@@ -1,11 +1,8 @@
 import React from 'react';
 import styles from './Main.module.scss'
+import {IChildren} from "../../types";
 
-type Main = {
-  children: React.ReactNode
-}
-
-function Main({children}: Main) {
+function Main({children}: IChildren) {
   return (
     <main className={styles.main}>{children}</main>
   );

@@ -1,0 +1,24 @@
+.wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  .title {
+    font-size: 38px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  .startLink {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 180px;
+    height: 40px;
+    border: none;
+    border-radius: 12px;
+    background: #1d59ce;
+    color: aliceblue;
+  }
+}

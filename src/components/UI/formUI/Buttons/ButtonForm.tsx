@@ -5,7 +5,7 @@ import styles from './styles.module.scss'
 function ButtonForm({children}: IChildren) {
   return (
     <>
-      <button className={styles.formBtn}>{children}</button>
+      <button type='submit' className={styles.formBtn}>{children}</button>
     </>
   );
 }

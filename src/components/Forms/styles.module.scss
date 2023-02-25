@@ -9,4 +9,11 @@
   box-sizing: border-box;
   align-items: center;
   flex-direction: column;
+	p{
+		a{
+			font-size: 18px;
+			font-weight: 500;
+			text-transform: capitalize;
+		}
+	}
 }

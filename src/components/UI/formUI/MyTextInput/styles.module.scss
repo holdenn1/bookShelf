@@ -7,10 +7,16 @@
   margin: 4px 0 8px;
   height: 24px;
   width: 200px;
-  padding: 4px;
+  padding: 6px 8px;
+	border-radius: 12px;
+	border: 0.5px solid rgb(92, 92, 92);
 }
 
-.formError {
+.inputError{
+	border: 1px solid red;
+}
+
+.textError {
   color: red;
   margin-bottom: 10px;
   text-align: center;

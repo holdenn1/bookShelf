@@ -10,15 +10,14 @@
     margin-bottom: 20px;
     text-align: center;
   }
-  .startLink {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 180px;
-    height: 40px;
-    border: none;
-    border-radius: 12px;
-    background: #1d59ce;
-    color: aliceblue;
-  }
+	.start {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 180px;
+		height: 40px;
+		border: none;
+		border-radius: 12px;
+		background: #1d59ce;
+	}
 }

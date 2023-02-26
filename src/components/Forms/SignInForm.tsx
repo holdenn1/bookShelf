@@ -3,7 +3,7 @@ import styles from './styles.module.scss';
 import { Form, Formik } from 'formik';
 import validateSchema from '../../utils/validate/validateSchema';
 import MyTextInput from '../UI/formUI/MyTextInput/MyTextInput';
-import ButtonForm from '../UI/formUI/Buttons/ButtonForm';
+import ButtonForm from '../UI/formUI/Buttons/LogInButton';
 import { useAppDispatch } from '../../hooks/reduxHooks';
 import { useNavigate } from 'react-router-dom';
 import { signInWithEmailAndPassword } from 'firebase/auth';
@@ -25,7 +25,7 @@ function SignInForm() {
 						email: user.email,
 					})
 				);
-				navigate('/bookShelf');
+				navigate('/book-shelf');
 			})
 			.catch(() => notify('Field check'));
 	};
@@ -58,7 +58,7 @@ function SignInForm() {
 						/>
 						<ButtonForm>Sign In</ButtonForm>
 						<p>
-							Or <Link to="/signUp">register</Link>
+							Or <Link to="/sign-up">register</Link>
 						</p>
 					</Form>
 				</>

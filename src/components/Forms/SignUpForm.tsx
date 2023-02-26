@@ -3,7 +3,7 @@ import { Form, Formik } from 'formik';
 import validateSchema from '../../utils/validate/validateSchema';
 import styles from './styles.module.scss';
 import MyTextInput from '../UI/formUI/MyTextInput/MyTextInput';
-import ButtonForm from '../UI/formUI/Buttons/ButtonForm';
+import ButtonForm from '../UI/formUI/Buttons/LogInButton';
 import { useAppDispatch } from '../../hooks/reduxHooks';
 import { useNavigate } from 'react-router-dom';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
@@ -25,7 +25,7 @@ function SignUpForm() {
 						email: user.email,
 					})
 				);
-				navigate('/bookShelf');
+				navigate('/book-shelf');
 			})
 			.catch(() => notify('The user already has an account at this address'));
 	};
@@ -58,7 +58,7 @@ function SignUpForm() {
 						/>
 						<ButtonForm>Sign Up</ButtonForm>
 						<p>
-							Or <Link to="/signIn">Log In</Link>
+							Or <Link to="/sign-in">Log In</Link>
 						</p>
 					</Form>
 				</>

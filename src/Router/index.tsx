@@ -17,15 +17,15 @@ export const router = createBrowserRouter([
         element: <HomePage/>
       },
       {
-        path: 'signUp',
+        path: 'sign-up',
         element: <SignUpPage/>
       },
       {
-        path: 'signIn',
+        path: 'sign-in',
         element: <SignInPage/>
       },
       {
-        path: 'bookShelf',
+        path: 'book-shelf',
         element: <BookshelfPage/>
       },
     ]

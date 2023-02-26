@@ -1,14 +1,25 @@
 import React from 'react';
-import {Link} from 'react-router-dom'
-import styles from './styles.module.scss'
+import styles from './styles.module.scss';
+import LinkToBookShelf from '../../components/UI/formUI/Links/LinkToBookShelf';
+import { useAuth } from '../../hooks/useAuth';
 
 function HomePage() {
-  return (
-    <div className={styles.wrapper}>
-      <h1 className={styles.title}>Create your own library!</h1>
-      <Link className={styles.startLink} to='signIn'>Start now</Link>
-    </div>
-  );
+	const { isAuth } = useAuth();
+
+	return (
+		<div className={styles.wrapper}>
+			<h1 className={styles.title}>
+				{' '}
+				{isAuth ? 'Back to the library?' : 'Create your own library!'}
+			</h1>
+
+			<LinkToBookShelf>
+				<span className={styles.start}>
+					{isAuth ? 'Сontinue' : 'Start now'}
+				</span>
+			</LinkToBookShelf>
+		</div>
+	);
 }
 
 export default HomePage;

@@ -7,3 +7,18 @@
 	border: 0.5px solid rgb(92, 92, 92);
 }
 
+.addBookBtn {
+	width: 100px;
+	height: 100px;
+	border-radius: 100%;
+	border: 0.5px solid #b8b8b8;
+	background: rgb(226, 226, 226);
+	&:hover {
+		background-color: #3c77ec;
+		color: aliceblue;
+		border: none;
+	}
+	span {
+		font-weight: 500;
+	}
+}

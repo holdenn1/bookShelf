@@ -25,7 +25,7 @@ function SignInForm() {
 						email: user.email,
 					})
 				);
-				navigate('/book-shelf');
+				navigate('/book-shelf/all-books');
 			})
 			.catch(() => notify('Field check'));
 	};

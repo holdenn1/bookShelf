@@ -25,7 +25,7 @@ function SignUpForm() {
 						email: user.email,
 					})
 				);
-				navigate('/book-shelf');
+				navigate('/book-shelf/all-books');
 			})
 			.catch(() => notify('The user already has an account at this address'));
 	};

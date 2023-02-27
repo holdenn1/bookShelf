@@ -1,13 +1,20 @@
 import React from 'react'
 import styles from './NavLibrary.module.scss'
+import {NavLink} from 'react-router-dom'
+import classNames from "classnames";
+
 export default function NavLibrary() {
-	return (
-		<nav className={styles.nav}>
-				<ul className={styles.bookList}>
-					<li className={styles.bookItem}>New book</li>
-					<li className={styles.bookItem}>All books</li>
-					<li className={styles.bookItem}>Favorite books</li>
-				</ul>
-			</nav>
-	)
+  const activeLink = ({isActive}: any) => isActive ? styles.activeLink : styles.bookItem
+
+  return (
+    <nav className={styles.nav}>
+      <ul className={styles.bookList}>
+        <NavLink className={activeLink} to='/book-shelf/new-book'>New
+          book</NavLink>
+        <NavLink className={activeLink} to='/book-shelf/all-books'>All books</NavLink>
+        <NavLink className={activeLink} to='/book-shelf/favorite-books'>Favorite
+          books</NavLink>
+      </ul>
+    </nav>
+  )
 }

@@ -5,6 +5,9 @@ import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import SignUpPage from "../pages/SignUpPage/SignUpPage";
 import SignInPage from "../pages/SignInPage/SignInPage";
 import BookshelfPage from "../pages/BookshelfPage/BookshelfPage";
+import AllBookPage from "../pages/LibraryPages/AllBookPage";
+import NewBookPage from "../pages/LibraryPages/NewBookPage";
+import FavoriteBooksPage from "../pages/LibraryPages/FavoriteBooksPage";
 
 export const router = createBrowserRouter([
   {
@@ -26,7 +29,21 @@ export const router = createBrowserRouter([
       },
       {
         path: 'book-shelf',
-        element: <BookshelfPage/>
+        element: <BookshelfPage/>,
+        children: [
+          {
+            path: 'new-book',
+            element: <NewBookPage/>
+          },
+          {
+            path: 'all-books',
+            element: <AllBookPage/>
+          },
+          {
+            path: 'favorite-books',
+            element: <FavoriteBooksPage/>
+          },
+        ]
       },
     ]
   }

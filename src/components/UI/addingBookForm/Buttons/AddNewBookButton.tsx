@@ -12,7 +12,7 @@ export default function AddNewBookButton() {
       onClick={() => dispatch(setVisibleAddingBookForm(true))}
     >
       <span>
-        Add
+        Add Book
       </span>
     </button>
   )

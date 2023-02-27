@@ -23,4 +23,14 @@
 }
 
 
-
+.addCover{
+  opacity: 0;
+  width: 100px;
+  height: 100px;
+  overflow: hidden;
+  position: absolute;
+  top: 98px;
+  left: 184px;
+  background: #1d59ce;
+  cursor: pointer;
+}

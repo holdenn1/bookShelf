@@ -3,15 +3,30 @@
 	height: 100%;
 	background: rgb(226, 226, 226);
 	padding: 24px;
-	.bookItem {
-		padding: 10px 12px;
-		margin-bottom: 10px;
-		border-radius: 12px;
-		background: aliceblue;
-		&:hover {
-			cursor: pointer;
+	.bookList{
+		display: flex;
+		flex-direction: column;
+		.bookItem {
+			padding: 10px 12px;
+			margin-bottom: 10px;
+			border-radius: 12px;
+			background: aliceblue;
+			color: #222222;
+
+			&:hover {
+				cursor: pointer;
+				color: aliceblue;
+				background-color: #3c77ec;
+			}
+
+		}
+		.activeLink{
+			padding: 10px 12px;
+			margin-bottom: 10px;
+			border-radius: 12px;
 			color: aliceblue;
-			background-color: #3c77ec;
+			background: #1d59ce;
 		}
 	}
+
 }

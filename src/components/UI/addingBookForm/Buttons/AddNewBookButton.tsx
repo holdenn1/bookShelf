@@ -1,8 +1,19 @@
 import React from 'react'
 import styles from './styles.module.scss'
+import {useAppDispatch} from "../../../../hooks/reduxHooks";
+import {setVisibleAddingBookForm} from "../../../../store/slices/librarySlice";
 
 export default function AddNewBookButton() {
-	return (
-		<button className={styles.addBookBtn}><span>Add</span> </button>
-	)
+  const dispatch = useAppDispatch()
+
+  return (
+    <button
+      className={styles.addBookBtn}
+      onClick={() => dispatch(setVisibleAddingBookForm(true))}
+    >
+      <span>
+        Add
+      </span>
+    </button>
+  )
 }

@@ -1,4 +1,8 @@
 .wrapper {
-  display: flex;
+  display: none;
   height: 100%;
+}
+
+.activeForm{
+  display: flex;
 }

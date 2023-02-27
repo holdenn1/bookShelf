@@ -7,7 +7,7 @@ interface TextInputProps {
 	name: string
 	type: string
 	placeholder: string
-  label: string
+  label?: string
   [key: string]: any
 }
 
@@ -15,7 +15,7 @@ export default function MyTextInput({label, type, placeholder, ...props}: TextIn
   const [field, meta] = useField(props);
   return (
     <>
-      <label className={styles.label} htmlFor={props.name}>{label}</label>
+      {!!label && <label className={styles.label} htmlFor={props.name}>{label}</label>}
       <input className={classNames(styles.input, {[styles.inputError]: meta.error && meta.touched}) } type={type} placeholder={placeholder} {...field}/>
       {meta.touched && meta.error ? (
         <p className={styles.textError}>{meta.error}</p>

@@ -1,9 +1,11 @@
 import React from 'react';
 import styles from "./styles.module.scss";
+import {INavButtons} from "../../../../types";
 
-function PrevButton() {
+function PrevButton({step, setStep}: INavButtons) {
+  console.log(step)
   return (
-    <button className={styles.prevButton}>Prev</button>
+    <button type='button' className={styles.prevButton}  onClick={() => setStep(step - 1)}>Prev</button>
   );
 }
 

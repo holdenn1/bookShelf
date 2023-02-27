@@ -5,11 +5,11 @@ import NewBook from '../NewBook/NewBook';
 import styles from './Library.module.scss';
 
 export default function Library() {
-	return (
-		<div className={styles.wrapper}>
-			<NavLibrary />
-			{/* 	<NewBook/> */}
-			<AddingBook />
-		</div>
-	);
+  return (
+    <div className={styles.wrapper}>
+      <NavLibrary/>
+      <NewBook/>
+      <AddingBook/>
+    </div>
+  );
 }

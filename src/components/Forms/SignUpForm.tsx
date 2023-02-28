@@ -19,6 +19,7 @@ function SignUpForm() {
 	const handleRegister = (email: string, password: string) => {
 		createUserWithEmailAndPassword(auth, email, password)
 			.then(({ user }) => {
+				console.log(user)
 				dispatch(
 					setUser({
 						id: user.uid,

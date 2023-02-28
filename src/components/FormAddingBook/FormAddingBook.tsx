@@ -8,7 +8,7 @@ import NavButtons from "../UI/addingBookForm/Buttons/NavButtons";
 import WrapperFormAddingBook from "../UI/addingBookForm/WrapperFormAddingBook/WrapperFormAddingBook";
 import classNames from "classnames";
 import {useAppDispatch, useAppSelector} from "../../hooks/reduxHooks";
-import {setVisibleAddingBookForm} from "../../store/slices/accountSlice";
+import {addBook, setVisibleAddingBookForm} from "../../store/slices/accountSlice";
 
 interface IAddingBook {
   title: string,
@@ -23,7 +23,7 @@ export default function FormAddingBook() {
   const dispatch = useAppDispatch()
 
 
-  const renderSteps = () => {
+  const renderSteps = (props:any) => {
     switch (step) {
       case 0: {
         return <BookTitle/>
@@ -32,7 +32,7 @@ export default function FormAddingBook() {
         return <BookDescription/>;
       }
       case 2: {
-        return <BookCover/>;
+        return <BookCover {...props}/>;
       }
       default:
         return null
@@ -43,6 +43,12 @@ export default function FormAddingBook() {
     const data = {...formData, ...values}
     setStep(step + 1)
     if (step === 2) {
+      dispatch(addBook({
+        id: new Date().toISOString(),
+        title: data.title,
+        description: data.description,
+        cover: data.cover
+      }))
       dispatch(setVisibleAddingBookForm(false))
       setStep(0)
       console.log(data)
@@ -60,10 +66,10 @@ export default function FormAddingBook() {
       onSubmit={(values, {resetForm}) => {
         handleSubmit(values, resetForm)
       }}>
-      {() => (
+      {(props) => (
         <Form className={classNames(styles.wrapper, {[styles.activeForm]: visibleAddingBookForm})}>
           <WrapperFormAddingBook>
-            {renderSteps()}
+            {renderSteps(props)}
             <NavButtons step={step} setStep={setStep}/>
           </WrapperFormAddingBook>
         </Form>

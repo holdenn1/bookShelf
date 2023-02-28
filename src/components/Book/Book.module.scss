@@ -1,0 +1,44 @@
+.card {
+  width: 180px;
+  height: 180px;
+  position: relative;
+  cursor: pointer;
+  border-radius: 12px;
+  margin: 20px;
+
+  .front, .back {
+    position: absolute;
+    width: 180px;
+    height: 180px;
+    left: 0;
+    top: 0;
+    transition: 1s;
+    backface-visibility: hidden;
+    background-color: #fff;
+    border: 1px solid #b8b8b8;
+    border-radius: 12px;
+
+    img {
+      width: 180px;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 12px;
+    }
+  }
+
+  &:hover .front {
+    transform: rotateY(180deg);
+  }
+
+  &:hover .back {
+    transform: rotateY(360deg);
+  }
+}
+
+.back {
+  transform: rotateY(180deg);
+}
+
+
+
+

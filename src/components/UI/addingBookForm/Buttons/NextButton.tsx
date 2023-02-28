@@ -3,7 +3,7 @@ import styles from './styles.module.scss'
 
 function NextButton() {
   return (
-    <button  className={styles.nextButton}>Next</button>
+    <button type='submit' className={styles.nextButton}>Next</button>
   );
 }
 

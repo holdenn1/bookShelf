@@ -8,7 +8,7 @@ import NavButtons from "../UI/addingBookForm/Buttons/NavButtons";
 import WrapperFormAddingBook from "../UI/addingBookForm/WrapperFormAddingBook/WrapperFormAddingBook";
 import classNames from "classnames";
 import {useAppDispatch, useAppSelector} from "../../hooks/reduxHooks";
-import {setVisibleAddingBookForm} from "../../store/slices/librarySlice";
+import {setVisibleAddingBookForm} from "../../store/slices/accountSlice";
 
 interface IAddingBook {
   title: string,
@@ -19,7 +19,7 @@ interface IAddingBook {
 export default function FormAddingBook() {
   const [step, setStep] = useState(0);
   const [formData, setFormData] = useState({})
-  const {visibleAddingBookForm} = useAppSelector(state => state.library)
+  const {visibleAddingBookForm} = useAppSelector(state => state.account)
   const dispatch = useAppDispatch()
 
 

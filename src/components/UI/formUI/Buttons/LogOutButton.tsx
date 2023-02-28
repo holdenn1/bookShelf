@@ -3,7 +3,7 @@ import { signOut } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { auth } from '../../../../firebase';
 import { useAppDispatch } from '../../../../hooks/reduxHooks';
-import { removeUser } from '../../../../store/slices/userSlice';
+import { removeUser } from '../../../../store/slices/accountSlice';
 import { IChildren } from '../../../../types';
 
 export default function LogOutButton({ children }: IChildren) {

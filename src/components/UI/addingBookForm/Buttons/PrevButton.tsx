@@ -3,7 +3,6 @@ import styles from "./styles.module.scss";
 import {INavButtons} from "../../../../types";
 
 function PrevButton({step, setStep}: INavButtons) {
-  console.log(step)
   return (
     <button type='button' className={styles.prevButton}  onClick={() => setStep(step - 1)}>Prev</button>
   );

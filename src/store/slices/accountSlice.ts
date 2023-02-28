@@ -2,10 +2,11 @@ import {createSlice} from "@reduxjs/toolkit";
 
 const initialState = {
   id: null,
-  email: null
+  email: null,
+  visibleAddingBookForm: false
 }
 
-const userSlice = createSlice({
+const accountSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
@@ -16,10 +17,13 @@ const userSlice = createSlice({
 		removeUser(state){
 			state.id = null
 			state.email = null
-		}
+		},
+    setVisibleAddingBookForm(state, action){
+      state.visibleAddingBookForm = action.payload
+    }
   }
 })
 
-export const {setUser, removeUser} = userSlice.actions
-export default userSlice.reducer
+export const {setUser, removeUser, setVisibleAddingBookForm} = accountSlice.actions
+export default accountSlice.reducer
 

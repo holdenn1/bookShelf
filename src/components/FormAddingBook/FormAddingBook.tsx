@@ -1,4 +1,6 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect, useRef} from 'react'
+import {ref, getDownloadURL, uploadBytesResumable, uploadBytes} from "firebase/storage";
+import {collection, addDoc, getDocs} from "firebase/firestore";
 import {Formik, Form} from 'formik'
 import BookCover from './steps/BookCover';
 import BookDescription from './steps/BookDescription';
@@ -9,11 +11,13 @@ import WrapperFormAddingBook from "../UI/addingBookForm/WrapperFormAddingBook/Wr
 import classNames from "classnames";
 import {useAppDispatch, useAppSelector} from "../../hooks/reduxHooks";
 import {addBook, setVisibleAddingBookForm} from "../../store/slices/accountSlice";
+import {db, storage} from "../../firebase";
+import {log} from "util";
 
 interface IAddingBook {
   title: string,
   description: string,
-  cover: string
+  cover: any
 }
 
 export default function FormAddingBook() {
@@ -23,7 +27,7 @@ export default function FormAddingBook() {
   const dispatch = useAppDispatch()
 
 
-  const renderSteps = (props:any) => {
+  const renderSteps = (props: any) => {
     switch (step) {
       case 0: {
         return <BookTitle/>
@@ -43,18 +47,51 @@ export default function FormAddingBook() {
     const data = {...formData, ...values}
     setStep(step + 1)
     if (step === 2) {
-      dispatch(addBook({
-        id: new Date().toISOString(),
-        title: data.title,
-        description: data.description,
-        cover: data.cover
-      }))
+      const metadata = {contentType: 'image/jpeg'};
+      const storageRef = ref(storage, 'images/' + data.cover.name);
+      const uploadTask = uploadBytesResumable(storageRef, data.cover, metadata);
+
+      uploadTask.on('state_changed',
+        (snapshot) => {
+          switch (snapshot.state) {
+            case 'paused':
+              console.log('Upload is paused');
+              break;
+            case 'running':
+              console.log('Upload is running');
+              break;
+          }
+        },
+        (error) => {
+          console.error(error)
+        },
+        () => {
+          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+            addDoc(collection(db, "books"), {
+              id: new Date().toISOString(),
+              title: data.title,
+              description: data.description,
+              cover: downloadURL
+            });
+        /*    dispatch(addBook({
+              id: new Date().toISOString(),
+              title: data.title,
+              description: data.description,
+              cover: downloadURL
+            }))*/
+          })
+        }
+      )
+
+
       dispatch(setVisibleAddingBookForm(false))
       setStep(0)
       console.log(data)
       resetForm()
     }
+
   }
+
 
   return (
     <Formik

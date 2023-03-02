@@ -1,8 +1,9 @@
 .bookshelfWrapper {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  @media screen and (max-width: 740px){
-    justify-content: center;
-  }
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 240px);
+  grid-auto-rows: 240px;
+  justify-items: center;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
 }

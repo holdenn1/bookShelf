@@ -1,39 +1,45 @@
-.img{
+.img {
   width: 80px;
   height: 80px;
   margin: 10px;
 }
 
-.text{
+.text {
   text-align: center;
   font-size: 18px;
   font-weight: 500;
   margin-bottom: 12px;
 }
-.titleDescription{
+
+.titleDescription {
   text-align: center;
   font-weight: 500;
   font-size: 16px;
   margin-bottom: 11px;
 
 }
-.instruction{
+
+.instruction {
   margin-bottom: 40px;
 }
-.descriptionBook{
+
+.descriptionBook {
   resize: none;
   padding: 12px;
 }
 
 
-.addCover{
-  opacity: 0;
-  width: 100px;
-  height: 100px;
-  overflow: hidden;
+.addCover {
   position: absolute;
-  top: 98px;
-  left: 232px;
+  width: 100px;
+  height: 90px;
   background: #1d59ce;
+  overflow: hidden;
   cursor: pointer;
+  opacity: 0;
+  &::-webkit-file-upload-button {
+    cursor: pointer;
+  }
 }
+
+

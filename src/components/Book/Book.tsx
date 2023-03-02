@@ -4,7 +4,6 @@ import {useAppSelector} from "../../hooks/reduxHooks";
 
 function Book() {
   const {library} = useAppSelector(state => state.account)
-
   return (
     <>{
       library.map(book => (

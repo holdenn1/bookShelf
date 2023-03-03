@@ -1,21 +1,20 @@
+@import "src/styles/mixins/contentCenterFlex";
+@import "src/styles/mixins/flexColumn";
+@import "src/styles/variables/variables";
+
 .wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @include contentCenterFlex;
   flex-direction: column;
   width: 100%;
   margin: 20px;
-
   .formAddingBook {
     width: 280px;
     height: 320px;
-    border: 1px solid #b8b8b8;
-    border-radius: 12px;
+    border: $primary-border;
+    border-radius: $primary-border-radius;
     overflow: hidden;
     padding: 16px;
     box-sizing: border-box;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
+   @include flexColumn
   }
 }

@@ -1,0 +1,6 @@
+@mixin navLinkBookItem($pd, $mb, $br, $backg) {
+  padding: $pd;
+  margin-bottom: $mb;
+  border-radius: $br;
+  background: $backg;
+}

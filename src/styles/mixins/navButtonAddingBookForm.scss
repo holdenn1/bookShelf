@@ -1,0 +1,9 @@
+@mixin navButtonAddingBookForm($backg){
+  width: 100px;
+  height: 32px;
+  border-radius: 12px;
+  border: 0.5px solid rgb(92, 92, 92);
+  margin: auto;
+  color: aliceblue;
+  background: $backg;
+}

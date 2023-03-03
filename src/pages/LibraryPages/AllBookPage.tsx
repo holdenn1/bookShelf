@@ -5,7 +5,7 @@ import BookshelfWrapper from "../../components/UI/BookshelfWrapper/BookshelfWrap
 import {collection, getDocs} from "firebase/firestore";
 import {db} from "../../firebase";
 import {addBook} from "../../store/slices/accountSlice";
-import styles from "../../components/AddingBook/AddingBook.module.scss";
+import styles from "./styles.module.scss";
 import {Link} from "react-router-dom";
 
 function AllBookPage() {

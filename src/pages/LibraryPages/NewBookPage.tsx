@@ -1,13 +1,20 @@
 import React from 'react';
-import AddingBook from "../../components/AddingBook/AddingBook";
 import FormAddingBook from "../../components/FormAddingBook/FormAddingBook";
+import classNames from "classnames";
+import styles from "./styles.module.scss";
+import AddNewBookButton from "../../components/UI/addingBookForm/Buttons/AddNewBookButton";
+import {useAppSelector} from "../../hooks/reduxHooks";
 
 function NewBookPage() {
+  const {visibleAddingBookForm} = useAppSelector(state => state.account)
   return (
-    <div>
-      <AddingBook title='Would you like to add more books to the library?'/>
+    <>
+      <div className={classNames(styles.wrapper, {[styles.visibleNewBookMessage]: visibleAddingBookForm})}>
+        <h3 className={styles.title}>Would you like to add more books to the library?</h3>
+        <AddNewBookButton/>
+      </div>
       <FormAddingBook/>
-    </div>
+    </>
   );
 }
 

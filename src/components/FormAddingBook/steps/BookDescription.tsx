@@ -14,7 +14,7 @@ export default function BookDescription({errors}: IBookDescription) {
   return (
     <>
       <img className={styles.img} src={descriptionBook} alt=""/>
-      <h3 className={styles.text}>What can you say about this book?</h3>
+      <h3 className={styles.title}>What can you say about this book?</h3>
       <Field
         name="description"
         as="textarea"

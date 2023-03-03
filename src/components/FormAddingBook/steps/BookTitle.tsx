@@ -7,7 +7,7 @@ export default function BookTitle() {
   return (
     <>
       <img className={styles.img} src={titleBook} alt=""/>
-      <h3 className={styles.text}>What is the title of the book?</h3>
+      <h3 className={styles.title}>What is the title of the book?</h3>
       <MyTextInput name='title' type='text' placeholder='Title book' />
     </>
   )

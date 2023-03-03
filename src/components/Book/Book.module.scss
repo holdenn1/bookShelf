@@ -1,10 +1,11 @@
+@import "src/styles/variables/variables";
+@import "src/styles/mixins/contentCenterFlex";
 .card {
   width: 222px;
   height: 222px;
   position: relative;
   cursor: pointer;
-  border-radius: 12px;
-
+  border-radius: $primary-border-radius;
   .front, .back {
     position: absolute;
     width: 200px;
@@ -14,19 +15,19 @@
     transition: 1s;
     backface-visibility: hidden;
     background-color: #fff;
-    border: 1px solid #b8b8b8;
-    border-radius: 12px;
+    border: $primary-border;
+    border-radius: $primary-border-radius;
     padding: 10px;
     img {
       max-width: 200px;
       max-height: 200px;
       object-fit: cover;
-      border-radius: 12px;
+      border-radius: $primary-border-radius;
     }
     .title{
       text-align: center;
-      font-size: 20px;
-      font-weight: 500;
+      font-size: $fz-title-book;
+      font-weight: $fw-title;
       text-transform: capitalize;
       margin: 10px;
       word-break: break-word;
@@ -36,9 +37,7 @@
     }
   }
   .front{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @include contentCenterFlex;
   }
   .back{
     overflow: auto;

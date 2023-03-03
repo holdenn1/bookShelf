@@ -1,9 +1,12 @@
-.logInBtn {
+@import "src/styles/variables/variables";
+
+.formButton {
   width: 180px;
   height: 40px;
-  border-radius: 12px;
   margin: 26px 0 20px;
-  border-radius: 12px;
-  border: 0.5px solid rgb(92, 92, 92);
+  border-radius: $primary-border-radius;
+  background: $primary-background;
+  color: $primary-color;
+  border: $primary-border;
 }
 

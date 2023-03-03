@@ -1,5 +1,7 @@
+@import "src/styles/mixins/headerAndFooterSize";
+@import "src/styles/variables/variables";
+
 .footer{
-  width: 100%;
-  height: 80px;
-  background: #1d59ce;
+  @include headerAndFooterSize(100%,80px);
+  background: $primary-background;
 }

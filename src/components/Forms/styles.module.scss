@@ -1,14 +1,16 @@
+@import "src/styles/variables/variables";
+
 .form{
   width: 340px;
   height: 380px;
-  border: 1px solid #b8b8b8;
-  border-radius: 12px;
+  border: $primary-border;
+  border-radius: $primary-border-radius;
   overflow: hidden;
   display: flex;
-  padding: 60px 10px 0;
-  box-sizing: border-box;
   align-items: center;
   flex-direction: column;
+  padding: 60px 10px 0;
+  box-sizing: border-box;
 	p{
 		a{
 			font-size: 18px;

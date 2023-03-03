@@ -1,13 +1,15 @@
+@import "src/styles/mixins/navButtonAddingBookForm";
+@import "src/styles/variables/variables";
 .addBookBtn {
   width: 100px;
   height: 100px;
   border-radius: 100%;
-  border: 0.5px solid #b8b8b8;
+  border: $primary-border;
   background: rgb(226, 226, 226);
 
   &:hover {
-    background-color: #3c77ec;
-    color: aliceblue;
+    background-color: $primary-background;
+    color: $primary-color;
     border: none;
   }
 
@@ -17,36 +19,18 @@
 }
 
 .nextButton {
-  width: 100px;
-  height: 32px;
-  border-radius: 12px;
-  border: 0.5px solid rgb(92, 92, 92);
-  margin: auto;
-  color: aliceblue;
-  background-color: #3c77ec;
+  @include navButtonAddingBookForm(#3c77ec);
 }
 
 .prevButton {
-  width: 100px;
-  height: 32px;
-  border-radius: 12px;
-  border: 0.5px solid rgb(92, 92, 92);
-  margin: auto;
-  color: aliceblue;
-  background-color: #0ad5dc;
+  @include navButtonAddingBookForm(#0ad5dc);
 }
 
-.subButton{
-  width: 100px;
-  height: 32px;
-  border-radius: 12px;
-  border: 0.5px solid rgb(92, 92, 92);
-  margin: auto;
-  color: aliceblue;
-  background-color: #07248e;
+.subButton {
+  @include navButtonAddingBookForm(#07248e);
 }
 
-.buttonContainer{
+.buttonContainer {
   margin: auto;
   display: flex;
   justify-content: space-around;

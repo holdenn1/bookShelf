@@ -20,12 +20,21 @@
 }
 
 .instruction {
-  margin-bottom: 40px;
+  margin-bottom: 14px;
 }
 
 .descriptionBook {
   resize: none;
-  padding: 12px;
+  padding: 5px 12px;
+  height: 40px;
+  margin-bottom: 6px;
+}
+
+.error{
+  border: 1px solid red;
+}
+.errorMassage{
+  color: red;
 }
 
 

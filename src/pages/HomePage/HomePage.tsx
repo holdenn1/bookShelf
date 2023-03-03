@@ -9,13 +9,11 @@ function HomePage() {
 	return (
 		<div className={styles.wrapper}>
 			<h1 className={styles.title}>
-				{' '}
 				{isAuth ? 'Back to the library?' : 'Create your own library!'}
 			</h1>
-
 			<LinkToBookShelf>
 				<span className={styles.start}>
-					{isAuth ? 'Сontinue' : 'Start now'}
+					{isAuth ? 'Continue' : 'Start now'}
 				</span>
 			</LinkToBookShelf>
 		</div>

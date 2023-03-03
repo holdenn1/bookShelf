@@ -10,6 +10,7 @@ interface ITitle {
 
 export default function AddingBook({title}: ITitle) {
   const {visibleAddingBookForm} = useAppSelector(state => state.account)
+
   return (
     <div className={classNames(styles.wrapper, {[styles.visibleNewBookMessage]: visibleAddingBookForm})}>
       <h3 className={styles.title}>{title}</h3>

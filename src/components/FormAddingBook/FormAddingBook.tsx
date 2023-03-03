@@ -1,6 +1,6 @@
-import React, {useState, useEffect, useRef} from 'react'
-import {ref, getDownloadURL, uploadBytesResumable, uploadBytes} from "firebase/storage";
-import {collection, addDoc, getDocs} from "firebase/firestore";
+import React, {useState, } from 'react'
+import {ref, getDownloadURL, uploadBytesResumable} from "firebase/storage";
+import {collection, addDoc} from "firebase/firestore";
 import {Formik, Form} from 'formik'
 import BookCover from './steps/BookCover';
 import BookDescription from './steps/BookDescription';
@@ -10,9 +10,9 @@ import NavButtons from "../UI/addingBookForm/Buttons/NavButtons";
 import WrapperFormAddingBook from "../UI/addingBookForm/WrapperFormAddingBook/WrapperFormAddingBook";
 import classNames from "classnames";
 import {useAppDispatch, useAppSelector} from "../../hooks/reduxHooks";
-import {addBook, setVisibleAddingBookForm} from "../../store/slices/accountSlice";
+import {setVisibleAddingBookForm} from "../../store/slices/accountSlice";
 import {db, storage} from "../../firebase";
-import {log} from "util";
+import addingBookValidateSchema from "../../utils/validate/addingBookValidateSchema";
 
 interface IAddingBook {
   title: string,
@@ -25,7 +25,8 @@ export default function FormAddingBook() {
   const [formData, setFormData] = useState({})
   const {visibleAddingBookForm} = useAppSelector(state => state.account)
   const dispatch = useAppDispatch()
-
+  const {id} = useAppSelector(state => state.account.user)
+  const currentValidationSchema = addingBookValidateSchema[step]
 
   const renderSteps = (props: any) => {
     switch (step) {
@@ -33,7 +34,7 @@ export default function FormAddingBook() {
         return <BookTitle/>
       }
       case 1: {
-        return <BookDescription/>;
+        return <BookDescription {...props}/>;
       }
       case 2: {
         return <BookCover {...props}/>;
@@ -46,6 +47,7 @@ export default function FormAddingBook() {
   const handleSubmit = (values: IAddingBook, resetForm: any) => {
     const data = {...formData, ...values}
     setStep(step + 1)
+
     if (step === 2) {
       const metadata = {contentType: 'image/jpeg'};
       const storageRef = ref(storage, 'images/' + data.cover.name);
@@ -67,29 +69,18 @@ export default function FormAddingBook() {
         },
         () => {
           getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-            addDoc(collection(db, "books"), {
-              id: new Date().toISOString(),
+            addDoc(collection(db, `books-user-${id}`), {
               title: data.title,
               description: data.description,
               cover: downloadURL
             });
-        /*    dispatch(addBook({
-              id: new Date().toISOString(),
-              title: data.title,
-              description: data.description,
-              cover: downloadURL
-            }))*/
           })
         }
       )
-
-
       dispatch(setVisibleAddingBookForm(false))
       setStep(0)
-      console.log(data)
       resetForm()
     }
-
   }
 
 
@@ -100,6 +91,7 @@ export default function FormAddingBook() {
         description: '',
         cover: ''
       }}
+      validationSchema={currentValidationSchema}
       onSubmit={(values, {resetForm}) => {
         handleSubmit(values, resetForm)
       }}>

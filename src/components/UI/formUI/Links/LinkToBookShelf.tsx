@@ -9,7 +9,7 @@ export default function LinkToBookShelf({children}:IChildren) {
 	return (
 		<>
 		{isAuth ? (
-				<Link className={styles.linkToBookShelf} to="book-shelf">
+				<Link className={styles.linkToBookShelf} to="book-shelf/all-books">
 					{children}
 				</Link>
 			) : (

@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './styles.module.scss';
 import {Form, Formik} from 'formik';
-import validateSchema from '../../utils/validate/validateSchema';
+import registrationValidateSchema from '../../utils/validate/registrationValidateSchema';
 import MyTextInput from '../UI/formUI/MyTextInput/MyTextInput';
 import ButtonForm from '../UI/formUI/Buttons/LogInButton';
 import {useAppDispatch} from '../../hooks/reduxHooks';
@@ -10,7 +10,7 @@ import {signInWithEmailAndPassword} from 'firebase/auth';
 import {setUser} from '../../store/slices/accountSlice';
 import {Link} from 'react-router-dom';
 import {auth} from '../../firebase';
-import {notify} from '../UI/formUI/Toast/Toast';
+import {notify} from '../UI/Toast/Toast';
 
 function SignInForm() {
   const dispatch = useAppDispatch();
@@ -39,7 +39,7 @@ function SignInForm() {
         email: '',
         password: '',
       }}
-      validationSchema={validateSchema}
+      validationSchema={registrationValidateSchema}
       onSubmit={({email, password}) => {
         handleLogin(email, password);
       }}

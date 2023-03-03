@@ -1,7 +1,7 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
 
-interface IBook {
+export interface IBook {
   id: string
   title: string,
   description: string
@@ -41,8 +41,8 @@ const accountSlice = createSlice({
     setVisibleAddingBookForm(state, action: PayloadAction<boolean>) {
       state.visibleAddingBookForm = action.payload
     },
-    addBook(state, action: PayloadAction<IBook>){
-      state.library.push(action.payload)
+    addBook(state, action: PayloadAction<IBook[]>){
+      state.library = action.payload
     }
   }
 })

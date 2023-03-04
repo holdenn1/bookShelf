@@ -1,6 +1,6 @@
-@import "src/styles/mixins/contentCenterFlex";
-@import "src/styles/mixins/flexColumn";
-@import "src/styles/variables/variables";
+@import "../../../../styles/mixins/contentCenterFlex";
+@import "../../../../styles/mixins/flexColumn";
+@import "../../../../styles/variables/variables";
 
 .wrapper {
   @include contentCenterFlex;

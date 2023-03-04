@@ -1,5 +1,5 @@
-@import "src/styles/variables/variables";
 @import "src/styles/mixins/contentCenterFlex";
+@import "src/styles/variables/variables";
 
 .wrapper {
   @include contentCenterFlex;
@@ -14,7 +14,13 @@
     text-align: center;
   }
 
-}
-.visibleNewBookMessage {
-  display: none;
+  .addBook {
+    @include contentCenterFlex;
+    width: 180px;
+    height: 40px;
+    border: none;
+    border-radius: $primary-border-radius;
+    color: $primary-color;
+    background: $primary-background;
+  }
 }

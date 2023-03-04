@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from "./styles.module.scss";
-import titleBook from "../../../img/icons/icons8-literature-64.png";
-import MyTextInput from "../../UI/formUI/MyTextInput/MyTextInput";
+import titleBook from "../../../../img/icons/icons8-literature-64.png";
+import MyTextInput from "../../../UI/formUI/MyTextInput/MyTextInput";
 
 export default function BookTitle() {
   return (

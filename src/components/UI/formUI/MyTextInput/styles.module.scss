@@ -1,5 +1,7 @@
+@import "src/styles/variables/variables";
+
 .label {
-  font-size: 18px;
+  font-size: $fz-title-form;
   text-transform: capitalize;
 }
 
@@ -8,7 +10,7 @@
   height: 24px;
   width: 200px;
   padding: 6px 8px;
-  border-radius: 12px;
+  border-radius: $primary-border-radius;
   border: 0.5px solid rgb(92, 92, 92);
 }
 

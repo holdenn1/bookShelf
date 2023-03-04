@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from "./styles.module.scss";
-import coverBook from '../../../img/icons/icons8-book-96.png'
+import coverBook from '../../../../img/icons/icons8-book-96.png'
 import {ErrorMessage} from "formik";
 
 interface IFormikProps {

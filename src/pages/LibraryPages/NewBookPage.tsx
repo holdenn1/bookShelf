@@ -1,5 +1,5 @@
 import React from 'react';
-import FormAddingBook from "../../components/FormAddingBook/FormAddingBook";
+import FormAddingBook from "../../components/Library/FormAddingBook/FormAddingBook";
 import classNames from "classnames";
 import styles from "./styles.module.scss";
 import AddNewBookButton from "../../components/UI/addingBookForm/Buttons/AddNewBookButton";

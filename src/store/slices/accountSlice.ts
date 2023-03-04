@@ -6,6 +6,7 @@ export interface IBook {
   title: string,
   description: string
   cover: string
+  favorite?: boolean
 }
 
 interface IUser {
@@ -17,6 +18,7 @@ interface IAccount {
   user: IUser
   visibleAddingBookForm: boolean,
   library: IBook[]
+  favoriteBooks: IBook[]
 }
 
 const initialState: IAccount = {
@@ -25,7 +27,8 @@ const initialState: IAccount = {
     email: null,
   },
   visibleAddingBookForm: false,
-  library: []
+  library: [],
+  favoriteBooks: []
 }
 
 const accountSlice = createSlice({
@@ -41,12 +44,15 @@ const accountSlice = createSlice({
     setVisibleAddingBookForm(state, action: PayloadAction<boolean>) {
       state.visibleAddingBookForm = action.payload
     },
-    addBook(state, action: PayloadAction<IBook[]>){
+    addBookToLibrary(state, action: PayloadAction<IBook[]>){
       state.library = action.payload
+    },
+    addBookToFavorite(state, action: PayloadAction<IBook[]>){
+      state.favoriteBooks = action.payload
     }
   }
 })
 
-export const {setUser, removeUser, setVisibleAddingBookForm,addBook} = accountSlice.actions
+export const {setUser, removeUser, setVisibleAddingBookForm,addBookToLibrary, addBookToFavorite} = accountSlice.actions
 export default accountSlice.reducer
 

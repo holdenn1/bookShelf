@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './BookshelfWraper.module.scss'
-import {IChildren} from "../../../types";
+import {IChildren} from "../../../../types";
 
 function BookshelfWrapper({children}:IChildren) {
 

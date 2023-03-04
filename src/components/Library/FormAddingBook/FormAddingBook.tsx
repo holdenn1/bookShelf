@@ -6,13 +6,13 @@ import BookCover from './steps/BookCover';
 import BookDescription from './steps/BookDescription';
 import BookTitle from './steps/BookTitle';
 import styles from './FormAddingBooks.module.scss'
-import NavButtons from "../UI/addingBookForm/Buttons/NavButtons";
-import WrapperFormAddingBook from "../UI/addingBookForm/WrapperFormAddingBook/WrapperFormAddingBook";
+import NavButtons from "../../UI/addingBookForm/Buttons/NavButtons";
+import WrapperFormAddingBook from "../../UI/wrappers/WrapperFormAddingBook/WrapperFormAddingBook";
 import classNames from "classnames";
-import {useAppDispatch, useAppSelector} from "../../hooks/reduxHooks";
-import {setVisibleAddingBookForm} from "../../store/slices/accountSlice";
-import {db, storage} from "../../firebase";
-import addingBookValidateSchema from "../../utils/validate/addingBookValidateSchema";
+import {useAppDispatch, useAppSelector} from "../../../hooks/reduxHooks";
+import {setVisibleAddingBookForm} from "../../../store/slices/accountSlice";
+import {db, storage} from "../../../firebase";
+import addingBookValidateSchema from "../../../utils/validate/addingBookValidateSchema";
 
 interface IAddingBook {
   title: string,
@@ -72,7 +72,8 @@ export default function FormAddingBook() {
             addDoc(collection(db, `books-user-${id}`), {
               title: data.title,
               description: data.description,
-              cover: downloadURL
+              cover: downloadURL,
+              favorite: false
             });
           })
         }

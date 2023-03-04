@@ -1,12 +1,11 @@
 import React, {useEffect} from 'react';
 import {useAppDispatch, useAppSelector} from "../../hooks/reduxHooks";
-import Book from "../../components/Book/Book";
-import BookshelfWrapper from "../../components/UI/BookshelfWrapper/BookshelfWrapper";
+import Book from "../../components/Library/Book/Book";
+import BookshelfWrapper from "../../components/UI/wrappers/BookshelfWrapper/BookshelfWrapper";
 import {collection, getDocs} from "firebase/firestore";
 import {db} from "../../firebase";
-import {addBook} from "../../store/slices/accountSlice";
-import styles from "./styles.module.scss";
-import {Link} from "react-router-dom";
+import {addBookToLibrary} from "../../store/slices/accountSlice";
+import LibraryTitle from "../../components/Library/LibraryTitle/LibraryTitle";
 
 function AllBookPage() {
   const {user, library} = useAppSelector(state => state.account)
@@ -14,12 +13,10 @@ function AllBookPage() {
 
 
   const fetchDataLibrary = async () => {
-    await getDocs(collection(db, `books-user-${user.id}`))
-      .then((querySnapshot) => {
-        const data: any = querySnapshot.docs
-          .map((doc) => ({...doc.data(), id: doc.id}));
-        dispatch(addBook(data))
-      })
+    const querySnapshot = await getDocs(collection(db, `books-user-${user.id}`))
+    const data: any = querySnapshot.docs.map((doc) => ({...doc.data(), id: doc.id}))
+    dispatch(addBookToLibrary(data))
+
   }
 
   useEffect(() => {
@@ -30,15 +27,10 @@ function AllBookPage() {
   return (
     <>
       {
-        library.length === 0 ? (
-            <div className={styles.wrapper}>
-              <h3 className={styles.title}>It`s still empty here</h3>
-              <Link className={styles.addBook} to='/book-shelf/new-book'>New Book</Link>
-            </div>
-          )
+        library.length === 0 ? (<LibraryTitle/>)
           : (
             <BookshelfWrapper>
-              <Book/>
+              {library.map(book => <Book key={book.id} {...book}/>)}
             </BookshelfWrapper>
           )
       }

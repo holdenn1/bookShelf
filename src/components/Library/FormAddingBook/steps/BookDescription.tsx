@@ -1,6 +1,6 @@
 import React from 'react'
 import {ErrorMessage, Field} from 'formik'
-import descriptionBook from '../../../img/icons/icons8-open-book-100.png'
+import descriptionBook from '../../../../img/icons/icons8-open-book-100.png'
 import styles from './styles.module.scss'
 import classNames from "classnames";
 

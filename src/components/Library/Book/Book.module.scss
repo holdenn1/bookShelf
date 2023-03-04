@@ -1,11 +1,13 @@
-@import "src/styles/variables/variables";
-@import "src/styles/mixins/contentCenterFlex";
+@import "../../../styles/variables/variables";
+@import "../../../styles/mixins/contentCenterFlex";
+
 .card {
   width: 222px;
   height: 222px;
   position: relative;
   cursor: pointer;
   border-radius: $primary-border-radius;
+
   .front, .back {
     position: absolute;
     width: 200px;
@@ -18,13 +20,15 @@
     border: $primary-border;
     border-radius: $primary-border-radius;
     padding: 10px;
+
     img {
       max-width: 200px;
       max-height: 200px;
       object-fit: cover;
       border-radius: $primary-border-radius;
     }
-    .title{
+
+    .title {
       text-align: center;
       font-size: $fz-title-book;
       font-weight: $fw-title;
@@ -32,16 +36,37 @@
       margin: 10px;
       word-break: break-word;
     }
-    .description{
+
+    .description {
       word-break: break-word;
     }
   }
-  .front{
+
+  .front {
     @include contentCenterFlex;
   }
-  .back{
+
+  .back {
     overflow: auto;
+
+    .favoriteStar {
+      height: 25px;
+      width: 25px;
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      opacity: 0.4;
+
+      &:hover {
+        opacity: 1;
+      }
+    }
+    .favorite {
+      opacity: 1;
+    }
+
   }
+
 
   &:hover .front {
     transform: rotateY(180deg);

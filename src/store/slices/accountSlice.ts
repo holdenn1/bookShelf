@@ -1,25 +1,8 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
+import {fetchDataLibrary} from "../actions/fetchDataLibrary";
+import {fetchFavoriteBooks} from "../actions/fetchFavoriteBooks";
+import {IAccount, IBook, IUser} from "../../types";
 
-
-export interface IBook {
-  id: string
-  title: string,
-  description: string
-  cover: string
-  favorite?: boolean
-}
-
-interface IUser {
-  id: string,
-  email: string | null,
-}
-
-interface IAccount {
-  user: IUser
-  visibleAddingBookForm: boolean,
-  library: IBook[]
-  favoriteBooks: IBook[]
-}
 
 const initialState: IAccount = {
   user: {
@@ -28,7 +11,7 @@ const initialState: IAccount = {
   },
   visibleAddingBookForm: false,
   library: [],
-  favoriteBooks: []
+  favoriteBooks: [],
 }
 
 const accountSlice = createSlice({
@@ -44,15 +27,26 @@ const accountSlice = createSlice({
     setVisibleAddingBookForm(state, action: PayloadAction<boolean>) {
       state.visibleAddingBookForm = action.payload
     },
-    addBookToLibrary(state, action: PayloadAction<IBook[]>){
+    setFavorite(state, action: PayloadAction<IBook[]>){
       state.library = action.payload
-    },
-    addBookToFavorite(state, action: PayloadAction<IBook[]>){
-      state.favoriteBooks = action.payload
     }
+
+  },
+  extraReducers: builder => {
+    builder
+      .addCase(fetchDataLibrary.pending, (state) => {
+      })
+      .addCase(fetchDataLibrary.fulfilled, (state, action) => {
+        state.library = action.payload
+      })
+      .addCase(fetchFavoriteBooks.pending, (state) => {
+      })
+      .addCase(fetchFavoriteBooks.fulfilled,(state, action) => {
+        state.favoriteBooks = action.payload
+      })
   }
 })
 
-export const {setUser, removeUser, setVisibleAddingBookForm,addBookToLibrary, addBookToFavorite} = accountSlice.actions
+export const {setUser, removeUser, setVisibleAddingBookForm,setFavorite} = accountSlice.actions
 export default accountSlice.reducer
 

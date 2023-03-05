@@ -13,7 +13,13 @@
     margin: 0 20px 14px;
     text-align: center;
   }
-
+  .error{
+    font-size: 32px;
+    font-weight: $fw-title;
+    margin: 30px 0px;
+    text-align: center;
+    color: red;
+  }
 }
 .visibleNewBookMessage {
   display: none;

@@ -1,4 +1,4 @@
-import React, {useState, } from 'react'
+import React, {useState,} from 'react'
 import {ref, getDownloadURL, uploadBytesResumable} from "firebase/storage";
 import {collection, addDoc} from "firebase/firestore";
 import {Formik, Form} from 'formik'
@@ -14,13 +14,18 @@ import {setVisibleAddingBookForm} from "../../../store/slices/accountSlice";
 import {db, storage} from "../../../firebase";
 import addingBookValidateSchema from "../../../utils/validate/addingBookValidateSchema";
 
-interface IAddingBook {
+interface IValues {
   title: string,
   description: string,
   cover: any
 }
 
-export default function FormAddingBook() {
+interface IFormAddingBookProps{
+  setError: React.Dispatch<React.SetStateAction<string>>,
+  setLoading:  React.Dispatch<React.SetStateAction<boolean>>
+}
+
+export default function FormAddingBook({setError, setLoading}: IFormAddingBookProps) {
   const [step, setStep] = useState(0);
   const [formData, setFormData] = useState({})
   const {visibleAddingBookForm} = useAppSelector(state => state.account)
@@ -44,38 +49,41 @@ export default function FormAddingBook() {
     }
   }
 
-  const handleSubmit = (values: IAddingBook, resetForm: any) => {
+  const handleSubmit = (values: IValues, resetForm: any) => {
     const data = {...formData, ...values}
     setStep(step + 1)
 
     if (step === 2) {
       const metadata = {contentType: 'image/jpeg'};
       const storageRef = ref(storage, 'images/' + data.cover.name);
-      const uploadTask = uploadBytesResumable(storageRef, data.cover, metadata);
+      const uploadBook = uploadBytesResumable(storageRef, data.cover, metadata);
 
-      uploadTask.on('state_changed',
+      uploadBook.on('state_changed',
         (snapshot) => {
           switch (snapshot.state) {
             case 'paused':
-              console.log('Upload is paused');
+              setLoading(false)
               break;
             case 'running':
-              console.log('Upload is running');
+              setError('')
+              setLoading(true);
               break;
           }
         },
         (error) => {
-          console.error(error)
+          setError('Invalid uploading. Try again later.')
         },
         () => {
-          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-            addDoc(collection(db, `books-user-${id}`), {
-              title: data.title,
-              description: data.description,
-              cover: downloadURL,
-              favorite: false
-            });
-          })
+          getDownloadURL(uploadBook.snapshot.ref)
+            .then((downloadURL) => {
+              addDoc(collection(db, `books-user-${id}`), {
+                title: data.title,
+                description: data.description,
+                cover: downloadURL,
+                favorite: false
+              });
+              setLoading(false)
+            })
         }
       )
       dispatch(setVisibleAddingBookForm(false))

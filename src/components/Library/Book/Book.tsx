@@ -2,17 +2,18 @@ import React from 'react';
 import styles from './Book.module.scss'
 import {useAppDispatch, useAppSelector} from "../../../hooks/reduxHooks";
 import favoriteIcon from './../../../img/icons/star-svgrepo-com.svg'
-import {addBookToLibrary, IBook} from "../../../store/slices/accountSlice";
-import {db} from "../../../firebase";
-import {doc, setDoc} from "firebase/firestore";
+import {setFavorite} from "../../../store/slices/accountSlice";
 import classNames from "classnames";
+import {fetchFavoriteBooks} from "../../../store/actions/fetchFavoriteBooks";
+import {doc, setDoc} from "firebase/firestore";
+import {db} from "../../../firebase";
+import {IBook} from "../../../types";
 
 function Book(book: IBook) {
   const {user, library} = useAppSelector(state => state.account)
   const dispatch = useAppDispatch()
 
   const addFavoriteBook = async (book: IBook) => {
-    console.log(book)
     const isFavorite = library.map(item => {
         if (item.id == book.id) {
           return {...item, favorite: !item.favorite}
@@ -20,14 +21,11 @@ function Book(book: IBook) {
         return item
       }
     )
-
-    dispatch(addBookToLibrary(isFavorite))
+    dispatch(setFavorite(isFavorite))
     const docRef = doc(db, `books-user-${user.id}`, `${book.id}`);
     await setDoc(docRef, {favorite: !book.favorite}, {merge: true});
-
+    dispatch(fetchFavoriteBooks(user))
   }
-
-  console.log(book.favorite)
 
 
   return (

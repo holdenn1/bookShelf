@@ -1,4 +1,5 @@
 @import "../../../styles/mixins/navLinkBookItem";
+@import "../../../styles/mixins/contentCenterFlex";
 @import "../../../styles/variables/variables";
 
 .nav {
@@ -12,21 +13,53 @@
     flex-direction: column;
 
     .bookItem {
-      @include navLinkBookItem(10px 12px, 10px, 12px, aliceblue);
-      color: $secondary-color;
+      border-radius: 12px;
+      margin-bottom: 12px;
+      overflow: hidden;
+      position: relative;
 
-      &:hover {
+      .searchBtn {
+        width: 26px;
+        height: 26px;
+        position: absolute;
+        top: 6px;
+        right: 8px;
         cursor: pointer;
+      }
+
+      .link {
+        color: $secondary-color;
+        @include navLinkBookItem(block, 10px 12px, aliceblue);
+
+        &:hover {
+          background: #4a7dea;
+          color: $primary-color;
+        }
+      }
+
+      .activeLink {
+        @include navLinkBookItem(block, 10px 12px, aliceblue);
+        background: $primary-background;
         color: $primary-color;
-        background-color: #3c77ec;
       }
     }
 
-    .activeLink {
-      @include navLinkBookItem(10px 12px, 10px, 12px, aliceblue);
-      background: $primary-background;
-      color: $primary-color;
+    .searchContainer {
+      @include contentCenterFlex;
+      display: none;
+      padding: 10px 0;
+      margin-bottom: 12px;
+      background: aliceblue;
+      border-radius: $primary-border-radius;
+
+      .search {
+        padding: 6px 8px;
+        border-radius: $primary-border-radius;
+        border: 0.5px solid rgb(92, 92, 92);
+      }
+    }
+    .searchActive {
+      display: flex;
     }
   }
-
 }

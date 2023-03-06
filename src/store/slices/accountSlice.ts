@@ -12,6 +12,7 @@ const initialState: IAccount = {
   visibleAddingBookForm: false,
   library: [],
   favoriteBooks: [],
+  search: ''
 }
 
 const accountSlice = createSlice({
@@ -27,8 +28,11 @@ const accountSlice = createSlice({
     setVisibleAddingBookForm(state, action: PayloadAction<boolean>) {
       state.visibleAddingBookForm = action.payload
     },
-    setFavorite(state, action: PayloadAction<IBook[]>){
+    setLibrary(state, action: PayloadAction<IBook[]>){
       state.library = action.payload
+    },
+    setSearch(state, action: PayloadAction<string>){
+      state.search = action.payload
     }
 
   },
@@ -47,6 +51,6 @@ const accountSlice = createSlice({
   }
 })
 
-export const {setUser, removeUser, setVisibleAddingBookForm,setFavorite} = accountSlice.actions
+export const {setUser, removeUser, setVisibleAddingBookForm,setLibrary, setSearch} = accountSlice.actions
 export default accountSlice.reducer
 

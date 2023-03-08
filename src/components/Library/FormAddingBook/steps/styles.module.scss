@@ -16,18 +16,18 @@
 .titleDescription {
   text-align: center;
   font-weight: $fw-title;
-  margin-bottom: 11px;
+  margin-bottom: 8px;
 }
 
 .instruction {
-  margin-bottom: 14px;
+  margin-bottom: 10px;
 }
 
 .descriptionBook {
   resize: none;
   padding: 5px 12px;
   height: 40px;
-  margin-bottom: 6px;
+  margin-bottom: 18px;
 }
 
 .error{
@@ -49,5 +49,14 @@
     cursor: pointer;
   }
 }
+.checkboxContainer{
+  position: relative;
+  .checkbox{
+    position: absolute;
+    top: 3px;
+    left: -20px;
+  }
+}
+
 
 

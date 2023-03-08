@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from "./styles.module.scss";
 import coverBook from '../../../../img/icons/icons8-book-96.png'
-import {ErrorMessage} from "formik";
+import {ErrorMessage,Field} from "formik";
 
 interface IFormikProps {
   setFieldValue: (field: string, value: any, shouldValidate?: boolean) => void
@@ -14,6 +14,10 @@ export default function BookCover({setFieldValue}: IFormikProps) {
       <h3 className={styles.title}>Add a cover!</h3>
       <p className={styles.titleDescription}>It will make your library more convenient and stylish!</p>
       <p className={styles.instruction}>Click on the book</p>
+      <div className={styles.checkboxContainer}>
+        <label htmlFor="seesEveryone">Share with everyone</label>
+        <Field name='seesEveryone' type='checkbox' className={styles.checkbox}/>
+      </div>
       <p className={styles.errorMassage}><ErrorMessage name='cover'/></p>
       <input type="file" name='cover'
              onChange={((e) => {

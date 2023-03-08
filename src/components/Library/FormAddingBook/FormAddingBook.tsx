@@ -10,7 +10,7 @@ import NavButtons from "../../UI/addingBookForm/Buttons/NavButtons";
 import WrapperFormAddingBook from "../../UI/wrappers/WrapperFormAddingBook/WrapperFormAddingBook";
 import classNames from "classnames";
 import {useAppDispatch, useAppSelector} from "../../../hooks/reduxHooks";
-import {setVisibleAddingBookForm} from "../../../store/slices/accountSlice";
+import {setVisibleAddingBookForm} from "../../../store/slices/mainSlice";
 import {db, storage} from "../../../firebase";
 import addingBookValidateSchema from "../../../utils/validate/addingBookValidateSchema";
 
@@ -18,6 +18,7 @@ interface IValues {
   title: string,
   description: string,
   cover: any
+  seesEveryone: boolean
 }
 
 interface IFormAddingBookProps{
@@ -28,9 +29,9 @@ interface IFormAddingBookProps{
 export default function FormAddingBook({setError, setLoading}: IFormAddingBookProps) {
   const [step, setStep] = useState(0);
   const [formData, setFormData] = useState({})
-  const {visibleAddingBookForm} = useAppSelector(state => state.account)
+  const {visibleAddingBookForm} = useAppSelector(state => state.main)
   const dispatch = useAppDispatch()
-  const {id} = useAppSelector(state => state.account.user)
+  const {id, email} = useAppSelector(state => state.account.user)
   const currentValidationSchema = addingBookValidateSchema[step]
 
   const renderSteps = (props: any) => {
@@ -80,8 +81,20 @@ export default function FormAddingBook({setError, setLoading}: IFormAddingBookPr
                 title: data.title,
                 description: data.description,
                 cover: downloadURL,
-                favorite: false
+                favorite: false,
+                seesEveryone: data.seesEveryone
               });
+              if(data.seesEveryone){
+                addDoc(collection(db, `books-sees-everyone`), {
+                  userId: id,
+                  userEmail: email,
+                  title: data.title,
+                  description: data.description,
+                  cover: downloadURL,
+                  favorite: false,
+                  seesEveryone: data.seesEveryone
+                });
+              }
               setLoading(false)
             })
         }
@@ -98,7 +111,8 @@ export default function FormAddingBook({setError, setLoading}: IFormAddingBookPr
       initialValues={{
         title: '',
         description: '',
-        cover: ''
+        cover: '',
+        seesEveryone: false
       }}
       validationSchema={currentValidationSchema}
       onSubmit={(values, {resetForm}) => {

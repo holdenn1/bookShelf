@@ -9,7 +9,7 @@ import Loader from "../../components/UI/Loader/Loader";
 export default function NewBookPage() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const {visibleAddingBookForm} = useAppSelector(state => state.account)
+  const {visibleAddingBookForm} = useAppSelector(state => state.main)
   return (
     <>
 

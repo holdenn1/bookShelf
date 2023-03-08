@@ -5,10 +5,11 @@ import BookshelfWrapper from "../../components/UI/wrappers/BookshelfWrapper/Book
 import LibraryTitle from "../../components/Library/LibraryTitle/LibraryTitle";
 import {fetchDataLibrary} from "../../store/actions/fetchDataLibrary";
 import {IBook} from "../../types";
-import { setSearch} from "../../store/slices/accountSlice";
+import { setSearch} from "../../store/slices/mainSlice";
 
 function AllBookPage() {
-  const {user, library, search} = useAppSelector(state => state.account)
+  const { search} = useAppSelector(state => state.main)
+  const {user, library} = useAppSelector(state => state.account)
   const [searchBooks, setSearchBooks] = useState<IBook[]>([])
   const dispatch = useAppDispatch()
 
@@ -18,7 +19,9 @@ function AllBookPage() {
   }, [])
 
   function librarySearch() {
-    const books = library.filter(book => book.title == search)
+    const books = library.filter(book => {
+      return  book.title.toLocaleLowerCase() == search
+    })
     setSearchBooks(books)
   }
 

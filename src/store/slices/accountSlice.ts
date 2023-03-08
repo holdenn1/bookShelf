@@ -9,10 +9,8 @@ const initialState: IAccount = {
     id: '',
     email: null,
   },
-  visibleAddingBookForm: false,
   library: [],
   favoriteBooks: [],
-  search: ''
 }
 
 const accountSlice = createSlice({
@@ -25,25 +23,14 @@ const accountSlice = createSlice({
     removeUser(state) {
       state.user = {id: '', email: null}
     },
-    setVisibleAddingBookForm(state, action: PayloadAction<boolean>) {
-      state.visibleAddingBookForm = action.payload
-    },
     setLibrary(state, action: PayloadAction<IBook[]>){
       state.library = action.payload
     },
-    setSearch(state, action: PayloadAction<string>){
-      state.search = action.payload
-    }
-
   },
   extraReducers: builder => {
     builder
-      .addCase(fetchDataLibrary.pending, (state) => {
-      })
       .addCase(fetchDataLibrary.fulfilled, (state, action) => {
         state.library = action.payload
-      })
-      .addCase(fetchFavoriteBooks.pending, (state) => {
       })
       .addCase(fetchFavoriteBooks.fulfilled,(state, action) => {
         state.favoriteBooks = action.payload
@@ -51,6 +38,6 @@ const accountSlice = createSlice({
   }
 })
 
-export const {setUser, removeUser, setVisibleAddingBookForm,setLibrary, setSearch} = accountSlice.actions
+export const {setUser, removeUser,setLibrary} = accountSlice.actions
 export default accountSlice.reducer
 

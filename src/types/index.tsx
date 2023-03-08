@@ -15,6 +15,7 @@ export interface IBook {
   description: string
   cover: string
   favorite?: boolean
+  seesEveryone: boolean
 }
 
 export interface IUser {
@@ -24,8 +25,12 @@ export interface IUser {
 
 export interface IAccount {
   user: IUser
-  visibleAddingBookForm: boolean,
   library: IBook[]
   favoriteBooks: IBook[]
+}
+
+export interface IMainReducer{
+  visibleAddingBookForm: boolean
   search: string
+  booksSeesEveryone: IBook[]
 }

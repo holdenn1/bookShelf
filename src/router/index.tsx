@@ -2,12 +2,13 @@ import {createBrowserRouter} from 'react-router-dom'
 import App from "../App";
 import HomePage from "../pages/HomePage/HomePage";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
-import SignUpPage from "../pages/SignUpPage/SignUpPage";
-import SignInPage from "../pages/SignInPage/SignInPage";
+import SignUpPage from "../pages/RegistrationPages/SignUpPage";
+import SignInPage from "../pages/RegistrationPages/SignInPage";
 import BookshelfPage from "../pages/BookshelfPage/BookshelfPage";
-import AllBookPage from "../pages/LibraryPages/AllBookPage";
-import NewBookPage from "../pages/LibraryPages/NewBookPage";
-import FavoriteBooksPage from "../pages/LibraryPages/FavoriteBooksPage";
+import AllBookPage from "../pages/AccountPages/AllBookPage";
+import NewBookPage from "../pages/AccountPages/NewBookPage";
+import FavoriteBooksPage from "../pages/AccountPages/FavoriteBooksPage";
+import LibraryPage from "../pages/LibraryPage/LibraryPage";
 
 export const router = createBrowserRouter([
   {
@@ -26,6 +27,10 @@ export const router = createBrowserRouter([
       {
         path: 'sign-in',
         element: <SignInPage/>
+      },
+      {
+        path: 'library',
+        element: <LibraryPage/>
       },
       {
         path: 'book-shelf',

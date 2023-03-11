@@ -16,6 +16,7 @@ export interface IBook {
   cover: string
   favorite?: boolean
   seesEveryone: boolean
+  booksEveryoneCollectionID?: string
 }
 
 export interface IUser {

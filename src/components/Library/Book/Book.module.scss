@@ -1,5 +1,6 @@
 @import "../../../styles/variables/variables";
 @import "../../../styles/mixins/contentCenterFlex";
+@import "../../../styles/mixins/booksIcons";
 
 .card {
   width: 222px;
@@ -50,21 +51,26 @@
     overflow: auto;
 
     .favoriteStar {
-      height: 25px;
-      width: 25px;
-      position: absolute;
-      top: 10px;
+      @include booksIcons;
       right: 10px;
-      opacity: 0.4;
-
-      &:hover {
-        opacity: 1;
-      }
     }
-    .favorite {
+
+    .favoriteActive {
       opacity: 1;
     }
 
+    .isAuth {
+      display: none;
+    }
+
+    .publicImg {
+      @include booksIcons;
+      left: 10px;
+    }
+
+    .publicActive {
+      opacity: 1;
+    }
   }
 
 

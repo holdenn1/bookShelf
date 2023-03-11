@@ -6,10 +6,12 @@ import Book from "../../components/Library/Book/Book";
 
 function LibraryPage() {
   const {booksSeesEveryone} = useAppSelector(state => state.main)
+
   const dispatch = useAppDispatch()
 
   useEffect(() => {
     dispatch(fetchSeesBooksEveryone())
+
   }, [])
 
   return (

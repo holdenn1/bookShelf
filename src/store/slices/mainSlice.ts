@@ -1,5 +1,5 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {IMainReducer} from "../../types";
+import {IBook, IMainReducer} from "../../types";
 import {fetchSeesBooksEveryone} from "../actions/fetchSeesBooksEveryone";
 
 const initialState: IMainReducer = {
@@ -12,22 +12,25 @@ const mainSlice = createSlice(
   {
     name: 'main',
     initialState,
-    reducers:{
+    reducers: {
       setVisibleAddingBookForm(state, action: PayloadAction<boolean>) {
         state.visibleAddingBookForm = action.payload
       },
-      setSearch(state, action: PayloadAction<string>){
+      setSearch(state, action: PayloadAction<string>) {
         state.search = action.payload
-      }
+      },
+      setBooksEveryone(state, action: PayloadAction<IBook[]>) {
+        state.booksSeesEveryone = action.payload
+      },
     },
     extraReducers: builder => {
       builder
-        .addCase(fetchSeesBooksEveryone.fulfilled, (state,action) => {
+        .addCase(fetchSeesBooksEveryone.fulfilled, (state, action) => {
           state.booksSeesEveryone = action.payload
         })
     }
   }
 )
 
-export const {setVisibleAddingBookForm,setSearch} = mainSlice.actions
+export const {setVisibleAddingBookForm, setSearch, setBooksEveryone} = mainSlice.actions
 export default mainSlice.reducer

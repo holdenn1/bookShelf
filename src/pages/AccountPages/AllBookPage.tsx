@@ -20,7 +20,7 @@ function AllBookPage() {
 
   function librarySearch() {
     const books = library.filter(book => {
-      return  book.title.toLocaleLowerCase() == search
+      return  book.title === search
     })
     setSearchBooks(books)
   }

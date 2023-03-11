@@ -1,6 +1,6 @@
 import React, {useState,} from 'react'
 import {ref, getDownloadURL, uploadBytesResumable} from "firebase/storage";
-import {collection, addDoc} from "firebase/firestore";
+import {collection, addDoc, setDoc, doc} from "firebase/firestore";
 import {Formik, Form} from 'formik'
 import BookCover from './steps/BookCover';
 import BookDescription from './steps/BookDescription';
@@ -13,6 +13,7 @@ import {useAppDispatch, useAppSelector} from "../../../hooks/reduxHooks";
 import {setVisibleAddingBookForm} from "../../../store/slices/mainSlice";
 import {db, storage} from "../../../firebase";
 import addingBookValidateSchema from "../../../utils/validate/addingBookValidateSchema";
+import {fetchSeesBooksEveryone} from "../../../store/actions/fetchSeesBooksEveryone";
 
 interface IValues {
   title: string,
@@ -21,9 +22,9 @@ interface IValues {
   seesEveryone: boolean
 }
 
-interface IFormAddingBookProps{
+interface IFormAddingBookProps {
   setError: React.Dispatch<React.SetStateAction<string>>,
-  setLoading:  React.Dispatch<React.SetStateAction<boolean>>
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export default function FormAddingBook({setError, setLoading}: IFormAddingBookProps) {
@@ -31,7 +32,7 @@ export default function FormAddingBook({setError, setLoading}: IFormAddingBookPr
   const [formData, setFormData] = useState({})
   const {visibleAddingBookForm} = useAppSelector(state => state.main)
   const dispatch = useAppDispatch()
-  const {id, email} = useAppSelector(state => state.account.user)
+  const {user, library} = useAppSelector(state => state.account)
   const currentValidationSchema = addingBookValidateSchema[step]
 
   const renderSteps = (props: any) => {
@@ -50,7 +51,7 @@ export default function FormAddingBook({setError, setLoading}: IFormAddingBookPr
     }
   }
 
-  const handleSubmit = (values: IValues, resetForm: any) => {
+  const handleSubmit = async (values: IValues, resetForm: any) => {
     const data = {...formData, ...values}
     setStep(step + 1)
 
@@ -74,29 +75,39 @@ export default function FormAddingBook({setError, setLoading}: IFormAddingBookPr
         (error) => {
           setError('Invalid uploading. Try again later.')
         },
-        () => {
-          getDownloadURL(uploadBook.snapshot.ref)
-            .then((downloadURL) => {
-              addDoc(collection(db, `books-user-${id}`), {
-                title: data.title,
-                description: data.description,
-                cover: downloadURL,
-                favorite: false,
-                seesEveryone: data.seesEveryone
+        async () => {
+          try {
+            const downloadURL = await getDownloadURL(uploadBook.snapshot.ref)
+            const dataBook = {
+              userId: user.id,
+              title: data.title,
+              description: data.description,
+              cover: downloadURL,
+              favorite: false,
+              seesEveryone: data.seesEveryone
+            }
+            if (data.seesEveryone) {
+              const userCollectionRef = collection(db, `books-user-${user.id}`);
+              const booksEveryoneCollectionRef = collection(db, `books-sees-everyone`)
+              const booksEveryoneCollection = await addDoc(booksEveryoneCollectionRef, dataBook);
+              const userCollection = await addDoc(userCollectionRef, {
+                ...dataBook,
+                booksEveryoneCollectionID: booksEveryoneCollection.id
               });
-              if(data.seesEveryone){
-                addDoc(collection(db, `books-sees-everyone`), {
-                  userId: id,
-                  userEmail: email,
-                  title: data.title,
-                  description: data.description,
-                  cover: downloadURL,
-                  favorite: false,
-                  seesEveryone: data.seesEveryone
-                });
-              }
-              setLoading(false)
-            })
+              await setDoc(doc(db, `books-sees-everyone`, `${booksEveryoneCollection.id}`),
+                {
+                  id: userCollection.id,
+                  booksEveryoneCollectionID: booksEveryoneCollection.id
+                }, {merge: true});
+              dispatch(fetchSeesBooksEveryone())
+            } else {
+              await addDoc(collection(db, `books-user-${user.id}`), dataBook)
+            }
+            setLoading(false)
+          } catch (e) {
+            console.error(e)
+            setError('Invalid uploading. Try again later.')
+          }
         }
       )
       dispatch(setVisibleAddingBookForm(false))

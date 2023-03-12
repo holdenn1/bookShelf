@@ -26,6 +26,9 @@ const accountSlice = createSlice({
     setLibrary(state, action: PayloadAction<IBook[]>){
       state.library = action.payload
     },
+    setFavorite(state, action: PayloadAction<IBook[]>){
+      state.favoriteBooks = action.payload
+    },
   },
   extraReducers: builder => {
     builder
@@ -38,6 +41,6 @@ const accountSlice = createSlice({
   }
 })
 
-export const {setUser, removeUser,setLibrary} = accountSlice.actions
+export const {setUser, removeUser,setLibrary,setFavorite} = accountSlice.actions
 export default accountSlice.reducer
 

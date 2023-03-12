@@ -3,7 +3,7 @@ import styles from './Book.module.scss'
 import {useAppDispatch, useAppSelector} from "../../../hooks/reduxHooks";
 import favoriteIcon from './../../../img/icons/star-svgrepo-com.svg'
 import publicImg from '../../../img/icons/icons8-public-30.png'
-import {setLibrary} from "../../../store/slices/accountSlice";
+import {setFavorite, setLibrary} from "../../../store/slices/accountSlice";
 import classNames from "classnames";
 import {fetchFavoriteBooks} from "../../../store/actions/fetchFavoriteBooks";
 import {collection, doc, setDoc, deleteDoc, addDoc, updateDoc} from "firebase/firestore";
@@ -11,10 +11,12 @@ import {db} from "../../../firebase";
 import {IBook} from "../../../types";
 import {setBooksEveryone} from "../../../store/slices/mainSlice";
 import {fetchSeesBooksEveryone} from "../../../store/actions/fetchSeesBooksEveryone";
+import {useAuth} from "../../../hooks/useAuth";
 
 function Book(book: IBook) {
   const {user, library} = useAppSelector(state => state.account)
   const dispatch = useAppDispatch()
+  const {isAuth} = useAuth();
 
   const addFavoriteBook = async (book: IBook) => {
     const isFavorite = library.map(item => {
@@ -24,14 +26,26 @@ function Book(book: IBook) {
         return item
       }
     )
+
+    const publicAndIsFavoriteBooks = isFavorite.filter(book => {
+      if (book.favorite && book.seesEveryone) {
+        return book
+      } else {
+        return book.seesEveryone
+      }
+    })
     dispatch(setLibrary(isFavorite))
-    const docRef = doc(db, `books-user-${user.id}`, `${book.id}`);
-    await setDoc(docRef, {favorite: !book.favorite}, {merge: true});
+    dispatch(setBooksEveryone(publicAndIsFavoriteBooks));
+    const docUserRef = doc(db, `books-user-${user.id}`, `${book.id}`);
+    const docPublicRef = doc(db, `books-sees-everyone`, `${book.booksEveryoneCollectionID}`)
+    await updateDoc(docUserRef, {favorite: !book.favorite});
+    if (book.seesEveryone) {
+      await updateDoc(docPublicRef, {favorite: !book.favorite});
+    }
     dispatch(fetchFavoriteBooks(user))
   }
 
   const setPublicBook = async (book: IBook) => {
-
     try {
       const isPublic = library.map(item => {
           if (item.id == book.id) {
@@ -51,6 +65,16 @@ function Book(book: IBook) {
       const publicBook = isPublic.filter(book => book.seesEveryone === true)
       dispatch(setBooksEveryone(publicBook));
 
+      const favoriteBook = isPublic.filter(book => {
+        if (book.favorite && book.seesEveryone) {
+          return book
+        } else {
+          return book.favorite
+        }
+      })
+
+      dispatch(setFavorite(favoriteBook))
+
       if (book.seesEveryone) {
         await deleteDoc(doc(db, "books-sees-everyone", `${book.booksEveryoneCollectionID}`));
       } else {
@@ -66,10 +90,24 @@ function Book(book: IBook) {
         const docPublic = doc(db, `books-sees-everyone`, `${booksEveryoneCollection.id}`)
         await setDoc(docPublic, {booksEveryoneCollectionID: booksEveryoneCollection.id}, {merge: true});
         await setDoc(docUserRef, {booksEveryoneCollectionID: booksEveryoneCollection.id}, {merge: true});
-        const setPublicBookID = isPublic.map(item => {
+        const setPublicBookIdItems = isPublic.map(item => {
           return {...item, booksEveryoneCollectionID: booksEveryoneCollection.id}
         })
-        dispatch(setLibrary(setPublicBookID))
+        const setPublicBookAndFavorite = isPublic.map(book => {
+          if (book.favorite) {
+            return {...book, booksEveryoneCollectionID: booksEveryoneCollection.id}
+          }
+          return book
+        })
+
+        const favorite = setPublicBookAndFavorite.filter(book => {
+          if (book.favorite) {
+            return book
+          }
+        })
+
+        dispatch(setLibrary(setPublicBookIdItems))
+        dispatch(setFavorite(favorite))
       }
       dispatch(fetchSeesBooksEveryone())
     } catch (e) {
@@ -87,12 +125,17 @@ function Book(book: IBook) {
           <p className={styles.description}>{book.description}</p>
           <img
             onClick={() => addFavoriteBook(book)}
-            className={classNames(styles.favoriteStar, {[styles.favoriteActive]: book.favorite})}
+            className={classNames(styles.favoriteStar,
+              {[styles.isAuth]: !isAuth},
+              {[styles.favoriteActive]: book.favorite}
+            )}
             src={favoriteIcon}
             alt=""/>
           <img
             onClick={() => setPublicBook(book)}
-            className={classNames(styles.publicImg, {[styles.publicActive]: book.seesEveryone})}
+            className={classNames(styles.publicImg,
+              {[styles.isAuth]: !isAuth},
+              {[styles.publicActive]: book.seesEveryone})}
             src={publicImg}
             alt=""/>
         </div>

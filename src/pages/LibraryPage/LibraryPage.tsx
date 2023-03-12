@@ -1,4 +1,5 @@
 import React, {useEffect} from 'react';
+import styles from './styles.module.scss'
 import BookshelfWrapper from "../../components/UI/wrappers/BookshelfWrapper/BookshelfWrapper";
 import {useAppDispatch, useAppSelector} from "../../hooks/reduxHooks";
 import {fetchSeesBooksEveryone} from "../../store/actions/fetchSeesBooksEveryone";
@@ -15,9 +16,18 @@ function LibraryPage() {
   }, [])
 
   return (
-    <BookshelfWrapper>
-      {booksSeesEveryone.map(book => <Book key={book.id} {...book}/>)}
-    </BookshelfWrapper>
+    <>
+      {booksSeesEveryone.length === 0 ? (
+        <div className={styles.wrapper}>
+          <h3>It's empty for now, come back later</h3>
+        </div>
+      ) : (
+        <BookshelfWrapper>
+          {booksSeesEveryone.map(book => <Book key={book.id} {...book}/>)}
+        </BookshelfWrapper>
+      )}
+    </>
+
   );
 }
 

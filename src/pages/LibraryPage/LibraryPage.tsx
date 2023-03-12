@@ -12,7 +12,6 @@ function LibraryPage() {
 
   useEffect(() => {
     dispatch(fetchSeesBooksEveryone())
-
   }, [])
 
   return (

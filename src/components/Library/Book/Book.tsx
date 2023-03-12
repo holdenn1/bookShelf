@@ -12,6 +12,7 @@ import {IBook} from "../../../types";
 import {setBooksEveryone} from "../../../store/slices/mainSlice";
 import {fetchSeesBooksEveryone} from "../../../store/actions/fetchSeesBooksEveryone";
 import {useAuth} from "../../../hooks/useAuth";
+import {fetchDataLibrary} from "../../../store/actions/fetchDataLibrary";
 
 function Book(book: IBook) {
   const {user, library} = useAppSelector(state => state.account)
@@ -19,6 +20,7 @@ function Book(book: IBook) {
   const {isAuth} = useAuth();
 
   const addFavoriteBook = async (book: IBook) => {
+    console.log(book.booksEveryoneCollectionID)
     const isFavorite = library.map(item => {
         if (item.id == book.id) {
           return {...item, favorite: !item.favorite}
@@ -90,9 +92,15 @@ function Book(book: IBook) {
         const docPublic = doc(db, `books-sees-everyone`, `${booksEveryoneCollection.id}`)
         await setDoc(docPublic, {booksEveryoneCollectionID: booksEveryoneCollection.id}, {merge: true});
         await setDoc(docUserRef, {booksEveryoneCollectionID: booksEveryoneCollection.id}, {merge: true});
+
         const setPublicBookIdItems = isPublic.map(item => {
-          return {...item, booksEveryoneCollectionID: booksEveryoneCollection.id}
+          if(book.seesEveryone){
+            console.log(item)
+            return {...item, booksEveryoneCollectionID: booksEveryoneCollection.id}
+          }
+          return item
         })
+
         const setPublicBookAndFavorite = isPublic.map(book => {
           if (book.favorite) {
             return {...book, booksEveryoneCollectionID: booksEveryoneCollection.id}
@@ -105,10 +113,10 @@ function Book(book: IBook) {
             return book
           }
         })
-
         dispatch(setLibrary(setPublicBookIdItems))
         dispatch(setFavorite(favorite))
       }
+      dispatch(fetchDataLibrary(user.id))
       dispatch(fetchSeesBooksEveryone())
     } catch (e) {
       console.error(e)

@@ -5,7 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 export const notify = (text:string) => {
 	toast.error(`${text}`, {
 		position: 'top-center',
-		autoClose: 3000,
+		autoClose: 2000,
 		hideProgressBar: false,
 		closeOnClick: true,
 		pauseOnHover: true,

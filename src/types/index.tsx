@@ -11,12 +11,15 @@ export interface INavButtons {
 
 export interface IBook {
   id: string
-  title: string,
+  userId: string
+  title: string
   description: string
   cover: string
-  favorite?: boolean
+  favorite: boolean
   seesEveryone: boolean
   booksEveryoneCollectionID?: string
+  rating: number
+  userWhoLikesBook: string[]
 }
 
 export interface IUser {

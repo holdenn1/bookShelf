@@ -84,7 +84,9 @@ export default function FormAddingBook({setError, setLoading}: IFormAddingBookPr
               description: data.description,
               cover: downloadURL,
               favorite: false,
-              seesEveryone: data.seesEveryone
+              seesEveryone: data.seesEveryone,
+              userWhoLikesBook: [],
+              rating: 0
             }
             if (data.seesEveryone) {
               const userCollectionRef = collection(db, `books-user-${user.id}`);

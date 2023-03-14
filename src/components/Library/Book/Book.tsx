@@ -11,6 +11,7 @@ import FavoriteIcon from "./Icons/FavoriteIcon";
 import PublicIcon from "./Icons/PublicIcon";
 import LikeIcon from "./Icons/LikeIcon";
 import UnlikeIcon from "./Icons/UnlikeIcon";
+import DeleteIcon from "./Icons/DeleteIcon";
 
 function Book(book: IBook) {
   const {user, library} = useAppSelector(state => state.account)
@@ -35,33 +36,38 @@ function Book(book: IBook) {
   }
 
   return (
-      <div key={book.id} className={styles.card}>
-        <div className={styles.front}>
-          <span className={styles.count}>{book.rating}⭐</span>
-          <img src={book.cover} alt=""/></div>
-        <div className={styles.back}>
-          <h3 className={styles.title}>{book.title}</h3>
-          <p className={styles.description}>{book.description}</p>
-          <FavoriteIcon
-            addFavoriteBook={addFavoriteBook}
-            book={book}
-            checkCurrentUser={checkCurrentUser}
-            isAuth={isAuth}/>
-          <PublicIcon
-            setPublicBook={setPublicBook}
-            book={book}
-            checkCurrentUser={checkCurrentUser}
-            isAuth={isAuth}/>
-          <LikeIcon
-            setLike={setLike}
-            book={book}
-            checkCurrentUser={checkCurrentUser}/>
-          <UnlikeIcon
-            setUnlike={setUnlike}
-            book={book}
-            checkCurrentUser={checkCurrentUser}/>
-        </div>
+    <div key={book.id} className={styles.card}>
+      <div className={styles.front}>
+        <span className={styles.count}>{book.rating}⭐</span>
+        <img src={book.cover} alt=""/></div>
+      <div className={styles.back}>
+        <h3 className={styles.title}>{book.title}</h3>
+        <p className={styles.description}>{book.description}</p>
+        <FavoriteIcon
+          addFavoriteBook={addFavoriteBook}
+          book={book}
+          checkCurrentUser={checkCurrentUser}
+          isAuth={isAuth}/>
+        <PublicIcon
+          setPublicBook={setPublicBook}
+          book={book}
+          checkCurrentUser={checkCurrentUser}
+          isAuth={isAuth}/>
+        <LikeIcon
+          setLike={setLike}
+          book={book}
+          checkCurrentUser={checkCurrentUser}/>
+        <UnlikeIcon
+          setUnlike={setUnlike}
+          book={book}
+          checkCurrentUser={checkCurrentUser}/>
+        <DeleteIcon
+          book={book}
+          user={user}
+          checkCurrentUser={checkCurrentUser}
+          isAuth={isAuth}/>
       </div>
+    </div>
   );
 }
 

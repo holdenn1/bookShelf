@@ -38,3 +38,21 @@ export interface IMainReducer{
   search: string
   booksSeesEveryone: IBook[]
 }
+
+export type SetFavoriteAndPublicProps = {
+  book: IBook
+  library: IBook[]
+  user: IUser
+}
+
+export type LikeAndUnLikeProps = {
+  isAuth: boolean
+  user: IUser
+  book: IBook
+}
+
+export type BookIconProps = {
+  isAuth?: boolean
+  checkCurrentUser: boolean
+  book: IBook
+}

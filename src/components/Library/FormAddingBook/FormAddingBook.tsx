@@ -1,6 +1,4 @@
 import React, {useState,} from 'react'
-import {ref, getDownloadURL, uploadBytesResumable} from "firebase/storage";
-import {collection, addDoc, setDoc, doc} from "firebase/firestore";
 import {Formik, Form} from 'formik'
 import BookCover from './steps/BookCover';
 import BookDescription from './steps/BookDescription';
@@ -11,18 +9,17 @@ import WrapperFormAddingBook from "../../UI/wrappers/WrapperFormAddingBook/Wrapp
 import classNames from "classnames";
 import {useAppDispatch, useAppSelector} from "../../../hooks/reduxHooks";
 import {setVisibleAddingBookForm} from "../../../store/slices/mainSlice";
-import {db, storage} from "../../../firebase";
 import addingBookValidateSchema from "../../../utils/validate/addingBookValidateSchema";
-import {fetchSeesBooksEveryone} from "../../../store/actions/fetchSeesBooksEveryone";
+import {uploadBook} from "../../../store/actions/uploadBook";
 
-interface IValues {
+export interface IValues {
   title: string,
   description: string,
   cover: any
   seesEveryone: boolean
 }
 
-interface IFormAddingBookProps {
+export interface IFormAddingBookProps {
   setError: React.Dispatch<React.SetStateAction<string>>,
   setLoading: React.Dispatch<React.SetStateAction<boolean>>
 }
@@ -51,67 +48,11 @@ export default function FormAddingBook({setError, setLoading}: IFormAddingBookPr
     }
   }
 
-  const handleSubmit = async (values: IValues, resetForm: any) => {
-    const data = {...formData, ...values}
+  const handleSubmit = (values: IValues, resetForm: any) => {
+    const data: IValues = {...formData, ...values}
     setStep(step + 1)
-
     if (step === 2) {
-      const metadata = {contentType: 'image/jpeg'};
-      const storageRef = ref(storage, 'images/' + data.cover.name);
-      const uploadBook = uploadBytesResumable(storageRef, data.cover, metadata);
-
-      uploadBook.on('state_changed',
-        (snapshot) => {
-          switch (snapshot.state) {
-            case 'paused':
-              setLoading(false)
-              break;
-            case 'running':
-              setError('')
-              setLoading(true);
-              break;
-          }
-        },
-        (error) => {
-          setError('Invalid uploading. Try again later.')
-        },
-        async () => {
-          try {
-            const downloadURL = await getDownloadURL(uploadBook.snapshot.ref)
-            const dataBook = {
-              userId: user.id,
-              title: data.title,
-              description: data.description,
-              cover: downloadURL,
-              favorite: false,
-              seesEveryone: data.seesEveryone,
-              userWhoLikesBook: [],
-              rating: 0
-            }
-            if (data.seesEveryone) {
-              const userCollectionRef = collection(db, `books-user-${user.id}`);
-              const booksEveryoneCollectionRef = collection(db, `books-sees-everyone`)
-              const booksEveryoneCollection = await addDoc(booksEveryoneCollectionRef, dataBook);
-              const userCollection = await addDoc(userCollectionRef, {
-                ...dataBook,
-                booksEveryoneCollectionID: booksEveryoneCollection.id
-              });
-              await setDoc(doc(db, `books-sees-everyone`, `${booksEveryoneCollection.id}`),
-                {
-                  id: userCollection.id,
-                  booksEveryoneCollectionID: booksEveryoneCollection.id
-                }, {merge: true});
-              dispatch(fetchSeesBooksEveryone())
-            } else {
-              await addDoc(collection(db, `books-user-${user.id}`), dataBook)
-            }
-            setLoading(false)
-          } catch (e) {
-            console.error(e)
-            setError('Invalid uploading. Try again later.')
-          }
-        }
-      )
+      dispatch(uploadBook({data, user, setError, setLoading}))
       dispatch(setVisibleAddingBookForm(false))
       setStep(0)
       resetForm()

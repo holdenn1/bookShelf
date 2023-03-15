@@ -43,6 +43,7 @@ export const uploadBook = createAsyncThunk(
             favorite: false,
             seesEveryone: data.seesEveryone,
             userWhoLikesBook: [],
+            userWhoUnlikesBook: [],
             rating: 0
           }
           if (data.seesEveryone) {

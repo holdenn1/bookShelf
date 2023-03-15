@@ -41,6 +41,7 @@ export const setPublic = createAsyncThunk(
           favorite: book.favorite,
           seesEveryone: !book.seesEveryone,
           userWhoLikesBook: [],
+          userWhoUnlikesBook: [],
           rating: 0
         });
         const docPublic = doc(db, `books-sees-everyone`, `${booksEveryoneCollection.id}`)

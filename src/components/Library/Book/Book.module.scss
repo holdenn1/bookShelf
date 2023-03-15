@@ -10,7 +10,6 @@
   border-radius: $primary-border-radius;
   overflow: hidden;
 
-
   .front, .back {
     position: absolute;
     width: 200px;
@@ -39,7 +38,6 @@
       border: 0.1px solid #898989;
       border-radius: 100%;
       background: rgba(234, 234, 234, 0.8);
-
     }
 
     img {
@@ -48,8 +46,6 @@
       object-fit: cover;
       border-radius: $primary-border-radius;
     }
-
-
   }
 
   .front {

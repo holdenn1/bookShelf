@@ -30,7 +30,7 @@ function SignInForm() {
 
         navigate('/book-shelf/all-books');
       })
-      .catch(() => notify('Field check'));
+      .catch(() => notify('Field check','error'));
   };
 
   return (

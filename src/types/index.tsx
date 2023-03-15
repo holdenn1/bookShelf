@@ -20,6 +20,7 @@ export interface IBook {
   booksEveryoneCollectionID?: string
   rating: number
   userWhoLikesBook: string[]
+  userWhoUnlikesBook: string[]
 }
 
 export interface IUser {

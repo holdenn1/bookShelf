@@ -10,7 +10,7 @@ type DeleteIconProps = BookIconProps & {
   user: IUser
 }
 
-function DeleteIcon({book,isAuth,checkCurrentUser,user}:DeleteIconProps) {
+function DeleteIcon({book, isAuth, checkCurrentUser, user}: DeleteIconProps) {
   const dispatch = useAppDispatch()
   return (
     <img

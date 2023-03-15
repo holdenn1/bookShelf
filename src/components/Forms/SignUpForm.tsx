@@ -29,7 +29,7 @@ function SignUpForm() {
         }
         navigate('/book-shelf/all-books');
       })
-      .catch(() => notify('The user already has an account at this address'));
+      .catch(() => notify('The user already has an account at this address', 'error'));
   };
 
   return (

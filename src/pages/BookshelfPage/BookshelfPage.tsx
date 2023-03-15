@@ -6,15 +6,13 @@ import { useAuth } from '../../hooks/useAuth';
 function BookshelfPage() {
 	const { isAuth } = useAuth();
 	const navigate = useNavigate();
-/* 
+
 	useEffect(() => {
 		!isAuth && navigate('/', { replace: true });
 	}, []);
- */
+
 	return (
-		<>
 			<Library />
-		</>
 	);
 }
 

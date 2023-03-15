@@ -12,7 +12,6 @@ export default function NewBookPage() {
   const {visibleAddingBookForm} = useAppSelector(state => state.main)
   return (
     <>
-
       <div className={classNames(styles.wrapper, {[styles.visibleNewBookMessage]: visibleAddingBookForm})}>
         {loading ? (<Loader/>) :
           (
@@ -23,8 +22,6 @@ export default function NewBookPage() {
             </>
           )
         }
-
-
       </div>
       <FormAddingBook setError={setError} setLoading={setLoading}/>
     </>

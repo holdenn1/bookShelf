@@ -9,11 +9,8 @@ export default function AddNewBookButton() {
   return (
     <button
       className={styles.addBookBtn}
-      onClick={() => dispatch(setVisibleAddingBookForm(true))}
-    >
-      <span>
-        Add Book
-      </span>
+      onClick={() => dispatch(setVisibleAddingBookForm(true))}>
+      <span>Add Book</span>
     </button>
   )
 }

@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import FormAddingBook from "../../components/Library/FormAddingBook/FormAddingBook";
+import AddingBookForm from "../../components/Forms/AddingBookForm/AddingBookForm";
 import classNames from "classnames";
 import styles from "./styles.module.scss";
 import AddNewBookButton from "../../components/UI/addingBookForm/Buttons/AddNewBookButton";
@@ -23,7 +23,7 @@ export default function NewBookPage() {
           )
         }
       </div>
-      <FormAddingBook setError={setError} setLoading={setLoading}/>
+      <AddingBookForm setError={setError} setLoading={setLoading}/>
     </>
   );
 }

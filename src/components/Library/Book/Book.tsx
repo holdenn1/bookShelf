@@ -12,6 +12,8 @@ import PublicIcon from "./Icons/PublicIcon";
 import LikeIcon from "./Icons/LikeIcon";
 import UnlikeIcon from "./Icons/UnlikeIcon";
 import DeleteIcon from "./Icons/DeleteIcon";
+import MessageIcon from "./Icons/MessageIcon";
+import classNames from "classnames";
 
 function Book(book: IBook) {
   const {user, library} = useAppSelector(state => state.account)
@@ -53,19 +55,24 @@ function Book(book: IBook) {
           book={book}
           checkCurrentUser={checkCurrentUser}
           isAuth={isAuth}/>
-        <LikeIcon
-          setLike={setLike}
-          book={book}
-          checkCurrentUser={checkCurrentUser}/>
-        <UnlikeIcon
-          setUnlike={setUnlike}
-          book={book}
-          checkCurrentUser={checkCurrentUser}/>
+
         <DeleteIcon
           book={book}
           user={user}
           checkCurrentUser={checkCurrentUser}
           isAuth={isAuth}/>
+
+        <div className={classNames(styles.bookPanel, {[styles.dontCurrentUser]: checkCurrentUser})}>
+          <LikeIcon
+            setLike={setLike}
+            book={book}
+            checkCurrentUser={checkCurrentUser}/>
+          <MessageIcon/>
+          <UnlikeIcon
+            setUnlike={setUnlike}
+            book={book}
+            checkCurrentUser={checkCurrentUser}/>
+        </div>
       </div>
     </div>
   );

@@ -74,10 +74,10 @@
 }
 
 .navActive {
-    position: fixed;
-    z-index: 100;
-    background: rgba(226, 226, 226, 0.85);
-    transition-duration: 1.2s;
-    transition-timing-function: cubic-bezier(0.68, -0.55, 0.262, 1.55);
-    width: 280px;
+  position: fixed;
+  z-index: 100;
+  background: rgba(226, 226, 226, 0.85);
+  transition-duration: 1.2s;
+  transition-timing-function: cubic-bezier(0.68, -0.55, 0.262, 1.55);
+  width: 280px;
 }

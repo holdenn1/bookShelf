@@ -3,7 +3,7 @@ import {getDownloadURL, ref, uploadBytesResumable} from "firebase/storage";
 import {db, storage} from "../../firebase";
 import {addDoc, collection, doc, setDoc} from "firebase/firestore";
 import {fetchSeesBooksEveryone} from "./fetchSeesBooksEveryone";
-import {IFormAddingBookProps, IValues} from "../../components/Library/FormAddingBook/FormAddingBook";
+import {IFormAddingBookProps, IValues} from "../../components/Forms/AddingBookForm/AddingBookForm";
 import {IUser} from "../../types";
 
 type UploadBookProps = IFormAddingBookProps & {

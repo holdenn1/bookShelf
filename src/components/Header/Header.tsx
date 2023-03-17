@@ -8,7 +8,7 @@ import {useAuth} from '../../hooks/useAuth';
 import LogOutButton from '../UI/formUI/Buttons/LogOutButton';
 import menuBtn from '../../img/icons/icons8-menu-50.png'
 import {useAppDispatch, useAppSelector} from "../../hooks/reduxHooks";
-import {setVisibleMenu} from "../../store/slices/mainSlice";
+import {setOpenSearchMenu, setVisibleMenu} from "../../store/slices/mainSlice";
 import classNames from "classnames";
 
 function Header() {
@@ -17,6 +17,11 @@ function Header() {
   const {visibleMenu} = useAppSelector(state => state.main)
   const location = useLocation();
   const showMenu = location.pathname.startsWith('/book-shelf/');
+
+  const handleMenu = () => {
+    dispatch(setVisibleMenu(!visibleMenu))
+    dispatch(setOpenSearchMenu(false))
+  }
 
   return (
     <header className={styles.header}>
@@ -31,7 +36,7 @@ function Header() {
         </LinkToBookShelf>
       )}
       <img
-        onClick={() => dispatch(setVisibleMenu(!visibleMenu))}
+        onClick={handleMenu}
         className={classNames(styles.menuBtn,{[styles.showMenu]: showMenu})}
         src={menuBtn} alt=""/>
     </header>

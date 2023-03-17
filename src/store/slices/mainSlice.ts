@@ -1,10 +1,12 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {IBook, IMainReducer} from "../../types";
+import {IMainReducer} from "../../types";
 import {fetchSeesBooksEveryone} from "../actions/fetchSeesBooksEveryone";
 
 const initialState: IMainReducer = {
   visibleAddingBookForm: false,
   visibleMenu: true,
+  isOpenSearchMenu: false,
+  visibleMessageForm: false,
   search: '',
   booksSeesEveryone: []
 }
@@ -17,11 +19,17 @@ const mainSlice = createSlice(
       setVisibleAddingBookForm(state, action: PayloadAction<boolean>) {
         state.visibleAddingBookForm = action.payload
       },
+      setVisibleMessageForm(state, action: PayloadAction<boolean>) {
+        state.visibleMessageForm = action.payload
+      },
       setVisibleMenu(state, action: PayloadAction<boolean>) {
         state.visibleMenu = action.payload
       },
       setSearch(state, action: PayloadAction<string>) {
         state.search = action.payload
+      },
+      setOpenSearchMenu(state, action: PayloadAction<boolean>) {
+        state.isOpenSearchMenu = action.payload
       }
     },
     extraReducers: builder => {
@@ -33,5 +41,11 @@ const mainSlice = createSlice(
   }
 )
 
-export const {setVisibleAddingBookForm, setSearch, setVisibleMenu} = mainSlice.actions
+export const {
+  setVisibleAddingBookForm,
+  setVisibleMessageForm,
+  setSearch,
+  setVisibleMenu,
+  setOpenSearchMenu
+} = mainSlice.actions
 export default mainSlice.reducer

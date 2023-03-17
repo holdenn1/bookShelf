@@ -1,5 +1,5 @@
 import React from 'react';
-import SignInForm from "../../components/Forms/SignInForm";
+import SignInForm from "../../components/Forms/mainForms/SignInForm";
 import FormWrapper from "../../components/UI/wrappers/FormWrapper/FormWrapper";
 
 function SignInPage() {

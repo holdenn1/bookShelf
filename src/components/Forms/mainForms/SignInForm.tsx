@@ -1,16 +1,16 @@
 import React from 'react';
 import styles from './styles.module.scss';
 import {Form, Formik} from 'formik';
-import registrationValidateSchema from '../../utils/validate/registrationValidateSchema';
-import MyTextInput from '../UI/formUI/MyTextInput/MyTextInput';
-import ButtonForm from '../UI/formUI/Buttons/LogInButton';
-import {useAppDispatch} from '../../hooks/reduxHooks';
+import registrationValidateSchema from '../../../utils/validate/registrationValidateSchema';
+import MyTextInput from '../../UI/formUI/MyTextInput/MyTextInput';
+import ButtonForm from '../../UI/formUI/Buttons/LogInButton';
+import {useAppDispatch} from '../../../hooks/reduxHooks';
 import {useNavigate} from 'react-router-dom';
 import {signInWithEmailAndPassword} from 'firebase/auth';
-import {setUser} from '../../store/slices/accountSlice';
+import {setUser} from '../../../store/slices/accountSlice';
 import {Link} from 'react-router-dom';
-import {auth} from '../../firebase';
-import {notify} from '../UI/Toast/Toast';
+import {auth} from '../../../firebase';
+import {notify} from '../../UI/Toast/Toast';
 
 function SignInForm() {
   const dispatch = useAppDispatch();
@@ -45,7 +45,6 @@ function SignInForm() {
       }}
     >
       {(props) => (
-        <>
           <Form className={styles.form}>
             <MyTextInput
               label="email"
@@ -64,7 +63,6 @@ function SignInForm() {
               Or <Link to="/sign-up">register</Link>
             </p>
           </Form>
-        </>
       )}
     </Formik>
   );

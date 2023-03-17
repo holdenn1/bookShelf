@@ -36,6 +36,8 @@ export interface IAccount {
 
 export interface IMainReducer{
   visibleAddingBookForm: boolean
+  visibleMessageForm:boolean
+  isOpenSearchMenu: boolean
   visibleMenu:boolean
   search: string
   booksSeesEveryone: IBook[]

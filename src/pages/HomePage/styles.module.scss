@@ -11,9 +11,12 @@
     font-size: 38px;
     margin-bottom: 20px;
     text-align: center;
+    @media screen and (max-width: 420px){
+      font-size: 32px;
+    }
   }
 .linkContainer{
-  width: 420px;
+  max-width: 420px;
   display: flex;
   justify-content: space-around;
   @media screen and (max-width: 440px){

@@ -20,5 +20,18 @@
     top: 15px;
     right: 15px;
     cursor: pointer;
+    @media screen and (max-width: 319px){
+      display: none;
+    }
+  }
+  .menuBtn{
+    display: none;
+    top: 15px;
+    left: 15px;
+    cursor: pointer;
+  }
+  .showMenu{
+    display: block;
+    position: fixed;
   }
 }

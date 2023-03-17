@@ -9,7 +9,7 @@ import {setSearch} from "../../../store/slices/mainSlice";
 export default function NavLibrary() {
   const activeLink = ({isActive}: any) => isActive ? styles.activeLink : styles.link;
   const [searchBtn, setSearchBtn] = useState(false)
-  const {search} = useAppSelector(state => state.main)
+  const {search, visibleMenu} = useAppSelector(state => state.main)
   const dispatch = useAppDispatch()
   const location = useLocation();
 
@@ -18,7 +18,7 @@ export default function NavLibrary() {
   }, [location.pathname])
 
   return (
-    <nav className={styles.nav}>
+    <nav className={classNames(styles.nav, {[styles.navActive]: visibleMenu})}>
       <ul className={styles.bookList}>
         <li className={styles.bookItem}>
           <NavLink className={activeLink} to='/book-shelf/new-book'>New book</NavLink>

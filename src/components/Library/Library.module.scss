@@ -1,5 +1,8 @@
 .wrapper {
   display: grid;
-  grid-template-columns: auto  1fr;
+  grid-template-columns: auto;
   height: 100%;
+  @media screen and (max-width: 640px){
+    grid-template-columns: auto ;
+  }
 }

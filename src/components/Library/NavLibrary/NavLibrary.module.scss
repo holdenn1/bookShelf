@@ -3,18 +3,24 @@
 @import "../../../styles/variables/variables";
 
 .nav {
-  width: 250px;
+  width: 0;
   height: 100%;
-  background: rgb(226, 226, 226);
-  padding: 24px;
+  z-index: 100;
+  background: rgba(226, 226, 226, 0.85);
+  position: fixed;
+  transition-duration: 1s;;
+  transition-timing-function: cubic-bezier(0.68, -0.55, 0.262, 1.55);
 
   .bookList {
     display: flex;
     flex-direction: column;
+    padding: 24px;
+    box-sizing: border-box;
 
     .bookItem {
       border-radius: 12px;
       margin-bottom: 12px;
+      height: 40px;
       overflow: hidden;
       position: relative;
 
@@ -28,6 +34,7 @@
       }
 
       .link {
+        white-space: nowrap;
         color: $secondary-color;
         @include navLinkBookItem(block, 10px 12px, aliceblue);
 
@@ -38,6 +45,7 @@
       }
 
       .activeLink {
+        white-space: nowrap;
         @include navLinkBookItem(block, 10px 12px, aliceblue);
         background: $primary-background;
         color: $primary-color;
@@ -58,8 +66,18 @@
         border: 0.5px solid rgb(92, 92, 92);
       }
     }
+
     .searchActive {
       display: flex;
     }
   }
+}
+
+.navActive {
+    position: fixed;
+    z-index: 100;
+    background: rgba(226, 226, 226, 0.85);
+    transition-duration: 1.2s;
+    transition-timing-function: cubic-bezier(0.68, -0.55, 0.262, 1.55);
+    width: 280px;
 }

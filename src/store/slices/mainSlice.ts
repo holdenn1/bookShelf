@@ -4,6 +4,7 @@ import {fetchSeesBooksEveryone} from "../actions/fetchSeesBooksEveryone";
 
 const initialState: IMainReducer = {
   visibleAddingBookForm: false,
+  visibleMenu: true,
   search: '',
   booksSeesEveryone: []
 }
@@ -16,12 +17,12 @@ const mainSlice = createSlice(
       setVisibleAddingBookForm(state, action: PayloadAction<boolean>) {
         state.visibleAddingBookForm = action.payload
       },
+      setVisibleMenu(state, action: PayloadAction<boolean>) {
+        state.visibleMenu = action.payload
+      },
       setSearch(state, action: PayloadAction<string>) {
         state.search = action.payload
-      },
-      setBooksEveryone(state, action: PayloadAction<IBook[]>) {
-        state.booksSeesEveryone = action.payload
-      },
+      }
     },
     extraReducers: builder => {
       builder
@@ -32,5 +33,5 @@ const mainSlice = createSlice(
   }
 )
 
-export const {setVisibleAddingBookForm, setSearch, setBooksEveryone} = mainSlice.actions
+export const {setVisibleAddingBookForm, setSearch, setVisibleMenu} = mainSlice.actions
 export default mainSlice.reducer

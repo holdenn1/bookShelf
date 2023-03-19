@@ -11,7 +11,7 @@ import FavoriteIcon from "./Icons/FavoriteIcon";
 import PublicIcon from "./Icons/PublicIcon";
 import LikeIcon from "./Icons/LikeIcon";
 import UnlikeIcon from "./Icons/UnlikeIcon";
-import DeleteIcon from "./Icons/DeleteIcon";
+import RemoveIcon from "./Icons/RemoveIcon";
 import MessageIcon from "./Icons/MessageIcon";
 import classNames from "classnames";
 
@@ -55,13 +55,11 @@ function Book(book: IBook) {
           book={book}
           checkCurrentUser={checkCurrentUser}
           isAuth={isAuth}/>
-
-        <DeleteIcon
+        <RemoveIcon
           book={book}
           user={user}
           checkCurrentUser={checkCurrentUser}
           isAuth={isAuth}/>
-
         <div className={classNames(styles.bookPanel, {[styles.dontCurrentUser]: checkCurrentUser})}>
           <LikeIcon
             setLike={setLike}

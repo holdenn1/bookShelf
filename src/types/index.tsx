@@ -32,6 +32,8 @@ export interface IAccount {
   user: IUser
   library: IBook[]
   favoriteBooks: IBook[]
+  loading: boolean
+  error: string
 }
 
 export interface IMainReducer{

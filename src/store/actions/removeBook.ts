@@ -5,15 +5,16 @@ import {fetchSeesBooksEveryone} from "./fetchSeesBooksEveryone";
 import {fetchFavoriteBooks} from "./fetchFavoriteBooks";
 import {fetchDataLibrary} from "./fetchDataLibrary";
 import {IBook, IUser} from "../../types";
+import {notify} from "../../components/UI/Toast/Toast";
 
 type RemoveBookProps = {
   user: IUser
   book: IBook
 }
 
-export const removeBook = createAsyncThunk(
+export const removeBook = createAsyncThunk<void, RemoveBookProps>(
   'user/removeBook',
-  async ({user, book}: RemoveBookProps, {dispatch}) => {
+  async ({user, book}, {dispatch}) => {
     try {
       await deleteDoc(doc(db, `books-user-${user.id}`, `${book.id}`));
       if (book.seesEveryone) {
@@ -24,8 +25,10 @@ export const removeBook = createAsyncThunk(
         dispatch(fetchFavoriteBooks(user))
       }
       dispatch(fetchDataLibrary(user.id))
+      notify('The book has been deleted', 'success')
     } catch (e) {
       console.error(e)
+      notify('An error occurred, please try again later', 'error')
     }
   }
 )

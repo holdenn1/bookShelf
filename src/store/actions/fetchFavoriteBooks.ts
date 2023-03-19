@@ -4,16 +4,18 @@ import {db} from "../../firebase";
 import {IBook, IUser} from "../../types";
 
 
-export const fetchFavoriteBooks = createAsyncThunk<IBook[], IUser>(
+export const fetchFavoriteBooks = createAsyncThunk(
   'user/fetchFavoriteBooks',
-  async (user) => {
+  async (user: IUser) => {
     try {
       const q = query(collection(db, `books-user-${user.id}`), where("favorite", "==", true));
       const querySnapshot = await getDocs(q);
-      const data:any = querySnapshot.docs.map((doc) => ({...doc.data(), id: doc.id}))
+      const data: IBook[] = querySnapshot.docs.map((doc) => {
+        return {...doc.data() as Omit<IBook, 'id'>, id: doc.id}
+      })
       return data
-    }catch (e) {
-      console.error(e)
+    } catch (e) {
+      throw e
     }
   }
 )

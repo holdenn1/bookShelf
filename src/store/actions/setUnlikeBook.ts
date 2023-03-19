@@ -5,9 +5,9 @@ import {arrayRemove, arrayUnion, doc, updateDoc} from "firebase/firestore";
 import {db} from "../../firebase";
 import {fetchSeesBooksEveryone} from "./fetchSeesBooksEveryone";
 
-export const setUnlikeBook = createAsyncThunk(
+export const setUnlikeBook = createAsyncThunk<void, LikeAndUnLikeProps>(
   'user/setUnlikeBook',
-  async ({isAuth, book, user}: LikeAndUnLikeProps, {dispatch}) => {
+  async ({isAuth, book, user}, {dispatch}) => {
     try {
       if (!isAuth) {
         notify('Only registered users can rate', 'error')
@@ -35,8 +35,7 @@ export const setUnlikeBook = createAsyncThunk(
       dispatch(fetchSeesBooksEveryone())
     } catch (e) {
       console.error(e)
+      notify('An error occurred, please try again later', 'error')
     }
   }
 )
-
-//arrayRemove(user.id)

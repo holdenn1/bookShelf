@@ -7,9 +7,9 @@ import {setVisibleMessageForm} from "../../../../store/slices/mainSlice";
 function MessageIcon() {
   const {visibleMessageForm} = useAppSelector(state => state.main)
   const dispatch = useAppDispatch()
-  console.log(2)
   return (
-    <img onClick={() => dispatch(setVisibleMessageForm(!visibleMessageForm))} className={styles.messageForUser}
+    <img onClick={() => dispatch(setVisibleMessageForm(!visibleMessageForm))}
+         className={styles.messageForUser}
          src={massage} alt=""/>
   );
 }

@@ -6,9 +6,9 @@ import {fetchSeesBooksEveryone} from "./fetchSeesBooksEveryone";
 import {LikeAndUnLikeProps} from "../../types";
 
 
-export const setLikeBook = createAsyncThunk(
+export const setLikeBook = createAsyncThunk<void, LikeAndUnLikeProps>(
   'user/setLikeBook',
-  async ({isAuth, book, user}: LikeAndUnLikeProps, {dispatch}) => {
+  async ({isAuth, book, user}, {dispatch}) => {
     try {
       if (!isAuth) {
         notify('Only registered users can rate', 'error')
@@ -37,6 +37,7 @@ export const setLikeBook = createAsyncThunk(
       dispatch(fetchSeesBooksEveryone())
     } catch (e) {
       console.error(e)
+      notify('An error occurred, please try again later', 'error')
     }
   }
 )

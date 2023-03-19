@@ -19,40 +19,25 @@ export interface IValues {
   seesEveryone: boolean
 }
 
-export interface IFormAddingBookProps {
-  setError: React.Dispatch<React.SetStateAction<string>>,
-  setLoading: React.Dispatch<React.SetStateAction<boolean>>
-}
-
-export default function AddingBookForm({setError, setLoading}: IFormAddingBookProps) {
+export default function AddingBookForm() {
   const [step, setStep] = useState(0);
   const [formData, setFormData] = useState({})
   const {visibleAddingBookForm} = useAppSelector(state => state.main)
   const dispatch = useAppDispatch()
   const {user, library} = useAppSelector(state => state.account)
   const currentValidationSchema = addingBookValidateSchema[step]
+  const stepsComponents = [BookTitle, BookDescription, BookCover]
 
   const renderSteps = (props: any) => {
-    switch (step) {
-      case 0: {
-        return <BookTitle/>
-      }
-      case 1: {
-        return <BookDescription {...props}/>;
-      }
-      case 2: {
-        return <BookCover {...props}/>;
-      }
-      default:
-        return null
-    }
+    const Component = stepsComponents[step]
+    return <Component {...props}/>
   }
 
   const handleSubmit = (values: IValues, resetForm: any) => {
     const data: IValues = {...formData, ...values}
     setStep(step + 1)
-    if (step === 2) {
-      dispatch(uploadBook({data, user, setError, setLoading}))
+    if (step === stepsComponents.length - 1) {
+      dispatch(uploadBook({data, user}))
       dispatch(setVisibleAddingBookForm(false))
       setStep(0)
       resetForm()

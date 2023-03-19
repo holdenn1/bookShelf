@@ -5,7 +5,8 @@ import {setFavorite, setLibrary} from "../slices/accountSlice";
 import {fetchFavoriteBooks} from "./fetchFavoriteBooks";
 import {fetchDataLibrary} from "./fetchDataLibrary";
 import {fetchSeesBooksEveryone} from "./fetchSeesBooksEveryone";
-import {SetFavoriteAndPublicProps} from "../../types";
+import {IBook, SetFavoriteAndPublicProps} from "../../types";
+import {notify} from "../../components/UI/Toast/Toast";
 
 
 export const setPublic = createAsyncThunk(
@@ -32,7 +33,7 @@ export const setPublic = createAsyncThunk(
       if (book.seesEveryone) {
         await deleteDoc(doc(db, "books-sees-everyone", `${book.booksEveryoneCollectionID}`));
       } else {
-        const booksEveryoneCollection = await addDoc(collection(db, `books-sees-everyone`), {
+        const publicBook: IBook = {
           id: book.id,
           userId: user.id,
           title: book.title,
@@ -43,7 +44,9 @@ export const setPublic = createAsyncThunk(
           userWhoLikesBook: [],
           userWhoUnlikesBook: [],
           rating: 0
-        });
+        }
+
+        const booksEveryoneCollection = await addDoc(collection(db, `books-sees-everyone`), publicBook);
         const docPublic = doc(db, `books-sees-everyone`, `${booksEveryoneCollection.id}`)
         await setDoc(docPublic, {booksEveryoneCollectionID: booksEveryoneCollection.id}, {merge: true});
         await setDoc(docUserRef, {booksEveryoneCollectionID: booksEveryoneCollection.id}, {merge: true});
@@ -72,8 +75,10 @@ export const setPublic = createAsyncThunk(
       }
       dispatch(fetchDataLibrary(user.id))
       dispatch(fetchSeesBooksEveryone())
+
     } catch (e) {
       console.error(e)
+      notify('An error occurred, please try again later', 'error')
     }
   }
 )

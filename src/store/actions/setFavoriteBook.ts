@@ -5,10 +5,11 @@ import {db} from "../../firebase";
 import {fetchSeesBooksEveryone} from "./fetchSeesBooksEveryone";
 import {fetchFavoriteBooks} from "./fetchFavoriteBooks";
 import {SetFavoriteAndPublicProps} from "../../types";
+import {notify} from "../../components/UI/Toast/Toast";
 
-export const setFavoriteBook = createAsyncThunk(
+export const setFavoriteBook = createAsyncThunk<void, SetFavoriteAndPublicProps>(
   'user/setFavoriteBook',
-  async ({book, library, user}: SetFavoriteAndPublicProps, {dispatch}) => {
+  async ({book, library, user}, {dispatch}) => {
     try {
       const isFavorite = library.map(item => {
           if (item.id == book.id) {
@@ -31,6 +32,8 @@ export const setFavoriteBook = createAsyncThunk(
       dispatch(fetchFavoriteBooks(user))
     } catch (e) {
       console.error(e)
+      notify('An error occurred, please try again later', 'error'
+      )
     }
   }
 )

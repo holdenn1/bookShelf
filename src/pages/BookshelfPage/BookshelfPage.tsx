@@ -6,7 +6,7 @@ import { useAuth } from '../../hooks/useAuth';
 function BookshelfPage() {
 	const { isAuth } = useAuth();
 	const navigate = useNavigate();
-	console.log(isAuth)
+
 	useEffect(() => {
 		!isAuth && navigate('/', { replace: true });
 	}, []);

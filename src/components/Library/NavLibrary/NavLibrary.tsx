@@ -52,6 +52,9 @@ export default function NavLibrary() {
         <li className={styles.bookItem}>
           <NavLink className={activeLink} to='/book-shelf/favorite-books'>Favorite books</NavLink>
         </li>
+        <li className={styles.bookItem}>
+          <NavLink className={activeLink} to='/book-shelf/messages'>Messages</NavLink>
+        </li>
       </ul>
     </nav>
   )

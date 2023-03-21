@@ -9,6 +9,7 @@ import AllBookPage from "../pages/AccountPages/AllBookPage";
 import NewBookPage from "../pages/AccountPages/NewBookPage";
 import FavoriteBooksPage from "../pages/AccountPages/FavoriteBooksPage";
 import LibraryPage from "../pages/LibraryPage/LibraryPage";
+import MessagesPage from "../pages/AccountPages/MessagesPage";
 
 export const router = createBrowserRouter([
   {
@@ -47,6 +48,10 @@ export const router = createBrowserRouter([
           {
             path: 'favorite-books',
             element: <FavoriteBooksPage/>
+          },
+          {
+            path: 'messages',
+            element: <MessagesPage/>
           },
         ]
       },

@@ -18,6 +18,7 @@
     width: 500px;
     height: 380px;
     padding: 20px;
+    margin: 0 12px;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
@@ -40,12 +41,21 @@
     .message {
       resize: none;
       padding: 6px 8px;
-      height: 200px;
+      height: 150px;
       border-radius: $primary-border-radius;
       border: $primary-border;
       &::-webkit-scrollbar {
         display: none;
       }
+    }
+    .submitBtn{
+      width: 200px;
+      height: 36px;
+      margin: auto;
+      border-radius: $primary-border-radius;
+      background: $primary-background;
+      color: $primary-color;
+      border: none;
     }
   }
 }

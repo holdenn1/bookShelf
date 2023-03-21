@@ -4,7 +4,7 @@ import BookshelfWrapper from "../../components/UI/wrappers/BookshelfWrapper/Book
 import {useAppDispatch, useAppSelector} from "../../hooks/reduxHooks";
 import {fetchSeesBooksEveryone} from "../../store/actions/fetchSeesBooksEveryone";
 import Book from "../../components/Library/Book/Book";
-import MessageForm from "../../components/Forms/MessageForm/MessageForm";
+import BookMessageForm from "../../components/Forms/BookMessageForm/BookMessageForm";
 
 function LibraryPage() {
   const {booksSeesEveryone} = useAppSelector(state => state.main)
@@ -24,7 +24,7 @@ function LibraryPage() {
       ) : (
         <BookshelfWrapper>
           {booksSeesEveryone.map(book => <Book key={book.id} {...book}/>)}
-          <MessageForm/>
+          <BookMessageForm/>
         </BookshelfWrapper>
       )}
     </>

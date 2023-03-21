@@ -1,11 +1,11 @@
 import React from 'react';
-import styles from './MessageFoem.module.scss'
+import styles from './BookMessageForm.module.scss'
 import {Formik, Form, Field} from 'formik'
 import classNames from "classnames";
 import {useAppDispatch, useAppSelector} from "../../../hooks/reduxHooks";
 import {setVisibleMessageForm} from "../../../store/slices/mainSlice";
 
-function MessageForm() {
+function BookMessageForm() {
   const {visibleMessageForm} = useAppSelector(state => state.main)
   const dispatch = useAppDispatch()
   return (
@@ -43,6 +43,7 @@ function MessageForm() {
               name='message'
               as="textarea"
               placeholder='Share your thoughts with the author'/>
+            <button className={styles.submitBtn} type='submit'>Submit message</button>
           </Form>
         )}
       </Formik>
@@ -50,4 +51,4 @@ function MessageForm() {
   );
 }
 
-export default MessageForm;
+export default BookMessageForm;

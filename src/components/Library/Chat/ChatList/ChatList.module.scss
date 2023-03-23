@@ -12,6 +12,7 @@
     color: $secondary-color;
     @include navLinkBookItem(block, 10px 12px, aliceblue);
     border-radius: 12px;
+    margin-bottom: 10px;
 
     &:hover {
       background: #2193d0;
@@ -25,5 +26,6 @@
     border-radius: 12px;
     background: #1b83b8;
     color: $primary-color;
+    margin-bottom: 10px;
   }
 }

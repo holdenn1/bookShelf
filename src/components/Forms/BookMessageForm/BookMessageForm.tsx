@@ -1,15 +1,16 @@
 import React, {useState} from 'react';
 import styles from './BookMessageForm.module.scss'
-import {Formik, Form, Field} from 'formik'
+import {Formik, Form, Field, FormikValues} from 'formik'
 import classNames from "classnames";
 import {useAppDispatch, useAppSelector} from "../../../hooks/reduxHooks";
 import {setVisibleMessageForm} from "../../../store/slices/mainSlice";
-import {realTimeDb} from "../../../firebase";
-import {ref, set, push} from "firebase/database";
+import {db, realTimeDb} from "../../../firebase";
+import {ref, set, serverTimestamp, push} from "firebase/database";
+import {arrayUnion, doc, updateDoc} from "firebase/firestore";
+import {fetchSeesBooksEveryone} from "../../../store/actions/fetchSeesBooksEveryone";
+import {IMessage} from "../../../types";
 
-interface IMessage {
-  message: string
-}
+
 
 function BookMessageForm() {
   const [formData, setFormData] = useState({})
@@ -17,20 +18,34 @@ function BookMessageForm() {
   const {id, email} = useAppSelector(state => state.account.user)
   const dispatch = useAppDispatch()
 
-  const handleSubmit = async (values: IMessage, resetForm: any) => {
-    const data: IMessage = {...formData, ...values}
-    const message = {}
+  const handleSubmit = async (values: FormikValues, resetForm: any) => {
+    const data: FormikValues = {...formData, ...values}
+    const message: IMessage = {
+      senderId: id,
+      message: data.message,
+      timestamp: serverTimestamp()
+    }
 
-    const newChatRef = push(ref(realTimeDb, "chats"));
-    const chatPath = `chats/${newChatRef.key}/messages/`;
-    const sendMessage = await push(ref(realTimeDb, chatPath), {message: data.message})
+    const chatRef = push(ref(realTimeDb, "chats"));
+    const messageRef = push(ref(realTimeDb, `chats/${chatRef.key}/messages/`));
+
+    const docUserRef = doc(db, `books-user-${currentBook.userId}`, `${currentBook.id}`);
+    const docPublicRef = doc(db, `books-sees-everyone`, `${currentBook.booksEveryoneCollectionID}`)
+
+
+    const sendMessage = await set(ref(realTimeDb, `chats/${chatRef.key}/messages/${messageRef.key}`), {
+      senderId: id,
+      messageId: messageRef.key,
+      message: data.message,
+      timestamp: serverTimestamp()
+    })
 
     const addFirstUser = await push(ref(realTimeDb, `users/${id}/chats/`), {
       toUserId: currentBook.userId,
       toUserEmail: currentBook.userEmail,
       bookId: currentBook.booksEveryoneCollectionID,
       bookTitle: currentBook.title,
-      chatId: newChatRef.key
+      chatId: chatRef.key
     })
 
     const addSecondUser = await push(ref(realTimeDb, `users/${currentBook.userId}/chats/`), {
@@ -38,9 +53,14 @@ function BookMessageForm() {
       fromUserEmail: email,
       bookId: currentBook.booksEveryoneCollectionID,
       bookTitle: currentBook.title,
-      chatId: newChatRef.key
+      chatId: chatRef.key
     })
 
+    await updateDoc(docPublicRef, {usersWhoSendMessage: arrayUnion(id)});
+    await updateDoc(docUserRef, {usersWhoSendMessage: arrayUnion(id)});
+
+
+    dispatch(fetchSeesBooksEveryone())
     dispatch(setVisibleMessageForm(false))
     resetForm()
   }

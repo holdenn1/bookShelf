@@ -20,8 +20,9 @@ export interface IBook {
   seesEveryone: boolean
   booksEveryoneCollectionID?: string
   rating: number
-  userWhoLikesBook: string[]
-  userWhoUnlikesBook: string[]
+  usersWhoLikesBook: string[]
+  usersWhoUnlikesBook: string[]
+  usersWhoSendMessage: string[]
 }
 
 export interface IUser {
@@ -45,6 +46,7 @@ export interface IMainReducer{
   search: string
   currentBook: IBook
   booksSeesEveryone: IBook[]
+  chats: IChats[]
 }
 
 export type SetFavoriteAndPublicProps = {
@@ -63,4 +65,19 @@ export type BookIconProps = {
   isAuth?: boolean
   checkCurrentUser: boolean
   book: IBook
+}
+
+export interface IChats {
+  fromUserId?: string
+  fromUserEmail?: string
+  toUserId?: string
+  toUserEmail?: string
+  book: string
+  chatId: string
+}
+
+export interface IMessage {
+  senderId: string
+  message: string
+  timestamp: object
 }

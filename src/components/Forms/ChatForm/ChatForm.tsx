@@ -1,20 +1,50 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styles from "./ChatForm.module.scss";
-import {Field, Form, Formik} from "formik";
+import {Field, Form, Formik, FormikValues} from "formik";
+import {push, ref, serverTimestamp, set} from "firebase/database";
+import {IMessage} from "../../../types";
+import {useAppSelector} from "../../../hooks/reduxHooks";
+import {realTimeDb} from "../../../firebase";
+import {useParams} from "react-router-dom";
 
 function ChatForm() {
+  const [formData, setFormData] = useState({})
+  const {id} = useAppSelector(state => state.account.user)
+  const {chatId} = useParams()
+
+  const handleSubmit = async (values: FormikValues, resetForm: any) => {
+    const data: FormikValues = {...formData, ...values}
+
+    const message: IMessage = {
+      senderId: id,
+      message: data.message,
+      timestamp: serverTimestamp()
+    }
+
+    const chatRef = push(ref(realTimeDb, "chats"));
+    const messageRef = push(ref(realTimeDb, `chats/${chatId}/messages/`));
+
+    const sendMessage = await set(ref(realTimeDb, `chats/${chatId}/messages/${messageRef.key}`), {
+      senderId: id,
+      messageId: messageRef.key,
+      message: data.message,
+      timestamp: serverTimestamp()
+    })
+
+    resetForm()
+  }
   return (
     <div className={styles.wrapper}>
       <Formik
         initialValues={{
           message: ''
         }}
-        onSubmit={(values) => console.log(values)}
+        onSubmit={(values, {resetForm}) => handleSubmit(values, resetForm)}
       >
         {() => (
-          <Form>
-            <Field name='message' as="textarea"/>
-            <button type='submit'>Submit</button>
+          <Form className={styles.form}>
+            <Field className={styles.message} name='message' as="textarea"/>
+            <button className={styles.submit} type='submit'>Submit</button>
           </Form>
         )}
       </Formik>

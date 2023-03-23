@@ -1,31 +1,27 @@
 import React, {useEffect, useState} from 'react';
 import styles from "./ChatList.module.scss";
-import {useAppSelector} from "../../../../hooks/reduxHooks";
+import {useAppDispatch, useAppSelector} from "../../../../hooks/reduxHooks";
 import {onValue, ref} from "firebase/database";
 import {realTimeDb} from "../../../../firebase";
 import {NavLink} from "react-router-dom";
+import {setChats} from "../../../../store/slices/mainSlice";
 
-interface IFromUserMessage {
-  fromUserId?: string
-  fromUserEmail?: string
-  toUserId?: string
-  toUserEmail?: string
-  book: string
-  chatId: string
-}
+
 
 function ChatList() {
-  const [chats, setChats] = useState<IFromUserMessage[]>([])
   const {id, email} = useAppSelector(state => state.account.user)
+  const {chats} = useAppSelector(state => state.main)
+  const dispatch = useAppDispatch()
   const activeLink = ({isActive}: any) => isActive ? styles.activeLink : styles.link;
 
   useEffect(() => {
     const userChatRef = ref(realTimeDb, `users/${id}/chats/`);
     onValue(userChatRef, (snapshot) => {
       const data = snapshot.val();
-      setChats(Object.values(data))
+      dispatch(setChats(Object.values(data)))
     })
   }, [])
+  console.log(chats)
 
   return (
     <nav className={styles.nav}>

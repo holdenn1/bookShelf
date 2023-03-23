@@ -1,0 +1,28 @@
+@import "src/styles/variables/variables";
+@import "src/styles/mixins/contentCenterFlex";
+
+.wrapper {
+  @include contentCenterFlex;
+  height: 80px;
+  border-top: 1px solid #cececc;
+
+  .form{
+    @include contentCenterFlex;
+    .message{
+      resize: none;
+      padding: 8px;
+      box-sizing: border-box;
+      width: 380px;
+      margin-right: 20px;
+    }
+    .submit{
+      width: 76px;
+      height: 32px;
+      border: none;
+      border-radius: $primary-border-radius;
+      background: $primary-background;
+      color: $primary-color;
+    }
+  }
+
+}

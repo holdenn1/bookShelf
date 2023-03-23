@@ -42,8 +42,9 @@ export const setPublic = createAsyncThunk(
           cover: book.cover,
           favorite: book.favorite,
           seesEveryone: !book.seesEveryone,
-          userWhoLikesBook: [],
-          userWhoUnlikesBook: [],
+          usersWhoLikesBook: [],
+          usersWhoUnlikesBook: [],
+          usersWhoSendMessage:[],
           rating: 0
         }
 

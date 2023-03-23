@@ -13,23 +13,23 @@ export const setUnlikeBook = createAsyncThunk<void, LikeAndUnLikeProps>(
         notify('Only registered users can rate', 'error')
         return
       }
-      const checkUserUnlike = book.userWhoUnlikesBook.some(id => id === user.id)
-      const checkUserLike = book.userWhoLikesBook.some(id => id === user.id)
+      const checkUserUnlike = book.usersWhoUnlikesBook.some(id => id === user.id)
+      const checkUserLike = book.usersWhoLikesBook.some(id => id === user.id)
       const docUserRef = doc(db, `books-user-${book.userId}`, `${book.id}`);
       const docPublicRef = doc(db, `books-sees-everyone`, `${book.booksEveryoneCollectionID}`)
       if (!checkUserUnlike && checkUserLike) {
-        await updateDoc(docPublicRef, {rating: book.rating - 2, userWhoUnlikesBook: arrayUnion(user.id)});
-        await updateDoc(docUserRef, {rating: book.rating - 2, userWhoUnlikesBook: arrayUnion(user.id)});
+        await updateDoc(docPublicRef, {rating: book.rating - 2, usersWhoUnlikesBook: arrayUnion(user.id)});
+        await updateDoc(docUserRef, {rating: book.rating - 2, usersWhoUnlikesBook: arrayUnion(user.id)});
         await updateDoc(docPublicRef, {userWhoLikesBook: arrayRemove(user.id)});
         await updateDoc(docUserRef, {userWhoLikesBook: arrayRemove(user.id)});
         notify('Your rating has been credited', 'success')
       } else if (!checkUserUnlike) {
-        await updateDoc(docPublicRef, {rating: book.rating - 1, userWhoUnlikesBook: arrayUnion(user.id)});
-        await updateDoc(docUserRef, {rating: book.rating - 1, userWhoUnlikesBook: arrayUnion(user.id)});
+        await updateDoc(docPublicRef, {rating: book.rating - 1, usersWhoUnlikesBook: arrayUnion(user.id)});
+        await updateDoc(docUserRef, {rating: book.rating - 1, usersWhoUnlikesBook: arrayUnion(user.id)});
         notify('Your rating has been credited', 'success')
       } else {
-        await updateDoc(docPublicRef, {rating: book.rating + 1, userWhoUnlikesBook: arrayRemove(user.id)});
-        await updateDoc(docUserRef, {rating: book.rating + 1, userWhoUnlikesBook: arrayRemove(user.id)});
+        await updateDoc(docPublicRef, {rating: book.rating + 1, usersWhoUnlikesBook: arrayRemove(user.id)});
+        await updateDoc(docUserRef, {rating: book.rating + 1, usersWhoUnlikesBook: arrayRemove(user.id)});
         notify('Your rating has been deleted', 'success')
       }
       dispatch(fetchSeesBooksEveryone())

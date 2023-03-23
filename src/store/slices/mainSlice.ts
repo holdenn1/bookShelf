@@ -1,5 +1,5 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {IBook, IMainReducer} from "../../types";
+import {IBook, IChats, IMainReducer} from "../../types";
 import {fetchSeesBooksEveryone} from "../actions/fetchSeesBooksEveryone";
 
 const initialState: IMainReducer = {
@@ -9,7 +9,8 @@ const initialState: IMainReducer = {
   visibleMessageForm: false,
   search: '',
   currentBook: {} as IBook,
-  booksSeesEveryone: []
+  booksSeesEveryone: [],
+  chats:[]
 }
 
 const mainSlice = createSlice(
@@ -34,7 +35,10 @@ const mainSlice = createSlice(
       },
       setOpenSearchMenu(state, action: PayloadAction<boolean>) {
         state.isOpenSearchMenu = action.payload
-      }
+      },
+      setChats(state, action: PayloadAction<IChats[]>) {
+        state.chats = action.payload
+      },
     },
     extraReducers: builder => {
       builder
@@ -51,6 +55,7 @@ export const {
   setSearch,
   setCurrentBook,
   setVisibleMenu,
-  setOpenSearchMenu
+  setOpenSearchMenu,
+  setChats
 } = mainSlice.actions
 export default mainSlice.reducer

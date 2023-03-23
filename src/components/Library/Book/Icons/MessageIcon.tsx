@@ -4,6 +4,7 @@ import styles from './../Book.module.scss'
 import {useAppDispatch, useAppSelector} from "../../../../hooks/reduxHooks";
 import {setCurrentBook, setVisibleMessageForm} from "../../../../store/slices/mainSlice";
 import {IBook} from "../../../../types";
+import {notify} from "../../../UI/Toast/Toast";
 
 interface IMessageIconProps {
   book: IBook
@@ -11,13 +12,20 @@ interface IMessageIconProps {
 
 function MessageIcon({book}: IMessageIconProps) {
   const {visibleMessageForm} = useAppSelector(state => state.main)
+  const {id} = useAppSelector(state => state.account.user)
   const dispatch = useAppDispatch()
 
-  return (
-    <img onClick={() => {
+  const handleMassage = () => {
+    const checkUserLike = book.usersWhoSendMessage.some(userId => userId === id)
+    if (!checkUserLike) {
       dispatch(setVisibleMessageForm(!visibleMessageForm))
       dispatch(setCurrentBook(book))
-    }}
+    } else {
+      notify('Your message has been sent to the author, please go to the message section to continue communication', 'success')
+    }
+  }
+  return (
+    <img onClick={handleMassage}
          className={styles.messageForUser}
          src={massage} alt=""
     />

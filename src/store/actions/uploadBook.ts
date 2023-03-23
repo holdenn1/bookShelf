@@ -33,8 +33,9 @@ export const uploadBook = createAsyncThunk<IBook, UploadBookProps, { rejectValue
         cover: downloadURL,
         favorite: false,
         seesEveryone: data.seesEveryone,
-        userWhoLikesBook: [],
-        userWhoUnlikesBook: [],
+        usersWhoLikesBook: [],
+        usersWhoUnlikesBook: [],
+        usersWhoSendMessage:[],
         rating: 0
       }
 

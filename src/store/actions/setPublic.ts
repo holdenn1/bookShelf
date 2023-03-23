@@ -35,6 +35,7 @@ export const setPublic = createAsyncThunk(
       } else {
         const publicBook: IBook = {
           id: book.id,
+          userEmail: user.email,
           userId: user.id,
           title: book.title,
           description: book.description,

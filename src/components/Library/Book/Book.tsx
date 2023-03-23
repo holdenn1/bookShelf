@@ -65,7 +65,7 @@ function Book(book: IBook) {
             setLike={setLike}
             book={book}
             checkCurrentUser={checkCurrentUser}/>
-          <MessageIcon/>
+          <MessageIcon book={book}/>
           <UnlikeIcon
             setUnlike={setUnlike}
             book={book}

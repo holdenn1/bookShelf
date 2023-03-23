@@ -10,6 +10,7 @@ import NewBookPage from "../pages/AccountPages/NewBookPage";
 import FavoriteBooksPage from "../pages/AccountPages/FavoriteBooksPage";
 import LibraryPage from "../pages/LibraryPage/LibraryPage";
 import MessagesPage from "../pages/AccountPages/MessagesPage";
+import ChatWindow from "../components/Library/Chat/ChatWindow/ChatWindow";
 
 export const router = createBrowserRouter([
   {
@@ -51,7 +52,11 @@ export const router = createBrowserRouter([
           },
           {
             path: 'messages',
-            element: <MessagesPage/>
+            element: <MessagesPage/>,
+            children:[{
+              path: `:chatId`,
+              element: <ChatWindow/>,
+            }]
           },
         ]
       },

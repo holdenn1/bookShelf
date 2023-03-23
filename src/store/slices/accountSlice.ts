@@ -9,7 +9,7 @@ import {removeBook} from "../actions/removeBook";
 const initialState: IAccount = {
   user: {
     id: '',
-    email: null,
+    email: '',
   },
   library: [],
   favoriteBooks: [],
@@ -25,7 +25,7 @@ const accountSlice = createSlice({
       state.user = action.payload
     },
     removeUser(state) {
-      state.user = {id: '', email: null}
+      state.user = {id: '', email: ''}
     },
     setLibrary(state, action: PayloadAction<IBook[]>) {
       state.library = action.payload

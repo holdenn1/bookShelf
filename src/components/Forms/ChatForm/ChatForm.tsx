@@ -9,11 +9,11 @@ function ChatForm() {
         initialValues={{
           message: ''
         }}
-        onSubmit={() => console.log(2)}
+        onSubmit={(values) => console.log(values)}
       >
         {() => (
           <Form>
-            <Field as="textarea"/>
+            <Field name='message' as="textarea"/>
             <button type='submit'>Submit</button>
           </Form>
         )}

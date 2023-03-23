@@ -27,6 +27,7 @@ export const uploadBook = createAsyncThunk<IBook, UploadBookProps, { rejectValue
 
       const dataBook: Omit<IBook, 'id'> = {
         userId: user.id,
+        userEmail: user.email,
         title: data.title,
         description: data.description,
         cover: downloadURL,

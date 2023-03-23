@@ -16,7 +16,7 @@
 
   .form {
     width: 500px;
-    height: 380px;
+    height: 360px;
     padding: 20px;
     margin: 0 12px;
     box-sizing: border-box;
@@ -27,21 +27,15 @@
 
     .title {
       font-size: 20px;
+      text-align: center;
       font-weight: $fw-title;
-      margin-bottom: 12px;
-    }
-
-    .titleInput {
-      padding: 6px 8px;
-      border-radius: $primary-border-radius;
-      border: $primary-border;
       margin-bottom: 12px;
     }
 
     .message {
       resize: none;
       padding: 6px 8px;
-      height: 150px;
+      height: 200px;
       border-radius: $primary-border-radius;
       border: $primary-border;
       &::-webkit-scrollbar {

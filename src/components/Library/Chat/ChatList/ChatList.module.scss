@@ -1,0 +1,29 @@
+@import "src/styles/variables/variables";
+@import "src/styles/mixins/navLinkBookItem";
+
+.nav {
+  width: 320px;
+  background: #eaeaee;
+  padding: 20px;
+  box-sizing: border-box;
+
+  .link {
+    white-space: nowrap;
+    color: $secondary-color;
+    @include navLinkBookItem(block, 10px 12px, aliceblue);
+    border-radius: 12px;
+
+    &:hover {
+      background: #2193d0;
+      color: $primary-color;
+    }
+  }
+
+  .activeLink {
+    white-space: nowrap;
+    @include navLinkBookItem(block, 10px 12px, aliceblue);
+    border-radius: 12px;
+    background: #1b83b8;
+    color: $primary-color;
+  }
+}

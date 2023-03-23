@@ -1,5 +1,5 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {IMainReducer} from "../../types";
+import {IBook, IMainReducer} from "../../types";
 import {fetchSeesBooksEveryone} from "../actions/fetchSeesBooksEveryone";
 
 const initialState: IMainReducer = {
@@ -8,6 +8,7 @@ const initialState: IMainReducer = {
   isOpenSearchMenu: false,
   visibleMessageForm: false,
   search: '',
+  currentBook: {} as IBook,
   booksSeesEveryone: []
 }
 
@@ -28,6 +29,9 @@ const mainSlice = createSlice(
       setSearch(state, action: PayloadAction<string>) {
         state.search = action.payload
       },
+      setCurrentBook(state, action: PayloadAction<IBook>) {
+        state.currentBook = action.payload
+      },
       setOpenSearchMenu(state, action: PayloadAction<boolean>) {
         state.isOpenSearchMenu = action.payload
       }
@@ -45,6 +49,7 @@ export const {
   setVisibleAddingBookForm,
   setVisibleMessageForm,
   setSearch,
+  setCurrentBook,
   setVisibleMenu,
   setOpenSearchMenu
 } = mainSlice.actions

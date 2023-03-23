@@ -11,6 +11,7 @@ export interface INavButtons {
 
 export interface IBook {
   id: string
+  userEmail: string
   userId: string
   title: string
   description: string
@@ -25,7 +26,7 @@ export interface IBook {
 
 export interface IUser {
   id: string,
-  email: string | null,
+  email: string,
 }
 
 export interface IAccount {
@@ -42,6 +43,7 @@ export interface IMainReducer{
   isOpenSearchMenu: boolean
   visibleMenu:boolean
   search: string
+  currentBook: IBook
   booksSeesEveryone: IBook[]
 }
 

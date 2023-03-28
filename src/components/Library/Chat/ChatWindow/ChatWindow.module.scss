@@ -1,4 +1,5 @@
 @import "src/styles/mixins/contentCenterFlex";
+@import "src/styles/mixins/message";
 @import "src/styles/variables/variables";
 
 
@@ -7,10 +8,13 @@
   height: 100%;
   display: grid;
   grid-template-rows: auto 1fr auto;
+  grid-template-columns: minmax(200px, 1fr);
+  justify-items: center;
 
   .head {
     height: 40px;
     background: #485e89;
+    width: 100%;
     @include contentCenterFlex;
 
     h3 {
@@ -19,19 +23,41 @@
   }
 
   .chatContainer {
-    display: flex;
-    align-items: flex-end;
+
+    width: 100%;
     padding: 20px;
+    box-sizing: border-box;
 
     .chat {
-      width: 100%;
+      max-width: 600px;
+      height: 100%;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
 
       .receiveUser {
         text-align: left;
+        padding: 4px 0;
+        margin: 2px 0;
+        color: aliceblue;
+        width: 100%;
+
+        span {
+          background: #06315f;
+          border-radius: 12px 12px 12px 0;
+          @include message;
+        }
       }
 
       .sendingUser {
         text-align: right;
+
+        span {
+          background: #176cc1;
+          border-radius: 12px 12px 0 12px;
+          @include message;
+        }
       }
     }
   }

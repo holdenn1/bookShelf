@@ -10,7 +10,7 @@ const initialState: IMainReducer = {
   search: '',
   currentBook: {} as IBook,
   booksSeesEveryone: [],
-  chats:[]
+
 }
 
 const mainSlice = createSlice(
@@ -36,9 +36,7 @@ const mainSlice = createSlice(
       setOpenSearchMenu(state, action: PayloadAction<boolean>) {
         state.isOpenSearchMenu = action.payload
       },
-      setChats(state, action: PayloadAction<IChats[]>) {
-        state.chats = action.payload
-      },
+
     },
     extraReducers: builder => {
       builder
@@ -55,7 +53,6 @@ export const {
   setSearch,
   setCurrentBook,
   setVisibleMenu,
-  setOpenSearchMenu,
-  setChats
+  setOpenSearchMenu
 } = mainSlice.actions
 export default mainSlice.reducer

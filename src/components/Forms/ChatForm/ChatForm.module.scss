@@ -5,15 +5,23 @@
   @include contentCenterFlex;
   height: 80px;
   border-top: 1px solid #cececc;
+  width: 100%;
 
   .form{
     @include contentCenterFlex;
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
     .message{
       resize: none;
       padding: 8px;
       box-sizing: border-box;
-      width: 380px;
+
+      width: 100%;
       margin-right: 20px;
+      &::-webkit-scrollbar {
+        display: none;
+      }
     }
     .submit{
       width: 76px;

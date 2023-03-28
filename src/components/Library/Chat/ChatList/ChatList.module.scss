@@ -1,5 +1,6 @@
 @import "src/styles/variables/variables";
 @import "src/styles/mixins/navLinkBookItem";
+@import "src/styles/mixins/removeChat";
 
 .nav {
   width: 320px;
@@ -13,10 +14,23 @@
     @include navLinkBookItem(block, 10px 12px, aliceblue);
     border-radius: 12px;
     margin-bottom: 10px;
+    position: relative;
 
     &:hover {
       background: #2193d0;
       color: $primary-color;
+    }
+
+    .item {
+      margin-bottom: 6px;
+    }
+
+    .titleBook {
+      font-weight: $fw-title;
+    }
+
+    .removeChat {
+      @include removeChat;
     }
   }
 
@@ -27,5 +41,19 @@
     background: #1b83b8;
     color: $primary-color;
     margin-bottom: 10px;
+    position: relative;
+
+    .item {
+      margin-bottom: 6px;
+    }
+
+    .titleBook {
+      font-weight: $fw-title;
+    }
+
+    .removeChat {
+      @include removeChat;
+    }
   }
+
 }

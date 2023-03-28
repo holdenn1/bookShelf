@@ -1,0 +1,10 @@
+@mixin removeChat {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 10px;
+  opacity: 0.4;
+  &:hover{
+    opacity: 1;
+  }
+}

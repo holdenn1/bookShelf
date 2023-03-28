@@ -36,17 +36,19 @@ export interface IAccount {
   favoriteBooks: IBook[]
   loading: boolean
   error: string
+  chats: IChats[]
+  messages: IMessage[]
 }
 
-export interface IMainReducer{
+export interface IMainReducer {
   visibleAddingBookForm: boolean
-  visibleMessageForm:boolean
+  visibleMessageForm: boolean
   isOpenSearchMenu: boolean
-  visibleMenu:boolean
+  visibleMenu: boolean
   search: string
   currentBook: IBook
   booksSeesEveryone: IBook[]
-  chats: IChats[]
+
 }
 
 export type SetFavoriteAndPublicProps = {
@@ -68,12 +70,17 @@ export type BookIconProps = {
 }
 
 export interface IChats {
-  fromUserId?: string
+  fromUserId: string
   fromUserEmail?: string
-  toUserId?: string
+  toUserId: string
   toUserEmail?: string
+  bookTitle: string
   book: string
   chatId: string
+  firstUserChatId: string
+  secondUserChatId: string
+  booksEveryoneCollectionID: string,
+  bookId: string,
 }
 
 export interface IMessage {

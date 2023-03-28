@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import styles from "./ChatForm.module.scss";
 import {Field, Form, Formik, FormikValues} from "formik";
 import {push, ref, serverTimestamp, set} from "firebase/database";
-import {IMessage} from "../../../types";
 import {useAppSelector} from "../../../hooks/reduxHooks";
 import {realTimeDb} from "../../../firebase";
 import {useParams} from "react-router-dom";
@@ -14,13 +13,6 @@ function ChatForm() {
 
   const handleSubmit = async (values: FormikValues, resetForm: any) => {
     const data: FormikValues = {...formData, ...values}
-
-    const message: IMessage = {
-      senderId: id,
-      message: data.message,
-      timestamp: serverTimestamp()
-    }
-
     const chatRef = push(ref(realTimeDb, "chats"));
     const messageRef = push(ref(realTimeDb, `chats/${chatId}/messages/`));
 

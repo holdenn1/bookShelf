@@ -1,47 +1,39 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import styles from "./ChatWindow.module.scss";
 import ChatForm from "../../../Forms/ChatForm/ChatForm";
-import {onValue, ref} from "firebase/database";
-import {realTimeDb} from "../../../../firebase";
-import {useAppSelector} from "../../../../hooks/reduxHooks";
+import {useAppDispatch, useAppSelector} from "../../../../hooks/reduxHooks";
 import {useParams} from 'react-router-dom'
 import classNames from "classnames";
-import {IMessage} from "../../../../types";
-
+import {fetchMessages} from "../../../../store/actions/fetchMessages";
 
 
 function ChatWindow() {
-  const {id} = useAppSelector(state => state.account.user)
+  const {user, messages, chats} = useAppSelector(state => state.account)
+  const dispatch = useAppDispatch()
   const {chatId} = useParams()
-  const [messages, setMessages] = useState<IMessage[]>([])
+  const chatTitle = chats.filter(chat => chat.chatId == chatId)
 
   useEffect(() => {
-    const userChatRef = ref(realTimeDb, `chats/${chatId}/messages`);
-    onValue(userChatRef, (snapshot) => {
-      const data = snapshot.val();
-      setMessages(Object.values(data))
-    })
+    dispatch(fetchMessages(chatId))
   }, [chatId])
-
 
   return (
     <div className={styles.window}>
-      <div className={styles.head}><h3>Lorem ipsum dolor sit amet.</h3></div>
+      <div className={styles.head}>{chatTitle.map(title => <h3 key={title.chatId}>{title.bookTitle}</h3>)}</div>
       <div className={styles.chatContainer}>
         <ul className={styles.chat}>
           {messages.map((message, index) => (
             <li
               key={index}
               className={classNames(styles.receiveUser,
-                {[styles.sendingUser]: message.senderId === id})}>
-              {message.message}
+                {[styles.sendingUser]: message.senderId === user.id})}>
+              <span>{message.message}</span>
             </li>
           ))}
         </ul>
       </div>
       <ChatForm/>
     </div>
-
   );
 }
 

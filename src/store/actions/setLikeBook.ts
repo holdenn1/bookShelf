@@ -22,8 +22,8 @@ export const setLikeBook = createAsyncThunk<void, LikeAndUnLikeProps>(
       if (!checkUserLike && checkUserUnlike) {
         await updateDoc(docPublicRef, {rating: book.rating + 2, usersWhoLikesBook: arrayUnion(user.id)});
         await updateDoc(docUserRef, {rating: book.rating + 2, usersWhoLikesBook: arrayUnion(user.id)});
-        await updateDoc(docPublicRef, {userWhoUnlikesBook: arrayRemove(user.id)});
-        await updateDoc(docUserRef, {userWhoUnlikesBook: arrayRemove(user.id)});
+        await updateDoc(docPublicRef, {usersWhoUnlikesBook: arrayRemove(user.id)});
+        await updateDoc(docUserRef, {usersWhoUnlikesBook: arrayRemove(user.id)});
         notify('Your rating has been credited', 'success')
       } else if (!checkUserLike) {
         await updateDoc(docPublicRef, {rating: book.rating + 1, usersWhoLikesBook: arrayUnion(user.id)});

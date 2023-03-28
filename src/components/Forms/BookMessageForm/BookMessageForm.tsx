@@ -8,8 +8,6 @@ import {db, realTimeDb} from "../../../firebase";
 import {ref, set, serverTimestamp, push} from "firebase/database";
 import {arrayUnion, doc, updateDoc} from "firebase/firestore";
 import {fetchSeesBooksEveryone} from "../../../store/actions/fetchSeesBooksEveryone";
-import {IMessage} from "../../../types";
-
 
 
 function BookMessageForm() {
@@ -20,18 +18,15 @@ function BookMessageForm() {
 
   const handleSubmit = async (values: FormikValues, resetForm: any) => {
     const data: FormikValues = {...formData, ...values}
-    const message: IMessage = {
-      senderId: id,
-      message: data.message,
-      timestamp: serverTimestamp()
-    }
 
     const chatRef = push(ref(realTimeDb, "chats"));
     const messageRef = push(ref(realTimeDb, `chats/${chatRef.key}/messages/`));
 
+    const firstUserRef = await push(ref(realTimeDb, `users/${id}/chats/`))
+    const secondUserRef = await push(ref(realTimeDb, `users/${currentBook.userId}/chats/`))
+
     const docUserRef = doc(db, `books-user-${currentBook.userId}`, `${currentBook.id}`);
     const docPublicRef = doc(db, `books-sees-everyone`, `${currentBook.booksEveryoneCollectionID}`)
-
 
     const sendMessage = await set(ref(realTimeDb, `chats/${chatRef.key}/messages/${messageRef.key}`), {
       senderId: id,
@@ -40,25 +35,32 @@ function BookMessageForm() {
       timestamp: serverTimestamp()
     })
 
-    const addFirstUser = await push(ref(realTimeDb, `users/${id}/chats/`), {
+    const addFirstUser = await set(ref(realTimeDb, `users/${id}/chats/${firstUserRef.key}`), {
       toUserId: currentBook.userId,
+      fromUserId: id,
       toUserEmail: currentBook.userEmail,
-      bookId: currentBook.booksEveryoneCollectionID,
+      booksEveryoneCollectionID: currentBook.booksEveryoneCollectionID,
+      bookId: currentBook.id,
       bookTitle: currentBook.title,
-      chatId: chatRef.key
+      chatId: chatRef.key,
+      firstUserChatId: firstUserRef.key,
+      secondUserChatId: secondUserRef.key
     })
 
-    const addSecondUser = await push(ref(realTimeDb, `users/${currentBook.userId}/chats/`), {
+    const addSecondUser = await set(ref(realTimeDb, `users/${currentBook.userId}/chats/${secondUserRef.key}`), {
       fromUserId: id,
+      toUserId: currentBook.userId,
       fromUserEmail: email,
-      bookId: currentBook.booksEveryoneCollectionID,
+      booksEveryoneCollectionID: currentBook.booksEveryoneCollectionID,
+      bookId: currentBook.id,
       bookTitle: currentBook.title,
-      chatId: chatRef.key
+      chatId: chatRef.key,
+      firstUserChatId: firstUserRef.key,
+      secondUserChatId: secondUserRef.key
     })
 
     await updateDoc(docPublicRef, {usersWhoSendMessage: arrayUnion(id)});
     await updateDoc(docUserRef, {usersWhoSendMessage: arrayUnion(id)});
-
 
     dispatch(fetchSeesBooksEveryone())
     dispatch(setVisibleMessageForm(false))

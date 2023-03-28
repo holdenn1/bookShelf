@@ -1,7 +1,7 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {fetchDataLibrary} from "../actions/fetchDataLibrary";
 import {fetchFavoriteBooks} from "../actions/fetchFavoriteBooks";
-import {IAccount, IBook, IUser} from "../../types";
+import {IAccount, IBook, IChats, IMessage, IUser} from "../../types";
 import {uploadBook} from "../actions/uploadBook";
 import {removeBook} from "../actions/removeBook";
 
@@ -14,7 +14,9 @@ const initialState: IAccount = {
   library: [],
   favoriteBooks: [],
   loading: false,
-  error: ''
+  error: '',
+  chats: [],
+  messages: []
 }
 
 const accountSlice = createSlice({
@@ -33,6 +35,12 @@ const accountSlice = createSlice({
     setFavorite(state, action: PayloadAction<IBook[]>) {
       state.favoriteBooks = action.payload
     },
+    setChats(state, action: PayloadAction<IChats[]>) {
+      state.chats = action.payload
+    },
+    setMessages(state, action: PayloadAction<IMessage[]>) {
+      state.messages = action.payload
+    }
   },
   extraReducers: builder => {
     builder
@@ -57,10 +65,16 @@ const accountSlice = createSlice({
       .addCase(removeBook.rejected, (state, action) => {
         state.error = action.payload as string
       })
-
   }
 })
 
-export const {setUser, removeUser, setLibrary, setFavorite} = accountSlice.actions
+export const {
+  setUser,
+  removeUser,
+  setLibrary,
+  setChats,
+  setMessages,
+  setFavorite
+} = accountSlice.actions
 export default accountSlice.reducer
 

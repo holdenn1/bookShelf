@@ -1,28 +1,25 @@
 import React, {useState} from 'react';
 import styles from "./ChatForm.module.scss";
 import {Field, Form, Formik, FormikValues} from "formik";
-import {push, ref, serverTimestamp, set} from "firebase/database";
-import {useAppSelector} from "../../../hooks/reduxHooks";
-import {realTimeDb} from "../../../firebase";
+import {useAppDispatch, useAppSelector} from "../../../hooks/reduxHooks";
 import {useParams} from "react-router-dom";
+import {notify} from "../../UI/Toast/Toast";
+import {sendingMessage} from "../../../store/actions/sendingMessage";
 
 function ChatForm() {
   const [formData, setFormData] = useState({})
-  const {id} = useAppSelector(state => state.account.user)
+  const {user} = useAppSelector(state => state.account)
   const {chatId} = useParams()
+  const dispatch = useAppDispatch()
 
   const handleSubmit = async (values: FormikValues, resetForm: any) => {
+    if (values.message.trim().length === 0) {
+      notify('Message cannot be empty', 'error')
+      return
+    }
     const data: FormikValues = {...formData, ...values}
-    const chatRef = push(ref(realTimeDb, "chats"));
-    const messageRef = push(ref(realTimeDb, `chats/${chatId}/messages/`));
 
-    const sendMessage = await set(ref(realTimeDb, `chats/${chatId}/messages/${messageRef.key}`), {
-      senderId: id,
-      messageId: messageRef.key,
-      message: data.message,
-      timestamp: serverTimestamp()
-    })
-
+    dispatch(sendingMessage({chatId, user, data}))
     resetForm()
   }
   return (

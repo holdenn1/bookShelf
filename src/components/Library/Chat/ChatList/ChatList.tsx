@@ -5,11 +5,12 @@ import {NavLink, useNavigate} from "react-router-dom";
 import removeChatImg from './../../../../img/icons/icons8-delete-24.png'
 import {IChats} from "../../../../types";
 import {removeChat} from "../../../../store/actions/removeChat";
+import classNames from "classnames";
 
 
 function ChatList() {
   const {chats, user} = useAppSelector(state => state.account)
-  const {booksSeesEveryone} = useAppSelector(state => state.main)
+  const {booksSeesEveryone, isOpenChatList} = useAppSelector(state => state.main)
   const activeLink = ({isActive}: any) => isActive ? styles.activeLink : styles.link;
   const dispatch = useAppDispatch()
   const navigate = useNavigate();
@@ -20,7 +21,7 @@ function ChatList() {
   }
 
   return (
-    <nav className={styles.nav}>
+    <nav className={classNames(styles.nav, {[styles.isOpenNav]: isOpenChatList})}>
       <ul className={styles.list}>
         {chats.map((chat, index) => (
           <NavLink key={index} className={activeLink} to={`/book-shelf/messages/${chat.chatId}`}>

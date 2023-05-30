@@ -2,7 +2,7 @@
 @import "src/styles/variables/variables";
 
 .footer{
-  @include headerAndFooterSize(100%,80px);
+  @include headerAndFooterSize(100%,40px);
   background: $primary-background;
   position: relative;
   z-index: 100;

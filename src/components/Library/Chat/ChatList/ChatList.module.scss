@@ -3,10 +3,13 @@
 @import "src/styles/mixins/removeChat";
 
 .nav {
-  width: 320px;
+  width: 270px;
   background: #eaeaee;
   padding: 20px;
   box-sizing: border-box;
+  transition-duration: 1s;
+  position: relative;
+  transition-timing-function: cubic-bezier(0.68, -0.55, 0.262, 1.55);
 
   .link {
     white-space: nowrap;
@@ -15,6 +18,8 @@
     border-radius: 12px;
     margin-bottom: 10px;
     position: relative;
+    transition-duration: 0.5s;
+    transition-delay: 0.4s;
 
     &:hover {
       background: #2193d0;
@@ -32,6 +37,8 @@
     .removeChat {
       @include removeChat;
     }
+
+
   }
 
   .activeLink {
@@ -42,6 +49,9 @@
     color: $primary-color;
     margin-bottom: 10px;
     position: relative;
+    transition-duration: 0.5s;
+    transition-delay: 0.4s;
+
 
     .item {
       margin-bottom: 6px;
@@ -55,5 +65,28 @@
       @include removeChat;
     }
   }
+}
 
+.isOpenNav {
+  width: 0;
+  background: #eaeaee;
+  padding: 0px;
+  box-sizing: border-box;
+  transition-duration: 1s;
+  transition-timing-function: cubic-bezier(0.68, -0.55, 0.262, 1.55);
+
+
+  .link {
+    opacity: 0;
+    transition-duration: 0.4s;
+    transition-delay: 0.35s;
+
+  }
+
+  .activeLink {
+    opacity: 0;
+    transition-duration: 0.4s;
+    transition-delay: 0.35s;
+
+  }
 }

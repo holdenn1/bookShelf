@@ -48,6 +48,7 @@ export interface IMainReducer {
   search: string
   currentBook: IBook
   booksSeesEveryone: IBook[]
+  isOpenChatList: boolean
 
 }
 

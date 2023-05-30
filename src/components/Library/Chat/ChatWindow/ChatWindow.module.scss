@@ -15,10 +15,19 @@
     height: 40px;
     background: #485e89;
     width: 100%;
+    position: relative;
     @include contentCenterFlex;
 
     h3 {
       color: $primary-color;
+    }
+
+    .chatListImg {
+      position: absolute;
+      top: 8px;
+      left: 10px;
+      cursor: pointer;
+      z-index: 100  ;
     }
   }
 

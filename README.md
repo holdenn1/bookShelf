@@ -11,6 +11,7 @@
 <li><code>REACT_APP_FIREBASE_STORAGE_BUCKET</code></li>
 <li><code>REACT_APP_FIREBASE_MESSAGING_SENDER_ID</code></li>
 <li><code>REACT_APP_FIREBASE_APP_ID</code></li>
+<li><code>REACT_APP_FIREBASE_DATABASE_URL</code></li>
 </ul>
 <p>3. Run the project</p>
 <code>npm run start</code>

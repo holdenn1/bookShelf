@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/bookShelf/static/css/main.d6c1d5e0.css",
+    "main.js": "/bookShelf/static/js/main.fa5244f6.js",
+    "static/media/icons8-поиск.svg": "/bookShelf/static/media/icons8-поиск.09e1b9e4d74c242778644fa45fe8c3a5.svg",
+    "static/media/star-svgrepo-com.svg": "/bookShelf/static/media/star-svgrepo-com.daa0330fa0faf9acb38d467583505d44.svg",
+    "index.html": "/bookShelf/index.html",
+    "main.d6c1d5e0.css.map": "/bookShelf/static/css/main.d6c1d5e0.css.map",
+    "main.fa5244f6.js.map": "/bookShelf/static/js/main.fa5244f6.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d6c1d5e0.css",
+    "static/js/main.fa5244f6.js"
+  ]
+}

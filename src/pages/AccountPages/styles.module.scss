@@ -1,5 +1,5 @@
-@import "src/styles/variables/variables";
-@import "src/styles/mixins/contentCenterFlex";
+@import 'src/styles/variables/variables';
+@import 'src/styles/mixins/contentCenterFlex';
 
 .wrapper {
   @include contentCenterFlex;
@@ -13,7 +13,7 @@
     margin: 0 20px 14px;
     text-align: center;
   }
-  .error{
+  .error {
     font-size: 32px;
     font-weight: $fw-title;
     margin: 30px 0px;

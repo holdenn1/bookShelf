@@ -11,9 +11,7 @@ function BookshelfPage() {
 		!isAuth && navigate('/', { replace: true });
 	}, []);
 
-	return (
-			<Library />
-	);
+	return <Library />;
 }
 
 export default BookshelfPage;

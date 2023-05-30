@@ -1,7 +1,6 @@
-@import "src/styles/mixins/contentCenterFlex";
-@import "src/styles/mixins/message";
-@import "src/styles/variables/variables";
-
+@import 'src/styles/mixins/contentCenterFlex';
+@import 'src/styles/mixins/message';
+@import 'src/styles/variables/variables';
 
 .window {
   width: 100%;
@@ -27,12 +26,11 @@
       top: 8px;
       left: 10px;
       cursor: pointer;
-      z-index: 100  ;
+      z-index: 100;
     }
   }
 
   .chatContainer {
-
     width: 100%;
     padding: 20px;
     box-sizing: border-box;

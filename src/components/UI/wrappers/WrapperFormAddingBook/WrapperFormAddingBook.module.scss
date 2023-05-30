@@ -1,6 +1,6 @@
-@import "../../../../styles/mixins/contentCenterFlex";
-@import "../../../../styles/mixins/flexColumn";
-@import "../../../../styles/variables/variables";
+@import '../../../../styles/mixins/contentCenterFlex';
+@import '../../../../styles/mixins/flexColumn';
+@import '../../../../styles/variables/variables';
 
 .wrapper {
   @include contentCenterFlex;
@@ -15,6 +15,6 @@
     overflow: hidden;
     padding: 16px;
     box-sizing: border-box;
-   @include flexColumn
+    @include flexColumn;
   }
 }

@@ -1,5 +1,5 @@
-@import "src/styles/variables/variables";
-@import "src/styles/mixins/contentCenterFlex";
+@import 'src/styles/variables/variables';
+@import 'src/styles/mixins/contentCenterFlex';
 
 .wrapper {
   @include contentCenterFlex;
@@ -7,12 +7,12 @@
   border-top: 1px solid #cececc;
   width: 100%;
 
-  .form{
+  .form {
     @include contentCenterFlex;
     width: 100%;
     padding: 10px;
     box-sizing: border-box;
-    .message{
+    .message {
       resize: none;
       padding: 8px;
       box-sizing: border-box;
@@ -23,7 +23,7 @@
         display: none;
       }
     }
-    .submit{
+    .submit {
       width: 76px;
       height: 32px;
       border: none;
@@ -32,5 +32,4 @@
       color: $primary-color;
     }
   }
-
 }

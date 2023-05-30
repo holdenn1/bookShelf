@@ -1,7 +1,7 @@
-@import "../../../styles/variables/variables";
-@import "../../../styles/mixins/flexColumn";
+@import '../../../styles/variables/variables';
+@import '../../../styles/mixins/flexColumn';
 
-.form{
+.form {
   width: 340px;
   height: 380px;
   border: $primary-border;
@@ -11,11 +11,11 @@
   padding: 60px 10px 0;
   box-sizing: border-box;
   margin: 12px;
-	p{
-		a{
-			font-size: 18px;
-			font-weight: 500;
-			text-transform: capitalize;
-		}
-	}
+  p {
+    a {
+      font-size: 18px;
+      font-weight: 500;
+      text-transform: capitalize;
+    }
+  }
 }

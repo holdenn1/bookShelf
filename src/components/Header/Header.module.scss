@@ -1,9 +1,9 @@
-@import "../../styles/mixins/contentCenterFlex";
-@import "../../styles/mixins/headerAndFooterSize";
-@import "src/styles/variables/variables";
+@import '../../styles/mixins/contentCenterFlex';
+@import '../../styles/mixins/headerAndFooterSize';
+@import 'src/styles/variables/variables';
 
 .header {
-  @include headerAndFooterSize(100%,80px);
+  @include headerAndFooterSize(100%, 80px);
   @include contentCenterFlex;
   position: fixed;
   top: 0;
@@ -20,17 +20,17 @@
     top: 15px;
     right: 15px;
     cursor: pointer;
-    @media screen and (max-width: 319px){
+    @media screen and (max-width: 319px) {
       display: none;
     }
   }
-  .menuBtn{
+  .menuBtn {
     display: none;
     top: 15px;
     left: 15px;
     cursor: pointer;
   }
-  .showMenu{
+  .showMenu {
     display: block;
     position: fixed;
   }

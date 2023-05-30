@@ -5,7 +5,6 @@ import Footer from './components/Footer/Footer';
 import { Outlet } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 
-
 function App() {
 	return (
 		<>

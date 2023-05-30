@@ -1,6 +1,6 @@
-@import "../../../styles/mixins/navLinkBookItem";
-@import "../../../styles/mixins/contentCenterFlex";
-@import "../../../styles/variables/variables";
+@import '../../../styles/mixins/navLinkBookItem';
+@import '../../../styles/mixins/contentCenterFlex';
+@import '../../../styles/variables/variables';
 
 .nav {
   width: 0;
@@ -8,7 +8,7 @@
   z-index: 100;
   background: rgba(226, 226, 226, 0.85);
   position: fixed;
-  transition-duration: 1s;;
+  transition-duration: 1s;
   transition-timing-function: cubic-bezier(0.68, -0.55, 0.262, 1.55);
 
   .bookList {

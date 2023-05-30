@@ -1,7 +1,7 @@
-@import "../../../styles/variables/variables";
-@import "../../../styles/mixins/contentCenterFlex";
-@import "../../../styles/mixins/mainBookIcons";
-@import "../../../styles/mixins/bookPanelIcons";
+@import '../../../styles/variables/variables';
+@import '../../../styles/mixins/contentCenterFlex';
+@import '../../../styles/mixins/mainBookIcons';
+@import '../../../styles/mixins/bookPanelIcons';
 
 .card {
   width: 222px;
@@ -11,7 +11,8 @@
   border-radius: $primary-border-radius;
   overflow: hidden;
 
-  .front, .back {
+  .front,
+  .back {
     position: absolute;
     width: 200px;
     height: 200px;
@@ -98,7 +99,6 @@
     .publicImg {
       @include mainBookIcons;
       left: 10px;
-
     }
 
     .publicActive {
@@ -129,7 +129,6 @@
     }
   }
 
-
   &:hover .front {
     transform: rotateY(180deg);
   }
@@ -142,7 +141,3 @@
 .back {
   transform: rotateY(180deg);
 }
-
-
-
-

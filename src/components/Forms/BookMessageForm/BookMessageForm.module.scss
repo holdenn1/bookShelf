@@ -1,6 +1,6 @@
-@import "./src/styles/variables/variables";
-@import "./src/styles/mixins/contentCenterFlex";
-@import "./src/styles/mixins/flexColumn";
+@import './src/styles/variables/variables';
+@import './src/styles/mixins/contentCenterFlex';
+@import './src/styles/mixins/flexColumn';
 
 .wrapper {
   position: fixed;
@@ -42,7 +42,7 @@
         display: none;
       }
     }
-    .submitBtn{
+    .submitBtn {
       width: 200px;
       height: 36px;
       margin: auto;

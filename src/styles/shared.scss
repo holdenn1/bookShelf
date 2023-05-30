@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700&display=swap');
 
 html,
 body {
@@ -21,10 +21,11 @@ p,
 Link,
 a,
 input,
-textarea,button,
+textarea,
+button,
 span,
 label {
-  font-family: "Raleway", sans-serif;
+  font-family: 'Raleway', sans-serif;
   line-height: 120%;
   font-weight: 400;
   text-decoration: none;

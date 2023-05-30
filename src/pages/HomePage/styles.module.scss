@@ -1,5 +1,5 @@
-@import "src/styles/variables/variables";
-@import "src/styles/mixins/contentCenterFlex";
+@import 'src/styles/variables/variables';
+@import 'src/styles/mixins/contentCenterFlex';
 
 .wrapper {
   width: 100%;
@@ -11,42 +11,41 @@
     font-size: 38px;
     margin-bottom: 20px;
     text-align: center;
-    @media screen and (max-width: 420px){
+    @media screen and (max-width: 420px) {
       font-size: 32px;
     }
   }
-.linkContainer{
-  max-width: 420px;
-  display: flex;
-  justify-content: space-around;
-  @media screen and (max-width: 440px){
-    flex-direction: column;
-    align-items: center;
+  .linkContainer {
+    max-width: 420px;
+    display: flex;
+    justify-content: space-around;
+    @media screen and (max-width: 440px) {
+      flex-direction: column;
+      align-items: center;
+    }
+    .start {
+      @include contentCenterFlex;
+      width: 180px;
+      height: 40px;
+      border: none;
+      border-radius: $primary-border-radius;
+      background: $primary-background;
+    }
+    .choice {
+      display: block;
+      margin: 4px 10px;
+      font-size: 36px;
+    }
+    .linkToLibrary {
+      @include contentCenterFlex;
+      width: 180px;
+      height: 40px;
+      border: none;
+      color: $primary-color;
+      border-radius: $primary-border-radius;
+      background: #540adc;
+    }
   }
-  .start {
-    @include contentCenterFlex;
-    width: 180px;
-    height: 40px;
-    border: none;
-    border-radius: $primary-border-radius;
-    background: $primary-background;
-  }
-  .choice{
-    display: block;
-    margin: 4px 10px;
-    font-size: 36px;
-
-  }
-  .linkToLibrary{
-    @include contentCenterFlex;
-    width: 180px;
-    height: 40px;
-    border: none;
-    color: $primary-color;
-    border-radius: $primary-border-radius;
-    background: #540adc;
-  }
-}
 
   .allBooksLink {
     width: 180px;
@@ -55,6 +54,3 @@
     margin: 60px 20px 40px;
   }
 }
-
-
-

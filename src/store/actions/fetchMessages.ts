@@ -1,6 +1,6 @@
+import { realTimeDb } from '@/firebase';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { onValue, ref } from 'firebase/database';
-import { realTimeDb } from '../../firebase';
 import { setMessages } from '../slices/accountSlice';
 
 export const fetchMessages = createAsyncThunk<void, string | undefined>(

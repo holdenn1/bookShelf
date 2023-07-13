@@ -1,6 +1,6 @@
-@import './src/styles/variables/variables';
-@import './src/styles/mixins/contentCenterFlex';
-@import './src/styles/mixins/flexColumn';
+@import 'src/styles/variables/variables';
+@import 'src/styles/mixins/contentCenterFlex';
+@import 'src/styles/mixins/flexColumn';
 
 .wrapper {
   position: fixed;

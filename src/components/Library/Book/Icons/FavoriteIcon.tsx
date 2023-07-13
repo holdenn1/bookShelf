@@ -1,8 +1,7 @@
-import React from 'react';
 import classNames from 'classnames';
-import styles from '../Book.module.scss';
-import favoriteIcon from '../../../../img/icons/star-svgrepo-com.svg';
-import { BookIconProps, IBook } from '../../../../types';
+import favoriteIcon from '@/img/icons/star-svgrepo-com.svg';
+import styles from './../styles.module.scss';
+import { BookIconProps, IBook } from '@/types';
 
 type FavoriteIconProps = BookIconProps & {
 	addFavoriteBook(book: IBook): Promise<void>;

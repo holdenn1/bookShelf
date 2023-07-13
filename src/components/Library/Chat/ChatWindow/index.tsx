@@ -1,13 +1,13 @@
-import React, { useEffect } from 'react';
-import styles from './ChatWindow.module.scss';
-import ChatForm from '../../../Forms/ChatForm/ChatForm';
-import { useAppDispatch, useAppSelector } from '../../../../hooks/reduxHooks';
-import { fetchMessages } from '../../../../store/actions/fetchMessages';
-import arrowLeft from './../../../../img/icons/icons8-go-back-24.png';
-import arrowRight from './../../../../img/icons/icons8-forward-button-24.png';
+import  { useEffect } from 'react';
+import styles from './styles.module.scss';
+import arrowLeft from '@/img/icons/icons8-go-back-24.png';
+import arrowRight from '@/img/icons/icons8-forward-button-24.png';
 import { useParams } from 'react-router-dom';
 import classNames from 'classnames';
-import { setVisibleChatList } from '../../../../store/slices/mainSlice';
+import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
+import { fetchMessages } from '@/store/actions/fetchMessages';
+import { setVisibleChatList } from '@/store/slices/mainSlice';
+import ChatForm from '@/components/Forms/ChatForm';
 
 function ChatWindow() {
 	const { user, messages, chats } = useAppSelector((state) => state.account);

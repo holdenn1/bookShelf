@@ -1,15 +1,14 @@
-import React from 'react';
-import styles from './Header.module.scss';
+import styles from './styles.module.scss';
 import { Link, useLocation } from 'react-router-dom';
-import LinkToBookShelf from '../UI/formUI/Links/LinkToBookShelf';
-import logIn from './../../img/icons/icons8-male-user-50.png';
-import logOut from './../../img/icons/icons8-log-out-50.png';
-import { useAuth } from '../../hooks/useAuth';
-import LogOutButton from '../UI/formUI/Buttons/LogOutButton';
-import menuBtn from '../../img/icons/icons8-menu-50.png';
-import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooks';
-import { setOpenSearchMenu, setVisibleMenu } from '../../store/slices/mainSlice';
 import classNames from 'classnames';
+import menuBtn from '@/img/icons/icons8-menu-50.png';
+import logIn from '@/img/icons/icons8-male-user-50.png';
+import logOut from '@/img/icons/icons8-log-out-50.png';
+import { useAuth } from '@/hooks/useAuth';
+import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
+import { setOpenSearchMenu, setVisibleMenu } from '@/store/slices/mainSlice';
+import LogOutButton from '../UI/formUI/Buttons/LogOutButton';
+import LinkToBookShelf from '../UI/formUI/Links/LinkToBookShelf';
 
 function Header() {
 	const { isAuth } = useAuth();

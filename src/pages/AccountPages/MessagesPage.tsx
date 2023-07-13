@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react';
-import ChatList from '../../components/Library/Chat/ChatList/ChatList';
-import { Outlet } from 'react-router-dom';
-import MessagePageWrapper from '../../components/UI/wrappers/MessagePageWrapper/MessagePageWrapper';
-import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooks';
+import  { useEffect } from 'react';
 import styles from './styles.module.scss';
-import { fetchChats } from '../../store/actions/fetchChats';
+import { Outlet } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
+import { fetchChats } from '@/store/actions/fetchChats';
+import MessagePageWrapper from '@/components/UI/wrappers/MessagePageWrapper';
+import ChatList from '@/components/Library/Chat/ChatList';
 
 function MessagesPage() {
 	const { chats, user } = useAppSelector((state) => state.account);

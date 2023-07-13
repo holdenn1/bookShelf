@@ -1,7 +1,6 @@
-import React from 'react';
 import { Outlet } from 'react-router-dom';
-import NavLibrary from './NavLibrary/NavLibrary';
-import styles from './Library.module.scss';
+import styles from './styles.module.scss';
+import NavLibrary from './NavLibrary';
 
 export default function Library() {
 	return (

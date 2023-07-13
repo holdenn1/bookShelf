@@ -1,12 +1,12 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { addDoc, collection, deleteDoc, doc, setDoc, updateDoc } from 'firebase/firestore';
-import { db } from '../../firebase';
-import { setFavorite, setLibrary } from '../slices/accountSlice';
 import { fetchFavoriteBooks } from './fetchFavoriteBooks';
 import { fetchDataLibrary } from './fetchDataLibrary';
 import { fetchSeesBooksEveryone } from './fetchSeesBooksEveryone';
-import { IBook, SetFavoriteAndPublicProps } from '../../types';
-import { notify } from '../../components/UI/Toast/Toast';
+import { IBook, SetFavoriteAndPublicProps } from '@/types';
+import { db } from '@/firebase';
+import { setFavorite, setLibrary } from '../slices/accountSlice';
+import { notify } from '@/components/UI/Toast';
 
 export const setPublic = createAsyncThunk(
 	'main/setPublic',

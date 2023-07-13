@@ -1,8 +1,7 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
-import { useAuth } from '../../../../hooks/useAuth';
-import { IChildren } from '../../../../types';
 import styles from './styles.module.scss';
+import { IChildren } from '@/types';
+import { useAuth } from '@/hooks/useAuth';
 
 export default function LinkToBookShelf({ children }: IChildren) {
 	const { isAuth } = useAuth();

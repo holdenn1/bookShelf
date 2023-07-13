@@ -1,10 +1,10 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
-import { db, storage } from '../../firebase';
 import { addDoc, collection, doc, setDoc } from 'firebase/firestore';
 import { fetchSeesBooksEveryone } from './fetchSeesBooksEveryone';
-import { IValues } from '../../components/Forms/AddingBookForm/AddingBookForm';
-import { IBook, IUser } from '../../types';
+import { IValues } from '@/components/Forms/AddingBookForm';
+import { IBook, IUser } from '@/types';
+import { db, storage } from '@/firebase';
 
 type UploadBookProps = {
 	data: IValues;

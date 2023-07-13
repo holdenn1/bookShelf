@@ -1,7 +1,7 @@
+import { realTimeDb } from '@/firebase';
+import { IUser } from '@/types';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { push, ref, serverTimestamp, set } from 'firebase/database';
-import { realTimeDb } from '../../firebase';
-import { IUser } from '../../types';
 import { FormikValues } from 'formik';
 
 interface ISendingMessageProps {

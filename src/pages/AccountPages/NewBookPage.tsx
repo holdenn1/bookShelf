@@ -1,10 +1,9 @@
-import React from 'react';
-import AddingBookForm from '../../components/Forms/AddingBookForm/AddingBookForm';
 import classNames from 'classnames';
 import styles from './styles.module.scss';
-import AddNewBookButton from '../../components/UI/addingBookForm/Buttons/AddNewBookButton';
-import { useAppSelector } from '../../hooks/reduxHooks';
-import Loader from '../../components/UI/Loader/Loader';
+import { useAppSelector } from '@/hooks/reduxHooks';
+import Loader from '@/components/UI/Loader';
+import AddNewBookButton from '@/components/UI/addingBookForm/Buttons/AddNewBookButton';
+import AddingBookForm from '@/components/Forms/AddingBookForm';
 
 export default function NewBookPage() {
 	const { visibleAddingBookForm } = useAppSelector((state) => state.main);

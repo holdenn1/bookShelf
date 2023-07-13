@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { fetchDataLibrary } from '../actions/fetchDataLibrary';
 import { fetchFavoriteBooks } from '../actions/fetchFavoriteBooks';
-import { IAccount, IBook, IChats, IMessage, IUser } from '../../types';
+import { IAccount, IBook, IChats, IMessage, IUser } from '@/types';
 import { uploadBook } from '../actions/uploadBook';
 import { removeBook } from '../actions/removeBook';
 

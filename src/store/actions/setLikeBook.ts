@@ -1,9 +1,9 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { notify } from '../../components/UI/Toast/Toast';
 import { arrayUnion, arrayRemove, doc, updateDoc } from 'firebase/firestore';
-import { db } from '../../firebase';
 import { fetchSeesBooksEveryone } from './fetchSeesBooksEveryone';
-import { LikeAndUnLikeProps } from '../../types';
+import { LikeAndUnLikeProps } from '@/types';
+import { notify } from '@/components/UI/Toast';
+import { db } from '@/firebase';
 
 export const setLikeBook = createAsyncThunk<void, LikeAndUnLikeProps>(
 	'user/setLikeBook',

@@ -1,4 +1,4 @@
-@import '../../../../styles/mixins/contentCenterFlex';
+@import 'src/styles/mixins/contentCenterFlex';
 
 .wrapper {
   @include contentCenterFlex;

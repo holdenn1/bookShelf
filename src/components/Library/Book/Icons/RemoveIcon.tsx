@@ -1,10 +1,9 @@
-import React from 'react';
-import { removeBook } from '../../../../store/actions/removeBook';
 import classNames from 'classnames';
-import styles from '../Book.module.scss';
-import deleteIcon from '../../../../img/icons/icons8-delete-24.png';
-import { useAppDispatch } from '../../../../hooks/reduxHooks';
-import { BookIconProps, IUser } from '../../../../types';
+import deleteIcon from '@/img/icons/icons8-delete-24.png';
+import styles from './../styles.module.scss';
+import { BookIconProps, IUser } from '@/types';
+import { useAppDispatch } from '@/hooks/reduxHooks';
+import { removeBook } from '@/store/actions/removeBook';
 
 type DeleteIconProps = BookIconProps & {
 	user: IUser;

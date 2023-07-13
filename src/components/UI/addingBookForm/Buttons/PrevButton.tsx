@@ -1,6 +1,5 @@
-import React from 'react';
 import styles from './styles.module.scss';
-import { INavButtons } from '../../../../types';
+import { INavButtons } from '@/types';
 
 function PrevButton({ step, setStep }: INavButtons) {
 	return (

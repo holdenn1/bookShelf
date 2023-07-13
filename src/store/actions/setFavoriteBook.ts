@@ -1,11 +1,11 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { setLibrary } from '../slices/accountSlice';
 import { doc, updateDoc } from 'firebase/firestore';
-import { db } from '../../firebase';
 import { fetchSeesBooksEveryone } from './fetchSeesBooksEveryone';
 import { fetchFavoriteBooks } from './fetchFavoriteBooks';
-import { SetFavoriteAndPublicProps } from '../../types';
-import { notify } from '../../components/UI/Toast/Toast';
+import { SetFavoriteAndPublicProps } from '@/types';
+import { setLibrary } from '../slices/accountSlice';
+import { db } from '@/firebase';
+import { notify } from '@/components/UI/Toast';
 
 export const setFavoriteBook = createAsyncThunk<void, SetFavoriteAndPublicProps>(
 	'user/setFavoriteBook',

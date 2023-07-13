@@ -1,5 +1,4 @@
-import React from 'react';
-import styles from './LibraryTitle.module.scss';
+import styles from './styles.module.scss';
 import { Link } from 'react-router-dom';
 
 function LibraryTitle() {

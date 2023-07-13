@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import  { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooks';
-import Book from '../../components/Library/Book/Book';
-import BookshelfWrapper from '../../components/UI/wrappers/BookshelfWrapper/BookshelfWrapper';
-import LibraryTitle from '../../components/Library/LibraryTitle/LibraryTitle';
-import { fetchDataLibrary } from '../../store/actions/fetchDataLibrary';
-import { IBook } from '../../types';
-import { setSearch } from '../../store/slices/mainSlice';
+import { IBook } from '@/types';
+import { fetchDataLibrary } from '@/store/actions/fetchDataLibrary';
+import { setSearch } from '@/store/slices/mainSlice';
+import LibraryTitle from '@/components/Library/LibraryTitle';
+import BookshelfWrapper from '@/components/UI/wrappers/BookshelfWrapper';
+import Book from '@/components/Library/Book';
 
 function AllBookPage() {
 	const { search } = useAppSelector((state) => state.main);

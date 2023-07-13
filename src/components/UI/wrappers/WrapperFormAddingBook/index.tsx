@@ -1,6 +1,5 @@
-import React from 'react';
-import styles from './WrapperFormAddingBook.module.scss';
-import { IChildren } from '../../../../types';
+import styles from './styles.module.scss';
+import { IChildren } from '@/types';
 
 function WrapperFormAddingBook({ children }: IChildren) {
 	return (

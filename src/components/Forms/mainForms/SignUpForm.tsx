@@ -1,16 +1,15 @@
-import React from 'react';
 import { Form, Formik } from 'formik';
-import registrationValidateSchema from '../../../utils/validate/registrationValidateSchema';
 import styles from './styles.module.scss';
-import MyTextInput from '../../UI/formUI/MyTextInput/MyTextInput';
-import ButtonForm from '../../UI/formUI/Buttons/LogInButton';
-import { useAppDispatch } from '../../../hooks/reduxHooks';
+import { useAppDispatch } from '@/hooks/reduxHooks';
 import { useNavigate } from 'react-router-dom';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { setUser } from '../../../store/slices/accountSlice';
+import { auth } from '@/firebase';
+import { setUser } from '@/store/slices/accountSlice';
+import { notify } from '@/components/UI/Toast';
+import registrationValidateSchema from '@/utils/validate/registrationValidateSchema';
+import MyTextInput from '@/components/UI/formUI/MyTextInput';
+import ButtonForm from '@/components/UI/formUI/Buttons/LogInButton';
 import { Link } from 'react-router-dom';
-import { auth } from '../../../firebase';
-import { notify } from '../../UI/Toast/Toast';
 
 function SignUpForm() {
 	const dispatch = useAppDispatch();

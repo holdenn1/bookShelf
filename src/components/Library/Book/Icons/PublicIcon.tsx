@@ -1,8 +1,7 @@
-import React from 'react';
 import classNames from 'classnames';
-import styles from '../Book.module.scss';
-import publicImg from '../../../../img/icons/icons8-public-30.png';
-import { BookIconProps, IBook } from '../../../../types';
+import styles from './../styles.module.scss';
+import publicImg from '@/img/icons/icons8-public-30.png';
+import { BookIconProps, IBook } from '@/types';
 
 type PublicIconProps = BookIconProps & {
 	setPublicBook(book: IBook): Promise<void>;

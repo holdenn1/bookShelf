@@ -1,7 +1,7 @@
+import { db } from '@/firebase';
+import { IBook } from '@/types';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { collection, getDocs, query, where } from 'firebase/firestore';
-import { db } from '../../firebase';
-import { IBook } from '../../types';
 
 export const fetchSeesBooksEveryone = createAsyncThunk('user/fetchSeesBooksEveryone', async () => {
 	try {

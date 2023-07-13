@@ -1,8 +1,7 @@
-import React from 'react';
+import { useAuth } from '@/hooks/useAuth';
 import styles from './styles.module.scss';
-import LinkToBookShelf from '../../components/UI/formUI/Links/LinkToBookShelf';
-import { useAuth } from '../../hooks/useAuth';
 import { Link } from 'react-router-dom';
+import LinkToBookShelf from '@/components/UI/formUI/Links/LinkToBookShelf';
 
 function HomePage() {
 	const { isAuth } = useAuth();

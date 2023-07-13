@@ -1,8 +1,7 @@
-import React from 'react';
 import classNames from 'classnames';
-import styles from '../Book.module.scss';
-import like from '../../../../img/icons/icons8-thumbs-up-24.png';
-import { BookIconProps, IBook } from '../../../../types';
+import styles from './../styles.module.scss';
+import like from '@/img/icons/icons8-thumbs-up-24.png';
+import { BookIconProps, IBook } from '@/types';
 
 type LikeIconProps = BookIconProps & {
 	setLike(book: IBook): Promise<void>;

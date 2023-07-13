@@ -1,12 +1,12 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { IBook, IChats, IUser } from '../../types';
 import { arrayRemove, doc, updateDoc } from 'firebase/firestore';
-import { db, realTimeDb } from '../../firebase';
 import { ref, remove } from 'firebase/database';
 import { fetchChats } from './fetchChats';
 import { fetchMessages } from './fetchMessages';
-import { notify } from '../../components/UI/Toast/Toast';
 import { NavigateFunction } from 'react-router-dom';
+import { IBook, IChats, IUser } from '@/types';
+import { db, realTimeDb } from '@/firebase';
+import { notify } from '@/components/UI/Toast';
 
 interface IRemoveChatProps {
 	booksSeesEveryone: IBook[];

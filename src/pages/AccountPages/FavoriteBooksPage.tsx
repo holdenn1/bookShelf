@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react';
-import BookshelfWrapper from '../../components/UI/wrappers/BookshelfWrapper/BookshelfWrapper';
-import LibraryTitle from '../../components/Library/LibraryTitle/LibraryTitle';
-import Book from '../../components/Library/Book/Book';
-import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooks';
-import { fetchFavoriteBooks } from '../../store/actions/fetchFavoriteBooks';
+import Book from '@/components/Library/Book';
+import LibraryTitle from '@/components/Library/LibraryTitle';
+import BookshelfWrapper from '@/components/UI/wrappers/BookshelfWrapper';
+import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
+import { fetchFavoriteBooks } from '@/store/actions/fetchFavoriteBooks';
+import  { useEffect } from 'react';
 
 function FavoriteBooksPage() {
 	const { favoriteBooks, user } = useAppSelector((state) => state.account);

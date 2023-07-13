@@ -1,16 +1,18 @@
+import App from '@/App';
+import ChatWindow from '@/components/Library/Chat/ChatWindow';
+import {
+  AllBookPage,
+  BookshelfPage,
+  ErrorPage,
+  FavoriteBooksPage,
+  HomePage,
+  LibraryPage,
+  MessagesPage,
+  NewBookPage,
+  SignInPage,
+  SignUpPage,
+} from '@/pages';
 import { createHashRouter } from 'react-router-dom';
-import App from '../App';
-import HomePage from '../pages/HomePage/HomePage';
-import ErrorPage from '../pages/ErrorPage/ErrorPage';
-import SignUpPage from '../pages/RegistrationPages/SignUpPage';
-import SignInPage from '../pages/RegistrationPages/SignInPage';
-import BookshelfPage from '../pages/BookshelfPage/BookshelfPage';
-import AllBookPage from '../pages/AccountPages/AllBookPage';
-import NewBookPage from '../pages/AccountPages/NewBookPage';
-import FavoriteBooksPage from '../pages/AccountPages/FavoriteBooksPage';
-import LibraryPage from '../pages/LibraryPage/LibraryPage';
-import MessagesPage from '../pages/AccountPages/MessagesPage';
-import ChatWindow from '../components/Library/Chat/ChatWindow/ChatWindow';
 
 export const router = createHashRouter([
   {

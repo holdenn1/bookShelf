@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { IBook, IMainReducer } from '../../types';
+import { IBook, IMainReducer } from '@/types';
 import { fetchSeesBooksEveryone } from '../actions/fetchSeesBooksEveryone';
 
 const initialState: IMainReducer = {

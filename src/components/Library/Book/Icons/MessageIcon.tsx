@@ -1,11 +1,10 @@
-import React from 'react';
-import massage from '../../../../img/icons/icons8-edit-message-24.png';
-import styles from './../Book.module.scss';
-import { useAppDispatch, useAppSelector } from '../../../../hooks/reduxHooks';
-import { setCurrentBook, setVisibleMessageForm } from '../../../../store/slices/mainSlice';
-import { IBook } from '../../../../types';
-import { notify } from '../../../UI/Toast/Toast';
-import { useAuth } from '../../../../hooks/useAuth';
+import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
+import styles from './../styles.module.scss';
+import massage from '@/img/icons/icons8-edit-message-24.png';
+import { useAuth } from '@/hooks/useAuth';
+import { notify } from '@/components/UI/Toast';
+import { setCurrentBook, setVisibleMessageForm } from '@/store/slices/mainSlice';
+import { IBook } from '@/types';
 
 interface IMessageIconProps {
 	book: IBook;

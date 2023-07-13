@@ -1,11 +1,11 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { push, ref, serverTimestamp, set } from 'firebase/database';
-import { db, realTimeDb } from '../../firebase';
 import { arrayUnion, doc, updateDoc } from 'firebase/firestore';
 import { fetchSeesBooksEveryone } from './fetchSeesBooksEveryone';
-import { setVisibleMessageForm } from '../slices/mainSlice';
-import { IBook, IUser } from '../../types';
 import { FormikValues } from 'formik';
+import { IBook, IUser } from '@/types';
+import { db, realTimeDb } from '@/firebase';
+import { setVisibleMessageForm } from '../slices/mainSlice';
 
 interface ISendingFeedbackProps {
 	user: IUser;

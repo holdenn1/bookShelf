@@ -18,6 +18,7 @@ function Book(book: IBook) {
   const { user, library } = useAppSelector((state) => state.account);
   const dispatch = useAppDispatch();
   const { isAuth, id } = useAuth();
+  
   const checkCurrentUser = id === book.userId;
 
   const addFavoriteBook = async (book: IBook) => {

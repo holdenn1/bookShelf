@@ -27,14 +27,14 @@ function ChatWindow() {
 					<img
 						src={arrowRight}
 						className={styles.chatListImg}
-						onClick={() => dispatch(setVisibleChatList())}
+						onClick={() => dispatch(setVisibleChatList(false))}
 						alt=''
 					/>
 				) : (
 					<img
 						src={arrowLeft}
 						className={styles.chatListImg}
-						onClick={() => dispatch(setVisibleChatList())}
+						onClick={() => dispatch(setVisibleChatList(true))}
 						alt=''
 					/>
 				)}

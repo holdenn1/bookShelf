@@ -35,8 +35,8 @@ const mainSlice = createSlice({
 		setOpenSearchMenu(state, action: PayloadAction<boolean>) {
 			state.isOpenSearchMenu = action.payload;
 		},
-		setVisibleChatList(state) {
-			state.isOpenChatList = !state.isOpenChatList;
+		setVisibleChatList(state, action: PayloadAction<boolean>) {
+			state.isOpenChatList = action.payload
 		},
 	},
 	extraReducers: (builder) => {

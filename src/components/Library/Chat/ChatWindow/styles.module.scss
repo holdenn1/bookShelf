@@ -1,6 +1,6 @@
-@import 'src/styles/mixins/contentCenterFlex';
-@import 'src/styles/mixins/message';
-@import 'src/styles/variables/variables';
+@import "src/styles/mixins/contentCenterFlex";
+@import "src/styles/mixins/message";
+@import "src/styles/variables/variables";
 
 .window {
   width: 100%;
@@ -9,6 +9,7 @@
   grid-template-rows: auto 1fr auto;
   grid-template-columns: minmax(200px, 1fr);
   justify-items: center;
+  gap: 16px;
 
   .head {
     height: 40px;
@@ -29,26 +30,29 @@
       z-index: 100;
     }
   }
-
-  .chatContainer {
+  .chatWrapper {
     width: 100%;
-    padding: 20px;
+    height: 100%;
+    overflow: auto;
+    display: flex;
+    align-items: flex-end;
+    padding: 0 20px;
     box-sizing: border-box;
-
+    position: relative;
+    &::-webkit-scrollbar {
+      display: none;
+    }
     .chat {
-      max-width: 600px;
-      height: 100%;
-      margin: 0 auto;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
+      width: 100%;
+      max-height: calc(100vh - 290px);
 
       .receiveUser {
         text-align: left;
         padding: 4px 0;
         margin: 2px 0;
         color: aliceblue;
-        width: 100%;
+        position: relative;
+        cursor: pointer;
 
         span {
           background: #06315f;
@@ -59,13 +63,23 @@
 
       .sendingUser {
         text-align: right;
+        position: relative;
+        cursor: pointer;
 
         span {
           background: #176cc1;
           border-radius: 12px 12px 0 12px;
           @include message;
+          margin-left: 10px;
         }
       }
+    }
+    .scrollToBottomBtn {
+      cursor: pointer;
+      position: fixed;
+      bottom: 150px;
+      right: 15px;
+      z-index: 1000;
     }
   }
 }

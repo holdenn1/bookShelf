@@ -7,9 +7,9 @@ function BookshelfPage() {
 	const { isAuth } = useAuth();
 	const navigate = useNavigate();
 
-/* 	useEffect(() => {
+useEffect(() => {
 		!isAuth && navigate('/', { replace: true });
-	}, []); */
+	}, []); 
 
 	return <Library />;
 }

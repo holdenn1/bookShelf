@@ -6,7 +6,12 @@ import { useAppDispatch, useAppSelector } from "@/hooks/reduxHooks";
 import { notify } from "@/components/UI/Toast";
 import { sendingMessage } from "@/store/actions/sendingMessage";
 
-function ChatForm() {
+type ChatFormProps = {
+  setShowChatMenu: Dispatch<SetStateAction<boolean>>;
+  prevMenu: NodeListOf<Element>;
+};
+
+function ChatForm({ setShowChatMenu, prevMenu }: ChatFormProps) {
   const [formData, setFormData] = useState({});
   const { user } = useAppSelector((state) => state.account);
   const { chatId } = useParams();
@@ -19,6 +24,12 @@ function ChatForm() {
     }
     const data: FormikValues = { ...formData, ...values };
     dispatch(sendingMessage({ chatId, user, data }));
+    
+    setShowChatMenu(false);
+    prevMenu.forEach((element) => {
+      element.removeAttribute("data-foo");
+    });
+
     resetForm();
   };
   return (

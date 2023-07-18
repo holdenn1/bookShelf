@@ -39,12 +39,22 @@
     padding: 0 20px;
     box-sizing: border-box;
     position: relative;
+    .emptyChat {
+      margin-bottom: 120px;
+      text-align: center;
+    }
     &::-webkit-scrollbar {
       display: none;
     }
+
     .chat {
       width: 100%;
       max-height: calc(100vh - 290px);
+      .emptyChat {
+        margin-bottom: 120px;
+        text-align: center;
+        font-size: 28px;
+      }
 
       .receiveUser {
         text-align: left;
@@ -112,6 +122,7 @@
           justify-content: space-between;
           align-items: center;
           padding: 6px 10px;
+          color: black;
           span {
             font-weight: 500;
           }

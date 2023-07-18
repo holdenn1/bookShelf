@@ -4,7 +4,6 @@ import styles from "./styles.module.scss";
 import arrowLeft from "@/img/icons/icons8-go-back-24.png";
 import arrowRight from "@/img/icons/icons8-forward-button-24.png";
 import arrowDown from "@/img/icons/icons8-arrow-down-50.png";
-import editIcon from "@/img/icons/icons8-edit-30.png";
 import removeIcon from "@/img/icons/icons8-remove-30.png";
 import { useParams } from "react-router-dom";
 import classNames from "classnames";
@@ -92,11 +91,6 @@ function ChatWindow() {
     }
   };
 
-  const deleteMessage = (message: IMessage) => {
-    dispatch(removeMessage({ currentChat, message, userId: user.id }));
-    setSelectedMessage(null);
-  };
-
   const handleMenu = (event: MouseEvent<HTMLLIElement>, message: IMessage) => {
     setSelectedMessage(message);
 
@@ -117,6 +111,11 @@ function ChatWindow() {
         });
       }
     }
+  };
+
+  const deleteMessage = (message: IMessage) => {
+    dispatch(removeMessage({ currentChat, message, userId: user.id }));
+    setSelectedMessage(null);
   };
 
   return (
@@ -147,42 +146,44 @@ function ChatWindow() {
         }}
       >
         <ul className={styles.chat}>
-          {messages.map((message) => (
-            <li
-              key={message.messageId}
-              className={classNames(styles.receiveUser, {
-                [styles.sendingUser]: message.senderId === user.id,
-              })}
-              onClick={(event: MouseEvent<HTMLLIElement>) =>
-                handleMenu(event, message)
-              }
-            >
-              {showChatMenu &&
-                menuNode &&
-                createPortal(
-                  <div className={styles.chatMenu}>
-                    <ul className={styles.chatMenuList}>
-                      <li className={styles.chatMenuItem}>
-                        <img src={editIcon} alt="" />
-                        <span>Edit</span>
-                      </li>
-                      <li
-                        className={styles.chatMenuItem}
-                        onClick={() => {
-                          if (selectedMessage) {
-                            deleteMessage(selectedMessage);
-                          }
-                        }}
-                      >
-                        <img src={removeIcon} alt="" /> <span>Remove</span>
-                      </li>
-                    </ul>
-                  </div>,
-                  menuNode
-                )}
-              <span className={styles.message}>{message.message}</span>
-            </li>
-          ))}
+          {messages.length ? (
+            messages.map((message) => (
+              <li
+                key={message.messageId}
+                className={classNames(styles.receiveUser, {
+                  [styles.sendingUser]: message.senderId === user.id,
+                })}
+                onClick={(event: MouseEvent<HTMLLIElement>) =>
+                  handleMenu(event, message)
+                }
+              >
+                <span className={styles.message}>{message.message}</span>
+              </li>
+            ))
+          ) : (
+            <p className={styles.emptyChat}>
+              The chat is empty, write a message first
+            </p>
+          )}
+          {showChatMenu &&
+            menuNode &&
+            createPortal(
+              <div className={styles.chatMenu}>
+                <ul className={styles.chatMenuList}>
+                  <li
+                    className={styles.chatMenuItem}
+                    onClick={() => {
+                      if (selectedMessage) {
+                        deleteMessage(selectedMessage);
+                      }
+                    }}
+                  >
+                    <img src={removeIcon} alt="" /> <span>Remove</span>
+                  </li>
+                </ul>
+              </div>,
+              menuNode
+            )}
         </ul>
 
         <img

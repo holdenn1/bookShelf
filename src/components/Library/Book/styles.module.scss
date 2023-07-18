@@ -1,11 +1,12 @@
-@import 'src/styles/variables/variables';
-@import 'src/styles/mixins/contentCenterFlex';
-@import 'src/styles/mixins/mainBookIcons';
-@import 'src/styles/mixins/bookPanelIcons';
+@import "src/styles/variables/variables";
+@import "src/styles/mixins/contentCenterFlex";
+@import "src/styles/mixins/mainBookIcons";
+@import "src/styles/mixins/bookPanelIcons";
+@import "src/styles/mixins/scrollbar";
 
 .card {
-  width: 222px;
-  height: 222px;
+  width: 250px;
+  height: 250px;
   position: relative;
   cursor: pointer;
   border-radius: $primary-border-radius;
@@ -14,8 +15,8 @@
   .front,
   .back {
     position: absolute;
-    width: 200px;
-    height: 200px;
+    width: 240px;
+    height: 240px;
     left: 0;
     top: 0;
     transition: 1s;
@@ -34,7 +35,7 @@
       height: 55px;
       position: absolute;
       top: 5px;
-      right: 5px;
+      right: 10px;
       z-index: 50;
       border: 0.1px solid #898989;
       border-radius: 100%;
@@ -67,13 +68,23 @@
       right: 10px;
     }
 
+    .editIcon {
+      @include mainBookIcons;
+      right: 12px;
+      top: 40px;
+    }
+
     .title {
       text-align: center;
       font-size: $fz-title-book;
       font-weight: $fw-title;
       text-transform: capitalize;
-      margin: 10px 0 14px;
-      word-break: break-word;
+      margin: 10px auto 14px;
+      width: 160px;
+      overflow-x: auto;
+      white-space: nowrap;
+
+      @include scrollbar(6px, rgb(77, 77, 77));
     }
 
     .description {
@@ -140,4 +151,57 @@
 
 .back {
   transform: rotateY(180deg);
+}
+
+.modalWrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  @include contentCenterFlex;
+  z-index: 400;
+  background-color: #8f8d8dc4;
+  .modal {
+    background-color: white;
+    padding: 20px;
+    border-radius: 12px;
+    .form {
+      width: 500px;
+      height: 360px;
+      margin: 0 12px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+
+      .title {
+        padding: 6px 8px;
+        border-radius: $primary-border-radius;
+        border: $primary-border;
+        height: 36px;
+        margin-bottom: 20px;
+      }
+
+      .description {
+        resize: none;
+        padding: 6px 8px;
+        height: 200px;
+        border-radius: $primary-border-radius;
+        border: $primary-border;
+        &::-webkit-scrollbar {
+          display: none;
+        }
+      }
+      .submit {
+        width: 180px;
+        height: 38px;
+        background-color: rgb(61, 61, 202);
+        display: block;
+        margin: auto;
+        border-radius: 12px;
+        color: white;
+        border: none;
+      }
+    }
+  }
 }

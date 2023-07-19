@@ -1,0 +1,56 @@
+@import "src/styles/mixins/contentCenterFlex";
+@import "src/styles/variables/variables";
+
+.modalWrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  @include contentCenterFlex;
+  z-index: 400;
+  background-color: #8f8d8dc4;
+  .modal {
+    background-color: white;
+    padding: 20px;
+    border-radius: 12px;
+    width: 500px;
+    margin: 0 20px;
+    .form {
+      height: 360px;
+      margin: 0 12px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+
+      .title {
+        padding: 6px 8px;
+        border-radius: $primary-border-radius;
+        border: $primary-border;
+        height: 36px;
+        margin-bottom: 20px;
+      }
+
+      .description {
+        resize: none;
+        padding: 6px 8px;
+        height: 200px;
+        border-radius: $primary-border-radius;
+        border: $primary-border;
+        &::-webkit-scrollbar {
+          display: none;
+        }
+      }
+      .submit {
+        width: 180px;
+        height: 38px;
+        background-color: rgb(61, 61, 202);
+        display: block;
+        margin: auto;
+        border-radius: 12px;
+        color: white;
+        border: none;
+      }
+    }
+  }
+}

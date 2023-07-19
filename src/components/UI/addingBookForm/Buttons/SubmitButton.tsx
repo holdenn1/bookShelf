@@ -1,11 +1,14 @@
-import styles from './styles.module.scss';
+import { ReactNode } from "react";
+import "./styles.scss";
 
-function SubmitButton() {
-	return (
-		<button type='submit' className={styles.subButton}>
-			Submit
-		</button>
-	);
+
+
+function SubmitButton({ title }: { title: string }) {
+  return (
+    <button type="submit" className="btn-type-submit">
+      {title}
+    </button>
+  );
 }
 
 export default SubmitButton;

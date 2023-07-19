@@ -15,24 +15,13 @@ import { setPublic } from "@/store/actions/setPublic";
 import { setLikeBook } from "@/store/actions/setLikeBook";
 import { setUnlikeBook } from "@/store/actions/setUnlikeBook";
 import EditIcon from "./icons/EditIcon";
-import { Field, Form, Formik } from "formik";
-import { updateBook } from "@/store/actions/updateBook";
+import EditBookForm from "@/components/Forms/EditBookForm";
 
-export type InitialValuesUpdateBook = {
-  title: string;
-  description: string;
-};
 function Book(book: IBook) {
-  const { user, library, chats } = useAppSelector((state) => state.account);
-  const { currentBook } = useAppSelector((state) => state.main);
+  const { user, library } = useAppSelector((state) => state.account);
   const [modalWisible, setModalWisible] = useState<boolean>(false);
   const dispatch = useAppDispatch();
   const { isAuth, id } = useAuth();
-  const initialValues = {
-    title: "",
-    description: "",
-  };
-
   const checkCurrentUser = id === book.userId;
 
   const addFavoriteBook = async (book: IBook) => {
@@ -49,14 +38,6 @@ function Book(book: IBook) {
 
   const setUnlike = async (book: IBook) => {
     dispatch(setUnlikeBook({ isAuth, book, user }));
-  };
-
-  const handleSubmit = (values: InitialValuesUpdateBook, resetForm: any) => {
-    const updatedBook = chats.find((chat) => chat.bookId === book.id)!;
-    console.log(updatedBook);
-    dispatch(updateBook({ book, user, values, updatedBook }));
-    setModalWisible(false);
-    resetForm();
   };
 
   return (
@@ -114,39 +95,7 @@ function Book(book: IBook) {
         </div>
       </div>
       {modalWisible && (
-        <div
-          className={styles.modalWrapper}
-          onClick={() => setModalWisible(false)}
-        >
-          <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
-            <Formik
-              initialValues={initialValues}
-              onSubmit={(values, { resetForm }) =>
-                handleSubmit(values, resetForm)
-              }
-            >
-              {() => (
-                <Form className={styles.form}>
-                  <Field
-                    className={styles.title}
-                    name="title"
-                    type="text"
-                    placeholder="Edit title"
-                  />
-                  <Field
-                    className={styles.description}
-                    name="description"
-                    as="textarea"
-                    placeholder="Edit description"
-                  />
-                  <button type="submit" className={styles.submit}>
-                    Edit book
-                  </button>
-                </Form>
-              )}
-            </Formik>
-          </div>
-        </div>
+        <EditBookForm book={book} setModalWisible={setModalWisible} />
       )}
     </>
   );

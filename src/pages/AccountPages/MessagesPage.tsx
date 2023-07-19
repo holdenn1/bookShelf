@@ -12,6 +12,7 @@ function MessagesPage() {
 
   useEffect(() => {
     dispatch(fetchChats(user.id));
+    
   }, []);
 
   return (

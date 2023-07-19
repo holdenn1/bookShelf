@@ -1,4 +1,3 @@
-import { InitialValuesUpdateBook } from "@/components/Library/Book";
 import { db, realTimeDb } from "@/firebase";
 import { IBook, IChats, IUser } from "@/types";
 import { createAsyncThunk } from "@reduxjs/toolkit";
@@ -6,8 +5,8 @@ import { doc, setDoc } from "firebase/firestore";
 import { fetchDataLibrary } from "./fetchDataLibrary";
 import { fetchFavoriteBooks } from "./fetchFavoriteBooks";
 import { fetchSeesBooksEveryone } from "./fetchSeesBooksEveryone";
-import { push, ref, set, update } from "firebase/database";
-import { uploadBook } from "./uploadBook";
+import { ref, update } from "firebase/database";
+import { InitialValuesUpdateBook } from "@/components/Forms/EditBookForm";
 
 type UpdateBookProps = {
   user: IUser;
@@ -30,9 +29,6 @@ export const updateBook = createAsyncThunk<void, UpdateBookProps>(
       `${book.booksEveryoneCollectionID}`
     );
 
-    // console.log(updatedBook);
-    // console.log(currentBook);
-    
     const firstUserRef = ref(
       realTimeDb,
       `users/${user.id}/chats/${updatedBook.secondUserChatId}`
@@ -61,9 +57,8 @@ export const updateBook = createAsyncThunk<void, UpdateBookProps>(
         bookTitle: values.title,
       };
 
-      await update(firstUserRef,updatedData)
-      await update(secondUserRef,updatedData)
- 
+      await update(firstUserRef, updatedData);
+      await update(secondUserRef, updatedData);
     }
     if (values.description) {
       await setDoc(

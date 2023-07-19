@@ -1,0 +1,17 @@
+@import "src/styles/mixins/mainButton";
+@import "src/styles/variables/variables";
+
+.btn-type-prev {
+  @include mainButton(#5293db, #3a76b8);
+}
+.btn-type-submit {
+  @include mainButton(#1842b8, #1b1baa);
+}
+
+.btn-type-next {
+  @include mainButton(#3232c6, #2020b3);
+}
+
+.btn-type-button {
+  @include mainButton(#3939bd, #262690);
+}

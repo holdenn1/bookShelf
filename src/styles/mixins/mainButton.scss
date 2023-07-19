@@ -1,0 +1,16 @@
+@mixin mainButton($bg, $bg-hover) {
+  width: 160px;
+  height: 42px;
+  font-size: 16px;
+  border: none;
+  font-weight: 500;
+  border-radius: 12px;
+  background-color: $bg;
+  color: white;
+  transition-duration: 0.3s;
+  margin: 10px;
+  &:hover {
+    background-color: $bg-hover;
+    cursor: pointer;
+  }
+}

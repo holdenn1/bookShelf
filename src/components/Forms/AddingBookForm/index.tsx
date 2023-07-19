@@ -1,16 +1,17 @@
-import { useState } from 'react';
-import { Formik, Form } from 'formik';
-import BookCover from './steps/BookCover';
-import BookDescription from './steps/BookDescription';
-import BookTitle from './steps/BookTitle';
-import styles from './styles.module.scss';
-import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
-import addingBookValidateSchema from '@/utils/validate/addingBookValidateSchema';
-import { uploadBook } from '@/store/actions/uploadBook';
-import { setVisibleAddingBookForm } from '@/store/slices/mainSlice';
-import classNames from 'classnames';
-import WrapperFormAddingBook from '@/components/UI/wrappers/WrapperFormAddingBook';
-import NavButtons from '@/components/UI/addingBookForm/Buttons/NavButtons';
+import { useState } from "react";
+import { Formik, Form } from "formik";
+import BookCover from "./steps/BookCover";
+import BookDescription from "./steps/BookDescription";
+import BookTitle from "./steps/BookTitle";
+import styles from "./styles.module.scss";
+import { useAppDispatch, useAppSelector } from "@/hooks/reduxHooks";
+import addingBookValidateSchema from "@/utils/validate/addingBookValidateSchema";
+import { uploadBook } from "@/store/actions/uploadBook";
+import { setVisibleAddingBookForm } from "@/store/slices/mainSlice";
+import classNames from "classnames";
+import WrapperFormAddingBook from "@/components/UI/wrappers/WrapperFormAddingBook";
+import NavigateForm from "./NavigateForm/NavigateForm";
+import { useNavigate } from "react-router-dom";
 
 export interface IValues {
   title: string;
@@ -27,6 +28,7 @@ export default function AddingBookForm() {
   const { user } = useAppSelector((state) => state.account);
   const currentValidationSchema = addingBookValidateSchema[step];
   const stepsComponents = [BookTitle, BookDescription, BookCover];
+  const navigate = useNavigate()
 
   const renderSteps = (props: any) => {
     const Component = stepsComponents[step];
@@ -37,7 +39,7 @@ export default function AddingBookForm() {
     const data: IValues = { ...formData, ...values };
     setStep(step + 1);
     if (step === stepsComponents.length - 1) {
-      dispatch(uploadBook({ data, user }));
+      dispatch(uploadBook({ data, user,navigate }));
       dispatch(setVisibleAddingBookForm(false));
       setStep(0);
       resetForm();
@@ -47,9 +49,9 @@ export default function AddingBookForm() {
   return (
     <Formik
       initialValues={{
-        title: '',
-        description: '',
-        cover: '',
+        title: "",
+        description: "",
+        cover: "",
         seesEveryone: false,
       }}
       validationSchema={currentValidationSchema}
@@ -59,11 +61,13 @@ export default function AddingBookForm() {
     >
       {(props) => (
         <Form
-          className={classNames(styles.wrapper, { [styles.activeForm]: visibleAddingBookForm })}
+          className={classNames(styles.wrapper, {
+            [styles.activeForm]: visibleAddingBookForm,
+          })}
         >
           <WrapperFormAddingBook>
             {renderSteps(props)}
-            <NavButtons step={step} setStep={setStep} />
+            <NavigateForm step={step} setStep={setStep} />
           </WrapperFormAddingBook>
         </Form>
       )}

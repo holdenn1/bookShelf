@@ -36,6 +36,13 @@ function ChatWindow() {
   }, [chatId]);
 
   useEffect(() => {
+    const isChat = chats.some(chat => chat.chatId === chatId)
+    if(!isChat){
+      navigate('/book-shelf/messages')
+    }
+  }, [chatId]);
+
+  useEffect(() => {
     const chatContainer = chatRef.current;
     if (chatContainer) {
       if (countScroll.current > 0) {

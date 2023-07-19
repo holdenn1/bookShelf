@@ -1,11 +1,11 @@
-import FormWrapper from '../../components/UI/wrappers/FormWrapper';
-import SignUpForm from '../../components/Forms/mainForms/SignUpForm';
+import styles from "./styles.module.scss";
+import SignUpForm from "../../components/Forms/mainForms/SignUpForm";
 
 function SignUpPage() {
   return (
-    <FormWrapper>
+    <main className={styles.mainBlockRegistrationForm}>
       <SignUpForm />
-    </FormWrapper>
+    </main>
   );
 }
 

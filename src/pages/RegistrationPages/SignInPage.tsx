@@ -1,11 +1,11 @@
+import styles from './styles.module.scss'
 import SignInForm from "@/components/Forms/mainForms/SignInForm";
-import FormWrapper from "@/components/UI/wrappers/FormWrapper";
 
 function SignInPage() {
 	return (
-		<FormWrapper>
+			<main className={styles.mainBlockRegistrationForm}>
 			<SignInForm />
-		</FormWrapper>
+			</main>
 	);
 }
 

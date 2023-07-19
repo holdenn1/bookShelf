@@ -1,11 +1,12 @@
-@import 'src/styles/variables/variables';
-@import 'src/styles/mixins/contentCenterFlex';
+@import "src/styles/variables/variables";
+@import "src/styles/mixins/contentCenterFlex";
 
-.wrapper {
+.mainBlockHomePage {
+  flex: 1 1 auto;
+  margin-top: 80px;
   width: 100%;
   height: 100%;
   @include contentCenterFlex;
-  flex-direction: column;
 
   .title {
     font-size: 38px;

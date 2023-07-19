@@ -1,10 +1,9 @@
-@import 'src/styles/mixins/headerAndFooterSize';
-@import 'src/styles/variables/variables';
+@import "src/styles/mixins/headerAndFooterSize";
+@import "src/styles/variables/variables";
 
 .footer {
   @include headerAndFooterSize(100%, 40px);
   background: $primary-background;
   position: relative;
   z-index: 500;
-  flex: 0 0 auto;
 }

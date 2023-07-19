@@ -15,7 +15,7 @@ function LibraryPage() {
   }, []);
 
   return (
-    <>
+    <main className={styles.mainBlockLibraryPage}>
       {booksSeesEveryone.length === 0 ? (
         <div className={styles.wrapper}>
           <h3>It's empty for now, come back later</h3>
@@ -28,7 +28,7 @@ function LibraryPage() {
           <BookMessageForm />
         </BookshelfWrapper>
       )}
-    </>
+    </main>
   );
 }
 

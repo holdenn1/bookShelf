@@ -4,7 +4,7 @@ import { fetchSeesBooksEveryone } from '../actions/fetchSeesBooksEveryone';
 
 const initialState: IMainReducer = {
 	visibleAddingBookForm: false,
-	visibleMenu: true,
+	visibleMenu: false,
 	isOpenSearchMenu: false,
 	visibleMessageForm: false,
 	search: '',

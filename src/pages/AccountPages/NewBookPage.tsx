@@ -4,7 +4,10 @@ import { useAppDispatch, useAppSelector } from "@/hooks/reduxHooks";
 import Loader from "@/components/UI/Loader";
 import AddingBookForm from "@/components/Forms/AddingBookForm";
 import MainButton from "@/components/UI/addingBookForm/Buttons/MainButton";
-import { setVisibleAddingBookForm } from "@/store/slices/mainSlice";
+import {
+  setVisibleAddingBookForm,
+  setVisibleMenu,
+} from "@/store/slices/mainSlice";
 
 export default function NewBookPage() {
   const { visibleAddingBookForm } = useAppSelector((state) => state.main);
@@ -18,6 +21,7 @@ export default function NewBookPage() {
   return (
     <>
       <div
+        onClick={() => dispatch(setVisibleMenu(false))}
         className={classNames(styles.wrapper, {
           [styles.visibleNewBookMessage]: visibleAddingBookForm,
         })}

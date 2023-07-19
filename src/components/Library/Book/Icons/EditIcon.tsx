@@ -2,7 +2,9 @@ import { Dispatch, SetStateAction } from "react";
 import classNames from "classnames";
 import editIcon from "@/img/icons/icons8-edit-24.png";
 import styles from "./../styles.module.scss";
-import { BookIconProps, IBook } from "@/types";
+import { BookIconProps } from "@/types";
+import { useAppDispatch } from "@/hooks/reduxHooks";
+import { setCurrentBook } from "@/store/slices/mainSlice";
 
 type EditIconProps = BookIconProps & {
   modalWisible: boolean;
@@ -16,9 +18,13 @@ function EditIcon({
   setModalWisible,
   modalWisible,
 }: EditIconProps) {
+  const dispatch = useAppDispatch()
   return (
     <img
-      onClick={() => setModalWisible(!modalWisible)}
+      onClick={() => {
+        dispatch(setCurrentBook(book))
+        setModalWisible(!modalWisible)
+      } }
       className={classNames(
         styles.editIcon,
         { [styles.isAuth]: !isAuth },

@@ -47,7 +47,6 @@ export const removeChat = createAsyncThunk<void, IRemoveChatProps>(
       );
 
       dispatch(fetchChats(user.id));
-      dispatch(fetchMessages());
       navigate("/book-shelf/messages", { replace: true });
     } catch (e) {
       console.error(e);

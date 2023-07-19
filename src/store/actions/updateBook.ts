@@ -1,21 +1,24 @@
 import { InitialValuesUpdateBook } from "@/components/Library/Book";
-import { db } from "@/firebase";
-import { IBook, IUser } from "@/types";
+import { db, realTimeDb } from "@/firebase";
+import { IBook, IChats, IUser } from "@/types";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { doc, setDoc } from "firebase/firestore";
 import { fetchDataLibrary } from "./fetchDataLibrary";
 import { fetchFavoriteBooks } from "./fetchFavoriteBooks";
 import { fetchSeesBooksEveryone } from "./fetchSeesBooksEveryone";
+import { push, ref, set, update } from "firebase/database";
+import { uploadBook } from "./uploadBook";
 
 type UpdateBookProps = {
   user: IUser;
   book: IBook;
   values: InitialValuesUpdateBook;
+  updatedBook: IChats;
 };
 
 export const updateBook = createAsyncThunk<void, UpdateBookProps>(
   "user/updateBook",
-  async ({ user, book, values }, { dispatch }) => {
+  async ({ user, book, values, updatedBook }, { dispatch }) => {
     const userCollectionBookRef = doc(
       db,
       `books-user-${user.id}`,
@@ -26,6 +29,19 @@ export const updateBook = createAsyncThunk<void, UpdateBookProps>(
       `books-sees-everyone`,
       `${book.booksEveryoneCollectionID}`
     );
+
+    // console.log(updatedBook);
+    // console.log(currentBook);
+    
+    const firstUserRef = ref(
+      realTimeDb,
+      `users/${user.id}/chats/${updatedBook.secondUserChatId}`
+    );
+    const secondUserRef = ref(
+      realTimeDb,
+      `users/${updatedBook.fromUserId}/chats/${updatedBook.firstUserChatId}`
+    );
+
     if (values.title) {
       await setDoc(
         userCollectionBookRef,
@@ -41,7 +57,15 @@ export const updateBook = createAsyncThunk<void, UpdateBookProps>(
         },
         { merge: true }
       );
-    } else if (values.description) {
+      const updatedData = {
+        bookTitle: values.title,
+      };
+
+      await update(firstUserRef,updatedData)
+      await update(secondUserRef,updatedData)
+ 
+    }
+    if (values.description) {
       await setDoc(
         userCollectionBookRef,
         {

@@ -16,8 +16,6 @@ import { setLikeBook } from "@/store/actions/setLikeBook";
 import { setUnlikeBook } from "@/store/actions/setUnlikeBook";
 import EditIcon from "./icons/EditIcon";
 import { Field, Form, Formik } from "formik";
-import MyTextInput from "@/components/UI/formUI/MyTextInput";
-import SubmitButton from "@/components/UI/addingBookForm/Buttons/SubmitButton";
 import { updateBook } from "@/store/actions/updateBook";
 
 export type InitialValuesUpdateBook = {
@@ -25,7 +23,8 @@ export type InitialValuesUpdateBook = {
   description: string;
 };
 function Book(book: IBook) {
-  const { user, library } = useAppSelector((state) => state.account);
+  const { user, library, chats } = useAppSelector((state) => state.account);
+  const { currentBook } = useAppSelector((state) => state.main);
   const [modalWisible, setModalWisible] = useState<boolean>(false);
   const dispatch = useAppDispatch();
   const { isAuth, id } = useAuth();
@@ -53,8 +52,9 @@ function Book(book: IBook) {
   };
 
   const handleSubmit = (values: InitialValuesUpdateBook, resetForm: any) => {
-    console.log(values);
-    dispatch(updateBook({ book, user, values }));
+    const updatedBook = chats.find((chat) => chat.bookId === book.id)!;
+    console.log(updatedBook);
+    dispatch(updateBook({ book, user, values, updatedBook }));
     setModalWisible(false);
     resetForm();
   };

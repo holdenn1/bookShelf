@@ -5,7 +5,7 @@ import arrowLeft from "@/img/icons/icons8-go-back-24.png";
 import arrowRight from "@/img/icons/icons8-forward-button-24.png";
 import arrowDown from "@/img/icons/icons8-arrow-down-50.png";
 import removeIcon from "@/img/icons/icons8-remove-30.png";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import classNames from "classnames";
 import { useAppDispatch, useAppSelector } from "@/hooks/reduxHooks";
 import { fetchMessages } from "@/store/actions/fetchMessages";
@@ -25,6 +25,7 @@ function ChatWindow() {
   const countScroll = useRef(0);
   const prevScrollTop = useRef(0);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const currentChat = chats.find((chat) => chat.chatId == chatId)!;
   const menuNode = document.querySelector('[data-foo="menu"]');
@@ -146,25 +147,19 @@ function ChatWindow() {
         }}
       >
         <ul className={styles.chat}>
-          {messages.length ? (
-            messages.map((message) => (
-              <li
-                key={message.messageId}
-                className={classNames(styles.receiveUser, {
-                  [styles.sendingUser]: message.senderId === user.id,
-                })}
-                onClick={(event: MouseEvent<HTMLLIElement>) =>
-                  handleMenu(event, message)
-                }
-              >
-                <span className={styles.message}>{message.message}</span>
-              </li>
-            ))
-          ) : (
-            <p className={styles.emptyChat}>
-              The chat is empty, write a message first
-            </p>
-          )}
+          {messages.map((message) => (
+            <li
+              key={message.messageId}
+              className={classNames(styles.receiveUser, {
+                [styles.sendingUser]: message.senderId === user.id,
+              })}
+              onClick={(event: MouseEvent<HTMLLIElement>) =>
+                handleMenu(event, message)
+              }
+            >
+              <span className={styles.message}>{message.message}</span>
+            </li>
+          ))}
           {showChatMenu &&
             menuNode &&
             createPortal(

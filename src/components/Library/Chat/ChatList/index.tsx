@@ -26,7 +26,7 @@ function ChatList() {
 
   return (
     <nav
-      className={classNames(styles.nav, { [styles.isOpenNav]: isOpenChatList })}
+      className={classNames(styles.nav, { [styles.isOpenNav]: isOpenChatList  })}
     >
       <ul className={styles.list}>
         {chats.map((chat, index) => (

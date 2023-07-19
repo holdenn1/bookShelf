@@ -21,8 +21,11 @@ function EditBookForm({book,setModalWisible}:EditBookFormProps) {
   const dispatch = useAppDispatch();
 
   const handleSubmit = (values: InitialValuesUpdateBook, resetForm: any) => {
+console.log(2);
 
-    const updatedBook = chats.find((chat) => chat.bookId === book.id)!;
+    const updatedBook = chats.find((chat) => chat.bookId === book.id);
+    console.log(updatedBook);
+    
     dispatch(updateBook({ book, user, values, updatedBook }));
     setModalWisible(false);
     resetForm();

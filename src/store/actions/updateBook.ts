@@ -12,7 +12,7 @@ type UpdateBookProps = {
   user: IUser;
   book: IBook;
   values: InitialValuesUpdateBook;
-  updatedBook: IChats;
+  updatedBook: IChats | undefined;
 };
 
 export const updateBook = createAsyncThunk<void, UpdateBookProps>(
@@ -29,15 +29,6 @@ export const updateBook = createAsyncThunk<void, UpdateBookProps>(
       `${book.booksEveryoneCollectionID}`
     );
 
-    const firstUserRef = ref(
-      realTimeDb,
-      `users/${user.id}/chats/${updatedBook.secondUserChatId}`
-    );
-    const secondUserRef = ref(
-      realTimeDb,
-      `users/${updatedBook.fromUserId}/chats/${updatedBook.firstUserChatId}`
-    );
-
     if (values.title) {
       await setDoc(
         userCollectionBookRef,
@@ -46,19 +37,15 @@ export const updateBook = createAsyncThunk<void, UpdateBookProps>(
         },
         { merge: true }
       );
-      await setDoc(
-        booksEveryoneCollectionBookRef,
-        {
-          title: values.title,
-        },
-        { merge: true }
-      );
-      const updatedData = {
-        bookTitle: values.title,
-      };
-
-      await update(firstUserRef, updatedData);
-      await update(secondUserRef, updatedData);
+      if (book.seesEveryone) {
+        await setDoc(
+          booksEveryoneCollectionBookRef,
+          {
+            title: values.title,
+          },
+          { merge: true }
+        );
+      }
     }
     if (values.description) {
       await setDoc(
@@ -68,14 +55,37 @@ export const updateBook = createAsyncThunk<void, UpdateBookProps>(
         },
         { merge: true }
       );
-      await setDoc(
-        booksEveryoneCollectionBookRef,
-        {
-          description: values.description,
-        },
-        { merge: true }
-      );
+      if (book.seesEveryone) {
+        await setDoc(
+          booksEveryoneCollectionBookRef,
+          {
+            description: values.description,
+          },
+          { merge: true }
+        );
+      }
     }
+
+    if (updatedBook) {
+      const firstUserRef = ref(
+        realTimeDb,
+        `users/${user.id}/chats/${updatedBook.secondUserChatId}`
+      );
+      const secondUserRef = ref(
+        realTimeDb,
+        `users/${updatedBook.fromUserId}/chats/${updatedBook.firstUserChatId}`
+      );
+
+      if (values.title) {
+        const updatedData = {
+          bookTitle: values.title,
+        };
+
+        await update(firstUserRef, updatedData);
+        await update(secondUserRef, updatedData);
+      }
+    }
+
     dispatch(fetchDataLibrary(user.id));
     dispatch(fetchSeesBooksEveryone());
     dispatch(fetchFavoriteBooks(user));

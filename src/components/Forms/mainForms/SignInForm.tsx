@@ -47,7 +47,7 @@ function SignInForm() {
           <MyTextInput label='email' name='email' type='email' placeholder='email' />
           <MyTextInput label='password' name='password' type='password' placeholder='password' />
           <ButtonForm>Sign In</ButtonForm>
-          <p>
+          <p className={styles.formNavigateText}>
             Or <Link to='/sign-up'>register</Link>
           </p>
         </Form>

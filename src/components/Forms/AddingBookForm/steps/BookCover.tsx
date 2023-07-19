@@ -9,7 +9,7 @@ interface IFormikProps {
 export default function BookCover({ setFieldValue }: IFormikProps) {
   return (
     <>
-      <img src={coverBook} alt="" />
+      <img src={coverBook} alt="" style={{marginTop: '10px'}}/>
       <h3 className={styles.title}>Add a cover!</h3>
       <p className={styles.titleDescription}>
         It will make your library more convenient and stylish!

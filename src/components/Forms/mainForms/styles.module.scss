@@ -1,5 +1,5 @@
-@import 'src/styles/variables/variables';
-@import 'src/styles/mixins/flexColumn';
+@import "src/styles/variables/variables";
+@import "src/styles/mixins/flexColumn";
 
 .form {
   width: 340px;
@@ -11,8 +11,10 @@
   padding: 60px 10px 0;
   box-sizing: border-box;
   margin: 12px;
-  p {
+  .formNavigateText {
+    color: rgb(29, 30, 31);
     a {
+      color: inherit;
       font-size: 18px;
       font-weight: 500;
       text-transform: capitalize;

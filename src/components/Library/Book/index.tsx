@@ -48,7 +48,10 @@ function Book(book: IBook) {
           <img src={book.cover} alt="" />
         </div>
         <div className={styles.back}>
+          <div className={styles.titleWrapper}>
+
           <h3 className={styles.title}>{book.title}</h3>
+          </div>
           <p className={styles.description}>{book.description}</p>
           <FavoriteIcon
             addFavoriteBook={addFavoriteBook}

@@ -1,6 +1,7 @@
-@import 'src/styles/variables/variables';
-@import 'src/styles/mixins/navLinkBookItem';
-@import 'src/styles/mixins/removeChat';
+@import "src/styles/variables/variables";
+@import "src/styles/mixins/navLinkBookItem";
+@import "src/styles/mixins/removeChat";
+@import "src/styles/mixins/scrollbar";
 
 .nav {
   width: 270px;
@@ -18,8 +19,14 @@
     border-radius: 12px;
     margin-bottom: 10px;
     position: relative;
-    transition-duration: 0.3s;
-    //transition-delay: 0.4s;
+    transition-delay: 0.4s;
+    transition-duration: 0.5s;
+    display: inline-block;
+    transition-property: opacity;
+    overflow-y: auto;
+    width: 230px;
+    box-sizing: border-box;
+    @include scrollbar(6px, rgb(68, 68, 68));
 
     &:hover {
       background: #2193d0;
@@ -47,9 +54,15 @@
     color: $primary-color;
     margin-bottom: 10px;
     position: relative;
-    transition-duration: 0.5s;
     transition-delay: 0.4s;
+    transition-duration: 0.5s;
+    transition-property: opacity;
+    display: inline-block;
+    overflow-y: auto;
+    box-sizing: border-box;
+    width: 230px;
 
+    @include scrollbar(6px, rgb(68, 68, 68));
     .item {
       margin-bottom: 6px;
     }

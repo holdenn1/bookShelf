@@ -13,7 +13,7 @@
     border: $primary-border;
     border-radius: $primary-border-radius;
     overflow: hidden;
-    padding: 16px;
+    padding: 4px 10px;
     box-sizing: border-box;
     @include flexColumn;
   }

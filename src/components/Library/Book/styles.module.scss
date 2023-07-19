@@ -58,6 +58,7 @@
     overflow: auto;
     display: flex;
     flex-direction: column;
+    align-items: center;
 
     &::-webkit-scrollbar {
       display: none;
@@ -73,18 +74,20 @@
       right: 12px;
       top: 40px;
     }
-
-    .title {
+    .titleWrapper {
+      max-width: 160px;
       text-align: center;
-      font-size: $fz-title-book;
-      font-weight: $fw-title;
-      text-transform: capitalize;
-      margin: 10px auto 14px;
-      width: 160px;
-      overflow-x: auto;
-      white-space: nowrap;
 
-      @include scrollbar(6px, rgb(77, 77, 77));
+      .title {
+        text-align: center;
+        font-size: $fz-title-book;
+        font-weight: $fw-title;
+        text-transform: capitalize;
+        margin: 10px auto 14px;
+        overflow-x: auto;
+        white-space: nowrap;
+        @include scrollbar(4px, rgb(77, 77, 77));
+      }
     }
 
     .description {
@@ -152,4 +155,3 @@
 .back {
   transform: rotateY(180deg);
 }
-

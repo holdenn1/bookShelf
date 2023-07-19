@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/bookShelf/static/css/main.ca736335.css",
-    "main.js": "/bookShelf/static/js/main.b36fee15.js",
+    "main.js": "/bookShelf/static/js/main.08072820.js",
     "static/media/icons8-поиск.svg": "/bookShelf/static/media/icons8-поиск.09e1b9e4d74c242778644fa45fe8c3a5.svg",
     "static/media/star-svgrepo-com.svg": "/bookShelf/static/media/star-svgrepo-com.daa0330fa0faf9acb38d467583505d44.svg",
     "index.html": "/bookShelf/index.html",
     "main.ca736335.css.map": "/bookShelf/static/css/main.ca736335.css.map",
-    "main.b36fee15.js.map": "/bookShelf/static/js/main.b36fee15.js.map"
+    "main.08072820.js.map": "/bookShelf/static/js/main.08072820.js.map"
   },
   "entrypoints": [
     "static/css/main.ca736335.css",
-    "static/js/main.b36fee15.js"
+    "static/js/main.08072820.js"
   ]
 }

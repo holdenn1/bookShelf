@@ -40,7 +40,7 @@ function ChatWindow() {
     if(!isChat){
       navigate('/book-shelf/messages')
     }
-  }, [chatId]);
+  }, [chatId, chats]);
 
   useEffect(() => {
     const chatContainer = chatRef.current;
